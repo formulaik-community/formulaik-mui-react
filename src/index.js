@@ -9,7 +9,7 @@ import InputPhoneNumber from './inputPhoneNumber'
 import DatePicker from './datePicker'
 import AceEditor from './aceEditor'
 import CronGenerator from './cronGenerator'
-//import EmailEditor from './emailEditor'
+
 import JSONEditor from './jsonEditor'
 import CronEditor from './cronEditor'
 import Autocomplete from './autocomplete'
@@ -49,8 +49,7 @@ export default (props) => {
     case 'cronGenerator':
       return CronGenerator
 
-    // case 'emailEditor':
-    //   return EmailEditor
+
     case 'JSONEditor':
       return JSONEditor
     case 'cronEditor':
