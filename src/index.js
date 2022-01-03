@@ -2,7 +2,6 @@
 import Input from './input'
 import Submit from './submit'
 import Checkbox from './checkbox'
-import Dropzone from './dropzone'
 import Select from './select'
 import TextArea from './textArea'
 import SelectCountry from './selectCountry'
@@ -35,15 +34,12 @@ export default (props) => {
       return Submit
     case 'checkbox':
       return Checkbox
-    case 'dropzone':
-      return Dropzone
     case 'textArea':
       return TextArea
     case 'selectCountry':
       return SelectCountry
     case 'inputPhoneNumber':
       return InputPhoneNumber
-
     case 'dateRangePicker':
       return DateRangePicker
     case 'datePicker':
