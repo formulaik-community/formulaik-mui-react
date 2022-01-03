@@ -26,7 +26,8 @@
   "peerDependencies": {
     "react": ">= 0.16.0 < 18.0.0",
     "formulaik": "git+https://28b1fe741a74422f216eaa7128b8b5914bb12594:x-oauth-basic@github.com/yelounak/formulaik.git",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "underscore": "^1.13.1"
   },
   "dependencies": {
     "react-ace": "^9.5.0",
