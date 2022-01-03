@@ -48,8 +48,6 @@ export default (props) => {
       return AceEditor
     case 'cronGenerator':
       return CronGenerator
-
-
     case 'JSONEditor':
       return JSONEditor
     case 'cronEditor':
