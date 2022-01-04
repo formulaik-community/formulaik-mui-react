@@ -26,8 +26,7 @@ import FormGroup from '@mui/material/FormGroup';
 import Rating$1 from '@mui/material/Rating';
 import DateRangePicker$1 from '@mui/lab/DateRangePicker';
 import Box from '@mui/material/Box';
-import Formulaik from 'formulaik';
-import FormulaikMui from 'formulaik-mui';
+import Formulaik from '@yelounak/formulaik';
 import { object, string } from 'yup';
 import _ from 'underscore';
 
@@ -603,8 +602,20 @@ var entry = (function (props) {
     customOnValueChanged && customOnValueChanged(data);
   };
 
+  var componentsLibrary = function componentsLibrary(_ref) {
+    var type = _ref.type;
+
+    switch (type) {
+      case 'button':
+        return Button;
+
+      default:
+        return null;
+    }
+  };
+
   return /*#__PURE__*/React.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [FormulaikMui]),
+    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
     formItemsProvider: formItemsProvider,
@@ -687,6 +698,9 @@ var ListEditor = (function (props) {
       case 'entry':
         return entry;
 
+      case 'button':
+        return Button;
+
       default:
         return null;
     }
@@ -695,7 +709,7 @@ var ListEditor = (function (props) {
   return /*#__PURE__*/React.createElement("div", {
     className: "mt-6"
   }, /*#__PURE__*/React.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary, FormulaikMui]),
+    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
     formItemsProvider: formItemsProvider,

@@ -29,8 +29,7 @@ var FormGroup = _interopDefault(require('@mui/material/FormGroup'));
 var Rating$1 = _interopDefault(require('@mui/material/Rating'));
 var DateRangePicker$1 = _interopDefault(require('@mui/lab/DateRangePicker'));
 var Box = _interopDefault(require('@mui/material/Box'));
-var Formulaik = _interopDefault(require('formulaik'));
-var FormulaikMui = _interopDefault(require('formulaik-mui'));
+var Formulaik = _interopDefault(require('@yelounak/formulaik'));
 var Yup = require('yup');
 var _ = _interopDefault(require('underscore'));
 
@@ -606,8 +605,20 @@ var entry = (function (props) {
     customOnValueChanged && customOnValueChanged(data);
   };
 
+  var componentsLibrary = function componentsLibrary(_ref) {
+    var type = _ref.type;
+
+    switch (type) {
+      case 'button':
+        return Button;
+
+      default:
+        return null;
+    }
+  };
+
   return /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [FormulaikMui]),
+    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
     formItemsProvider: formItemsProvider,
@@ -690,6 +701,9 @@ var ListEditor = (function (props) {
       case 'entry':
         return entry;
 
+      case 'button':
+        return Button;
+
       default:
         return null;
     }
@@ -698,7 +712,7 @@ var ListEditor = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "mt-6"
   }, /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary, FormulaikMui]),
+    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
     formItemsProvider: formItemsProvider,

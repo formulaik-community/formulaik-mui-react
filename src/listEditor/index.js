@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Formulaik from 'formulaik'
-import FormulaikMui from 'formulaik-mui'
+import Formulaik from '@yelounak/formulaik'
+import ButtonInFormulaic from '../button'
 
 import * as Yup from 'yup'
 
@@ -81,6 +81,8 @@ export default (props) => {
     switch (type) {
       case 'entry':
         return entry
+      case 'button':
+        return ButtonInFormulaic
       default:
         return null
     }
@@ -88,7 +90,7 @@ export default (props) => {
 
   return <div className="mt-6">
     <Formulaik
-      componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary, FormulaikMui]}
+      componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
       initialValues={initialValues}
       validationSchema={validationSchema}
       formItemsProvider={formItemsProvider}

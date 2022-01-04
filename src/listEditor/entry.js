@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Formulaik from 'formulaik'
-import FormulaikMui from 'formulaik-mui'
+import Formulaik from '@yelounak/formulaik'
+import ButtonInFormulaic from '../button'
 
 import * as Yup from 'yup'
 
@@ -63,8 +63,17 @@ export default (props) => {
     customOnValueChanged && customOnValueChanged(data)
   }
 
+  const componentsLibrary = ({ type }) => {
+    switch (type) {
+      case 'button':
+        return ButtonInFormulaic
+      default:
+        return null
+    }
+  }
+
   return <Formulaik
-    componentsLibraries={[...itemProps.componentsLibraries, FormulaikMui]}
+    componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
     initialValues={initialValues}
     validationSchema={validationSchema}
     formItemsProvider={formItemsProvider}

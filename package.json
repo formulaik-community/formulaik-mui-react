@@ -1,15 +1,21 @@
 {
-  "name": "formulaik-mui",
-  "version": "1.0.0",
+  "name": "@yelounak/formulaik-mui",
+  "version": "1.0.31",
   "description": "Formulaik-mui components library.",
   "author": "yelounak",
   "license": "MIT",
-  "repository": "yelounak/formulaik-mui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yelounak/formulaik-mui"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/yelounak"
   },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
@@ -24,10 +30,10 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "formulaik": "git+https://28b1fe741a74422f216eaa7128b8b5914bb12594:x-oauth-basic@github.com/yelounak/formulaik.git",
     "react": ">= 0.16.0 < 18.0.0",
     "underscore": "^1.13.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@yelounak/formulaik": ">= 1.0.0 < 2.0.0"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.11.0",
