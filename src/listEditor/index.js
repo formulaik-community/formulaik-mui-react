@@ -31,12 +31,7 @@ export default (props) => {
     ...(items.map((item, i) => ({
       type: 'entry',
       id: `entry-${i}`,
-      props: {
-        formItems: itemProps.formItems,
-        canRemove: itemProps.canRemove,
-        componentsLibraries: itemProps.componentsLibraries,
-        onEntryValuesChangedHook: itemProps.onEntryValuesChangedHook
-      }
+      props: itemProps
     }))),
     ...((itemProps.canAddItems && items.length < itemProps.maxItems) ? [
       {

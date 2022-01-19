@@ -571,14 +571,12 @@ var entry = (function (props) {
   var _useState = React.useState(null),
       error = _useState[0];
 
-  var validationSchema = Yup.object().shape({
-    className: Yup.string().min(1, 'Must contain at least 8 characters').max(100, 'Must contain at most 18 characters'),
-    value: Yup.object()
-  });
   var formItemsProvider = [].concat(itemProps.canRemove && itemProps.showRemove ? [{
     isMulti: true,
     className: 'flex ',
-    items: [].concat(itemProps.formItems, [{
+    items: [].concat(itemProps.formItemsProvider({
+      item: item
+    }), [{
       type: 'button',
       id: 'removeItem',
       label: 'Remove',
@@ -591,11 +589,9 @@ var entry = (function (props) {
         }
       }
     }])
-  }] : itemProps.formItems);
-  var initialValues = {
-    className: item ? item.className : null,
-    value: item ? item.value : null
-  };
+  }] : itemProps.formItemsProvider({
+    item: item
+  }));
 
   var onValuesChanged = function onValuesChanged(values) {
     var data = itemProps.onEntryValuesChangedHook({
@@ -619,8 +615,12 @@ var entry = (function (props) {
 
   return /*#__PURE__*/React__default.createElement(Formulaik, {
     componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
-    initialValues: initialValues,
-    validationSchema: validationSchema,
+    initialValues: itemProps.initialValues({
+      item: item
+    }),
+    validationSchema: itemProps.validationSchema({
+      item: item
+    }),
     formItemsProvider: formItemsProvider,
     onValuesChanged: onValuesChanged,
     error: error
@@ -647,12 +647,7 @@ var ListEditor = (function (props) {
     return {
       type: 'entry',
       id: "entry-" + i,
-      props: {
-        formItems: itemProps.formItems,
-        canRemove: itemProps.canRemove,
-        componentsLibraries: itemProps.componentsLibraries,
-        onEntryValuesChangedHook: itemProps.onEntryValuesChangedHook
-      }
+      props: itemProps
     };
   }), itemProps.canAddItems && items.length < itemProps.maxItems ? [{
     type: 'button',
