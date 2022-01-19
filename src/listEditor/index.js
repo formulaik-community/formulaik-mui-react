@@ -42,10 +42,10 @@ export default (props) => {
       {
         type: 'button',
         id: 'addItem',
-        label: 'Add item',
+        label: itemProps.addItemLabel ? itemProps.addItemLabel : 'Add item',
         props: {
           onClick: () => {
-            const newItem = { className: null, value: null }
+            const newItem = itemProps.newStruct
             items.push(newItem)
             customOnValueChanged && customOnValueChanged(items)
           }

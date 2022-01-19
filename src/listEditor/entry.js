@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import Formulaik from '@yelounak/formulaik'
 import ButtonInFormulaic from '../button'
-
 import * as Yup from 'yup'
-
-import _ from 'underscore'
-
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 export default (props) => {
   const {
@@ -31,13 +23,13 @@ export default (props) => {
   })
 
   const formItemsProvider = [
-    {
-      isMulti: true,
-      className: 'flex ',
-      items: [
-        ...itemProps.formItems,
-        ...(itemProps.canRemove ?
-          [{
+    ...((itemProps.canRemove && itemProps.showRemove) ? [
+      {
+        isMulti: true,
+        className: 'flex ',
+        items: [
+          ...itemProps.formItems,
+          {
             type: 'button',
             id: 'removeItem',
             label: 'Remove',
@@ -47,9 +39,9 @@ export default (props) => {
                 customOnValueChanged && customOnValueChanged({ isRemoved: true })
               }
             }
-          },] : [])
-      ]
-    }
+          }
+        ]
+      }] : itemProps.formItems)
   ]
 
 

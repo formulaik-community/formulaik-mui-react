@@ -572,10 +572,10 @@ var entry = (function (props) {
     className: string().min(1, 'Must contain at least 8 characters').max(100, 'Must contain at most 18 characters'),
     value: object()
   });
-  var formItemsProvider = [{
+  var formItemsProvider = [].concat(itemProps.canRemove && itemProps.showRemove ? [{
     isMulti: true,
     className: 'flex ',
-    items: [].concat(itemProps.formItems, itemProps.canRemove ? [{
+    items: [].concat(itemProps.formItems, [{
       type: 'button',
       id: 'removeItem',
       label: 'Remove',
@@ -587,8 +587,8 @@ var entry = (function (props) {
           });
         }
       }
-    }] : [])
-  }];
+    }])
+  }] : itemProps.formItems);
   var initialValues = {
     className: item ? item.className : null,
     value: item ? item.value : null
@@ -654,13 +654,10 @@ var ListEditor = (function (props) {
   }), itemProps.canAddItems && items.length < itemProps.maxItems ? [{
     type: 'button',
     id: 'addItem',
-    label: 'Add item',
+    label: itemProps.addItemLabel ? itemProps.addItemLabel : 'Add item',
     props: {
       onClick: function onClick() {
-        var newItem = {
-          className: null,
-          value: null
-        };
+        var newItem = itemProps.newStruct;
         items.push(newItem);
         customOnValueChanged && customOnValueChanged(items);
       }
