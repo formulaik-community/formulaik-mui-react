@@ -22,6 +22,10 @@ import SwitchControl from './switch'
 import Rating from './rating'
 import DateRangePicker from './dateRangePicker'
 import ListEditor from './listEditor'
+import H1 from './h1'
+import H2 from './h2'
+import H3 from './h3'
+import H4 from './h4'
 
 export default (props) => {
   const { type } = props
@@ -70,6 +74,14 @@ export default (props) => {
       return Rating
     case 'listEditor':
       return ListEditor
+    case 'h1':
+      return H1
+    case 'h2':
+      return H2
+    case 'h3':
+      return H3
+    case 'h4':
+      return H4
     default:
       return null
   }

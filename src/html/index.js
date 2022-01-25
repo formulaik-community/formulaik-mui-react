@@ -4,8 +4,8 @@ export default (props) => {
   const {
     item: { label, id, props: itemProps } } = props
 
-  return <>
+  return <div>
     {itemProps.content}
-  </>
+  </div>
 }
 

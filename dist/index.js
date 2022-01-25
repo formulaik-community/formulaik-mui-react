@@ -460,7 +460,7 @@ var RadioGroup = (function (props) {
 var Html = (function (props) {
   var _props$item = props.item,
       itemProps = _props$item.props;
-  return /*#__PURE__*/React__default.createElement(Fragment, null, itemProps.content);
+  return /*#__PURE__*/React__default.createElement("div", null, itemProps.content);
 });
 
 var Divider = (function (props) {
@@ -713,6 +713,26 @@ var ListEditor = (function (props) {
   }));
 });
 
+var H1 = (function (props) {
+  var itemProps = props.item.props;
+  return /*#__PURE__*/React__default.createElement("h1", null, itemProps.content);
+});
+
+var H2 = (function (props) {
+  var itemProps = props.item.props;
+  return /*#__PURE__*/React__default.createElement("h2", null, itemProps.content);
+});
+
+var H3 = (function (props) {
+  var itemProps = props.item.props;
+  return /*#__PURE__*/React__default.createElement("h3", null, itemProps.content);
+});
+
+var H4 = (function (props) {
+  var itemProps = props.item.props;
+  return /*#__PURE__*/React__default.createElement("h4", null, itemProps.content);
+});
+
 var index = (function (props) {
   var type = props.type;
 
@@ -782,6 +802,18 @@ var index = (function (props) {
 
     case 'listEditor':
       return ListEditor;
+
+    case 'h1':
+      return H1;
+
+    case 'h2':
+      return H2;
+
+    case 'h3':
+      return H3;
+
+    case 'h4':
+      return H4;
 
     default:
       return null;
