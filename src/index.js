@@ -26,6 +26,7 @@ import H1 from './h1'
 import H2 from './h2'
 import H3 from './h3'
 import H4 from './h4'
+import VisualSelect from './visualSelect'
 
 export default (props) => {
   const { type } = props
@@ -82,6 +83,8 @@ export default (props) => {
       return H3
     case 'h4':
       return H4
+    case 'visualSelect':
+      return VisualSelect
     default:
       return null
   }
