@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
+import Button$1 from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox$1 from '@mui/material/Checkbox';
 import Select$1 from '@mui/material/Select';
@@ -19,7 +20,6 @@ import Autocomplete$1 from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import Radio from '@mui/material/Radio';
 import RadioGroup$1 from '@mui/material/RadioGroup';
-import Button$1 from '@mui/material/Button';
 import ButtonGroup$1 from '@mui/material/ButtonGroup';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
@@ -76,7 +76,6 @@ var Submit = (function (props) {
   return /*#__PURE__*/React.createElement("div", {
     className: "flex justify-center mt-4"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "btn btn-outline btn-lg w-60  " + (isSubmitting ? 'loading' : ''),
     type: "submit",
     disabled: isSubmitting
   }, isSubmitting ? '' : value));
@@ -730,6 +729,72 @@ var H4 = (function (props) {
   return /*#__PURE__*/React.createElement("h4", null, itemProps.content);
 });
 
+var VisualSelect = (function (props) {
+  var values = props.values,
+      customOnValueChanged = props.customOnValueChanged,
+      _props$item = props.item,
+      id = _props$item.id,
+      _props$item$props = _props$item.props,
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
+
+  var _useState = useState(values[id] ? values[id].filter(function (a) {
+    return a;
+  }) : []),
+      selectedItems = _useState[0],
+      setSelectedItems = _useState[1];
+
+  var items = itemProps.items,
+      _itemProps$cols = itemProps.cols,
+      cols = _itemProps$cols === void 0 ? 1 : _itemProps$cols,
+      maxSelectionAllowed = itemProps.maxSelectionAllowed,
+      _itemProps$itemHeight = itemProps.itemHeight,
+      itemHeight = _itemProps$itemHeight === void 0 ? 'h-72' : _itemProps$itemHeight,
+      ContentComponent = itemProps.ContentComponent;
+
+  var onClickItem = function onClickItem(e, item) {
+    e.preventDefault();
+    e.stopPropagation();
+    var id = item.id;
+    var isSelected = selectedItems.includes(id);
+    var newSelectedItems;
+
+    if (isSelected) {
+      newSelectedItems = selectedItems.filter(function (a) {
+        return a !== id;
+      });
+    } else {
+      newSelectedItems = selectedItems.length < maxSelectionAllowed ? [].concat(selectedItems, [id]) : [].concat(selectedItems);
+    }
+
+    setSelectedItems(newSelectedItems);
+    customOnValueChanged && customOnValueChanged(newSelectedItems);
+  };
+
+  var renderThumbnail = function renderThumbnail(item) {
+    var isSelected = selectedItems.includes(item.id);
+    return /*#__PURE__*/React.createElement("div", {
+      onClick: function onClick(e) {
+        return onClickItem(e, item);
+      },
+      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (isSelected ? 'border-4' : 'border-2') + "\n        " + (isSelected ? 'opacity-100' : 'opacity-90 hover:opacity-100') + "\n        " + (isSelected ? 'scale-105' : 'hover:scale-105') + "\n        " + (isSelected ? 'border-pink-600' : 'border-warmGray-200 hover:border-pink-600') + "\n        "
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "\n        absolute\n        left-1\n        right-1\n        bottom-1\n        top-1\n        flex\n        rounded-xl\n        overflow-hidden\n        justify-center\n        group-hover:flex\n        bg-warmGray-100\n        bg-opacity-80\n        group-hover:bg-opacity-100\n    "
+    }, /*#__PURE__*/React.createElement(ContentComponent, {
+      item: item
+    })));
+  };
+
+  var renderItem = function renderItem(item, index) {
+    return /*#__PURE__*/React.createElement("li", {
+      className: "w-full"
+    }, " ", renderThumbnail(item));
+  };
+
+  return /*#__PURE__*/React.createElement("ul", {
+    className: "grid-cols-" + cols + " grid gap-x-5 gap-y-7 py-4"
+  }, items && items.length > 0 && items.map(renderItem));
+});
+
 var index = (function (props) {
   var type = props.type;
 
@@ -811,6 +876,9 @@ var index = (function (props) {
 
     case 'h4':
       return H4;
+
+    case 'visualSelect':
+      return VisualSelect;
 
     default:
       return null;

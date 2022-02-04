@@ -11,7 +11,16 @@ export default (props) => {
 
   const [selectedItems, setSelectedItems] = useState(values[id] ? (values[id]).filter(a => a) : [])
 
-  const { items, isGrid = true, cols = 1, maxSelectionAllowed, itemHeight = 'h-72', ContentComponent } = itemProps
+  const { items,
+    isGrid = true,
+    cols = 1,
+    maxSelectionAllowed,
+    itemHeight = 'h-72',
+    ContentComponent,
+    highlightColor = 'pink-600',
+    baseColor = 'warmGray-100',
+    useLatestSelection = false
+  } = itemProps
 
   const onClickItem = (e, item) => {
     e.preventDefault()
@@ -22,9 +31,16 @@ export default (props) => {
     if (isSelected) {
       newSelectedItems = selectedItems.filter(a => a !== id)
     } else {
-      newSelectedItems = selectedItems.length < maxSelectionAllowed ? [...selectedItems, id] : [...selectedItems]
+      if (useLatestSelection) {
+        newSelectedItems = [...selectedItems, id]
+        if (newSelectedItems.length > maxSelectionAllowed) {
+          newSelectedItems.splice(0, 1)
+        }
+      }
+      else {
+        newSelectedItems = selectedItems.length < maxSelectionAllowed ? [...selectedItems, id] : [...selectedItems]
+      }
     }
-
 
     setSelectedItems(newSelectedItems)
     customOnValueChanged && customOnValueChanged(newSelectedItems)
@@ -46,10 +62,10 @@ export default (props) => {
         duration-200
         ease-in-out
         ${itemHeight}
-        ${isSelected ? 'border-4' : 'border-2'}
-        ${isSelected ? 'opacity-100' : 'opacity-90 hover:opacity-100'}
+        ${isSelected ? 'border-4' : 'border-4'}
+        ${isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80'}
         ${isSelected ? 'scale-105' : 'hover:scale-105'}
-        ${isSelected ? 'border-pink-600' : 'border-warmGray-200 hover:border-pink-600'}
+        ${isSelected ? `border-${highlightColor}` : `border-${baseColor} hover:border-${highlightColor}`}
         `}>
       <div className={`
         absolute
@@ -62,7 +78,7 @@ export default (props) => {
         overflow-hidden
         justify-center
         group-hover:flex
-        bg-warmGray-100
+        bg-${baseColor}
         bg-opacity-80
         group-hover:bg-opacity-100
     `}>
