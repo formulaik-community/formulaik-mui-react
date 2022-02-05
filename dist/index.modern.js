@@ -749,7 +749,13 @@ var VisualSelect = (function (props) {
       maxSelectionAllowed = itemProps.maxSelectionAllowed,
       _itemProps$itemHeight = itemProps.itemHeight,
       itemHeight = _itemProps$itemHeight === void 0 ? 'h-72' : _itemProps$itemHeight,
-      ContentComponent = itemProps.ContentComponent;
+      ContentComponent = itemProps.ContentComponent,
+      _itemProps$highlightC = itemProps.highlightColor,
+      highlightColor = _itemProps$highlightC === void 0 ? 'pink-600' : _itemProps$highlightC,
+      _itemProps$baseColor = itemProps.baseColor,
+      baseColor = _itemProps$baseColor === void 0 ? 'warmGray-100' : _itemProps$baseColor,
+      _itemProps$useLatestS = itemProps.useLatestSelection,
+      useLatestSelection = _itemProps$useLatestS === void 0 ? false : _itemProps$useLatestS;
 
   var onClickItem = function onClickItem(e, item) {
     e.preventDefault();
@@ -763,7 +769,15 @@ var VisualSelect = (function (props) {
         return a !== id;
       });
     } else {
-      newSelectedItems = selectedItems.length < maxSelectionAllowed ? [].concat(selectedItems, [id]) : [].concat(selectedItems);
+      if (useLatestSelection) {
+        newSelectedItems = [].concat(selectedItems, [id]);
+
+        if (newSelectedItems.length > maxSelectionAllowed) {
+          newSelectedItems.splice(0, 1);
+        }
+      } else {
+        newSelectedItems = selectedItems.length < maxSelectionAllowed ? [].concat(selectedItems, [id]) : [].concat(selectedItems);
+      }
     }
 
     setSelectedItems(newSelectedItems);
@@ -776,9 +790,9 @@ var VisualSelect = (function (props) {
       onClick: function onClick(e) {
         return onClickItem(e, item);
       },
-      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (isSelected ? 'border-4' : 'border-2') + "\n        " + (isSelected ? 'opacity-100' : 'opacity-90 hover:opacity-100') + "\n        " + (isSelected ? 'scale-105' : 'hover:scale-105') + "\n        " + (isSelected ? 'border-pink-600' : 'border-warmGray-200 hover:border-pink-600') + "\n        "
+      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (isSelected ? 'border-4' : 'border-4') + "\n        " + (isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80') + "\n        " + (isSelected ? 'scale-105' : 'hover:scale-105') + "\n        " + (isSelected ? "border-" + highlightColor : "border-" + baseColor + " hover:border-" + highlightColor) + "\n        "
     }, /*#__PURE__*/React.createElement("div", {
-      className: "\n        absolute\n        left-1\n        right-1\n        bottom-1\n        top-1\n        flex\n        rounded-xl\n        overflow-hidden\n        justify-center\n        group-hover:flex\n        bg-warmGray-100\n        bg-opacity-80\n        group-hover:bg-opacity-100\n    "
+      className: "\n        absolute\n        left-1\n        right-1\n        bottom-1\n        top-1\n        flex\n        rounded-xl\n        overflow-hidden\n        justify-center\n        group-hover:flex\n        bg-" + baseColor + "\n        bg-opacity-80\n        group-hover:bg-opacity-100\n    "
     }, /*#__PURE__*/React.createElement(ContentComponent, {
       item: item
     })));
