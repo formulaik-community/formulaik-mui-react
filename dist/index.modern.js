@@ -29,6 +29,15 @@ import Box from '@mui/material/Box';
 import Formulaik from '@yelounak/formulaik';
 import { object } from 'yup';
 import _ from 'underscore';
+import AddAPhotoIcon from '@mui/icons-material/Add';
+import '@mui/material/IconButton';
+import '@mui/icons-material/Delete';
+import '@mui/material/Modal';
+import Avatar$2 from '@mui/material/Avatar';
+import '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import { FileUploader as FileUploader$1 } from 'react-drag-drop-files';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -809,6 +818,155 @@ var VisualSelect = (function (props) {
   }, items && items.length > 0 && items.map(renderItem));
 });
 
+var Add = (function (props) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "items-center flex overflow-hidden relative"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "     items-center  flex  overflow-hidden  justify-center absolute  left-0  right-0  bottom-0  top-0"
+  }, /*#__PURE__*/React.createElement(AddAPhotoIcon, {
+    fontSize: 'large',
+    color: '#858585'
+  })));
+});
+
+var Shell = (function (props) {
+  var badge = props.badge,
+      children = props.children;
+
+  if (!badge) {
+    return children;
+  }
+
+  return /*#__PURE__*/React.createElement(StyledBadge, {
+    overlap: "circular",
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'right'
+    },
+    variant: "dot"
+  }, children);
+});
+var StyledBadge = styled(Badge)(function (_ref) {
+  var theme = _ref.theme;
+  return {
+    '& .MuiBadge-badge': {
+      backgroundColor: '#44b700',
+      color: '#44b700',
+      boxShadow: "0 0 0 2px " + theme.palette.background.paper,
+      '&::after': {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        borderRadius: '50%',
+        animation: 'ripple 1.2s infinite ease-in-out',
+        border: '1px solid currentColor',
+        content: '""'
+      }
+    },
+    '@keyframes ripple': {
+      '0%': {
+        transform: 'scale(.8)',
+        opacity: 1
+      },
+      '100%': {
+        transform: 'scale(2.4)',
+        opacity: 0
+      }
+    }
+  };
+});
+
+var Avatar = (function (props) {
+  var _props$initials2;
+
+  var _props$badge = props.badge,
+      badge = _props$badge === void 0 ? false : _props$badge;
+  return /*#__PURE__*/React.createElement(Shell, {
+    badge: badge
+  }, /*#__PURE__*/React.createElement(Avatar$2, {
+    sx: {
+      bgcolor: props.bgcolor,
+      width: props.size,
+      height: props.size
+    },
+    src: props.src
+  }, (_props$initials2 = props.initials) != null ? _props$initials2 : props.initials));
+});
+
+var Preview = (function (props) {
+  var size = props.size,
+      data = props.data;
+  return /*#__PURE__*/React.createElement("div", {
+    className: " w-full  h-full  items-center  flex  justify-center   transform group-hover:scale-105 transition duration-200 ease-in-out "
+  }, /*#__PURE__*/React.createElement(Avatar, {
+    size: size * 4,
+    badge: false,
+    src: data.file ? URL.createObjectURL(data.file) : data.url
+  }));
+});
+
+var fileTypes = ["JPG", "JPEG", "WEBP", "PNG", "GIF"];
+var FileUploader = (function (props) {
+  var onFileChanged = props.onFileChanged,
+      _props$maxFileSize = props.maxFileSize,
+      maxFileSize = _props$maxFileSize === void 0 ? 10 : _props$maxFileSize;
+  return /*#__PURE__*/React.createElement(FileUploader$1, {
+    maxSize: maxFileSize,
+    onSizeError: function onSizeError() {
+      alert("Please choose a smaller file (" + maxFileSize + "mb max)");
+    },
+    handleChange: onFileChanged,
+    name: "file",
+    types: fileTypes
+  });
+});
+
+var Avatar$1 = (function (props) {
+  var values = props.values,
+      customOnValueChanged = props.customOnValueChanged,
+      _props$item = props.item,
+      id = _props$item.id,
+      _props$item$props = _props$item.props,
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
+
+  var _useState = useState(values[id]),
+      data = _useState[0],
+      setData = _useState[1];
+
+  var size = itemProps.size;
+
+  var onFileChanged = function onFileChanged(file) {
+    var _data = _extends({}, data, {
+      file: file
+    });
+
+    setData(_data);
+    customOnValueChanged && customOnValueChanged(_data);
+  };
+
+  var _props = _extends({}, itemProps, {
+    data: data
+  });
+
+  var onClick = function onClick() {};
+
+  var showPreview = data.url || data.file;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "  \n            my-4\n            border \n            border-warmGray-300 \n            rounded-full\n            h-" + size + "\n            w-" + size + "                            \n            align-middle             \n            hover:bg-warmGray-50\n            cursor-pointer\n            justify-center\n            items-center \n            flex\n            group \n            relative\n            overflow-hidden",
+    onClick: onClick
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0      \n      "
+  }, showPreview ? /*#__PURE__*/React.createElement(Preview, _props) : /*#__PURE__*/React.createElement(Add, _props)), /*#__PURE__*/React.createElement("div", {
+    className: "\n      bg-pink-300 \n      bg-opacity-70\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0    \n      hidden\n      group-hover:flex \n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center \n      "
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("small", null, "Click to change picture"))), /*#__PURE__*/React.createElement("div", {
+    className: "      \n      bg-opacity-25\n      items-center \n      flex \n      overflow-hidden \n      h-full \n      w-full \n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
+  }, /*#__PURE__*/React.createElement(FileUploader, {
+    onFileChanged: onFileChanged
+  })));
+});
+
 var index = (function (props) {
   var type = props.type;
 
@@ -893,6 +1051,9 @@ var index = (function (props) {
 
     case 'visualSelect':
       return VisualSelect;
+
+    case 'avatar':
+      return Avatar$1;
 
     default:
       return null;

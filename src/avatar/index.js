@@ -6,7 +6,8 @@ import Shell from './shell'
 import FileUploader from './fileUploader'
 import IconButton from '@mui/material/IconButton'
 import AddAPhotoIcon from '@mui/icons-material/Add'
-
+import RemoveButton from '@mui/icons-material/DeleteOutline'
+import EditOutlined from '@mui/icons-material/EditOutlined'
 
 export default (props) => {
   const {
@@ -15,11 +16,14 @@ export default (props) => {
     item: { id, props: itemProps = {} }
   } = props
 
-  const [data, setData] = useState(values[id])
-  const { size } = itemProps
+  const [data, setData] = useState(values[id] ? values[id] : {})
+  const { size, canRemove = true, canEdit = false } = itemProps
 
   const onFileChanged = (file) => {
-    const _data = { ...data, file }
+    var _data = { ...data, file }
+    if (!_data.file) {
+      _data = null
+    }
     setData(_data)
     customOnValueChanged && customOnValueChanged(_data)
   }
@@ -27,9 +31,15 @@ export default (props) => {
   const _props = { ...itemProps, data }
   const onClick = () => { }
 
-  const showPreview = data.url || data.file
+  const hasData = data.url || data.file
+
 
   return <div className={`  
+            my-4                        
+            flex   
+            group                     
+            `}>
+    <div className={`  
             my-4
             border 
             border-warmGray-300 
@@ -45,8 +55,8 @@ export default (props) => {
             group 
             relative
             overflow-hidden`}
-    onClick={onClick}>
-    <div className={`
+      onClick={onClick}>
+      <div className={`
       bg-pink-300
       bg-opacity-25
       absolute 
@@ -55,12 +65,12 @@ export default (props) => {
       bottom-0 
       top-0      
       `}>
-      {showPreview
-        ? <Preview {..._props} />
-        : <Add {..._props} />
-      }
-    </div>
-    <div className={`
+        {hasData
+          ? <Preview {..._props} />
+          : <Add {..._props} />
+        }
+      </div>
+      <div className={`
       bg-pink-300 
       bg-opacity-70
       absolute 
@@ -68,7 +78,7 @@ export default (props) => {
       right-0 
       bottom-0 
       top-0    
-      hidden
+      ${hasData ? 'hidden' : 'flex'}
       group-hover:flex 
       items-center
       px-2
@@ -76,9 +86,9 @@ export default (props) => {
       text-center
       justify-center 
       `}>
-      <span><small>Click to change picture</small></span>
-    </div>
-    <div className={`      
+        <span><small>{`${hasData ? 'Click to change picture' : 'Click to add a picture'}`}</small></span>
+      </div>
+      <div className={`      
       bg-opacity-25
       items-center 
       flex 
@@ -92,8 +102,43 @@ export default (props) => {
         duration-200
         ease-in-out'>
       `}>
-      <FileUploader onFileChanged={onFileChanged} />
-    </div>
+        <FileUploader onFileChanged={onFileChanged} />
+      </div>
 
+    </div>
+    {hasData ?
+      <div className={`              
+            px-2
+            py-4
+            h-full            
+            hidden
+            group-hover:grid
+            place-items-center
+            grid-cols-1
+            transform        
+            transition
+            duration-200
+            ease-in-out
+            `}>
+        {canRemove ? <IconButton aria-label="Delete" component="span"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            const _data = {}
+            setData(_data)
+            customOnValueChanged && customOnValueChanged(_data)
+          }} >
+          <RemoveButton />
+        </IconButton> : null}
+        {canEdit ? <IconButton aria-label="Move up" component="span"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+
+          }} >
+          <EditOutlined />
+        </IconButton> : null}
+      </div>
+      : null}
   </div>
 }
