@@ -3,7 +3,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 var TextField = _interopDefault(require('@mui/material/TextField'));
-var Button$1 = _interopDefault(require('@mui/material/Button'));
+var LoadingButton = _interopDefault(require('@mui/lab/LoadingButton'));
 var FormControlLabel = _interopDefault(require('@mui/material/FormControlLabel'));
 var Checkbox$1 = _interopDefault(require('@mui/material/Checkbox'));
 var Select$1 = _interopDefault(require('@mui/material/Select'));
@@ -23,6 +23,7 @@ var Autocomplete$1 = _interopDefault(require('@mui/material/Autocomplete'));
 var CircularProgress = _interopDefault(require('@mui/material/CircularProgress'));
 var Radio = _interopDefault(require('@mui/material/Radio'));
 var RadioGroup$1 = _interopDefault(require('@mui/material/RadioGroup'));
+var Button$1 = _interopDefault(require('@mui/material/Button'));
 var ButtonGroup$1 = _interopDefault(require('@mui/material/ButtonGroup'));
 var Switch = _interopDefault(require('@mui/material/Switch'));
 var FormGroup = _interopDefault(require('@mui/material/FormGroup'));
@@ -33,7 +34,7 @@ var Formulaik = _interopDefault(require('@yelounak/formulaik'));
 var Yup = require('yup');
 var _ = _interopDefault(require('underscore'));
 var AddAPhotoIcon = _interopDefault(require('@mui/icons-material/Add'));
-require('@mui/material/IconButton');
+var IconButton = _interopDefault(require('@mui/material/IconButton'));
 require('@mui/icons-material/Delete');
 require('@mui/material/Modal');
 var Avatar$2 = _interopDefault(require('@mui/material/Avatar'));
@@ -41,6 +42,8 @@ require('@mui/material/colors');
 var styles = require('@mui/material/styles');
 var Badge = _interopDefault(require('@mui/material/Badge'));
 var reactDragDropFiles = require('react-drag-drop-files');
+var RemoveButton = _interopDefault(require('@mui/icons-material/DeleteOutline'));
+var EditOutlined = _interopDefault(require('@mui/icons-material/EditOutlined'));
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -84,13 +87,17 @@ var Input = (function (props) {
 
 var Submit = (function (props) {
   var isSubmitting = props.isSubmitting,
-      value = props.item.value;
+      _props$item = props.item,
+      value = _props$item.value;
   return /*#__PURE__*/React__default.createElement("div", {
-    className: "flex justify-center mt-4"
-  }, /*#__PURE__*/React__default.createElement("button", {
-    type: "submit",
-    disabled: isSubmitting
-  }, isSubmitting ? '' : value));
+    className: "flex justify-center my-2"
+  }, /*#__PURE__*/React__default.createElement(LoadingButton, {
+    loading: isSubmitting,
+    variant: "outlined",
+    onClick: props.submitForm,
+    disabled: isSubmitting,
+    size: 'large'
+  }, value));
 });
 
 var Checkbox = (function (props) {
@@ -934,16 +941,24 @@ var Avatar$1 = (function (props) {
       _props$item$props = _props$item.props,
       itemProps = _props$item$props === void 0 ? {} : _props$item$props;
 
-  var _useState = React.useState(values[id]),
+  var _useState = React.useState(values[id] ? values[id] : {}),
       data = _useState[0],
       setData = _useState[1];
 
-  var size = itemProps.size;
+  var size = itemProps.size,
+      _itemProps$canRemove = itemProps.canRemove,
+      canRemove = _itemProps$canRemove === void 0 ? true : _itemProps$canRemove,
+      _itemProps$canEdit = itemProps.canEdit,
+      canEdit = _itemProps$canEdit === void 0 ? false : _itemProps$canEdit;
 
   var onFileChanged = function onFileChanged(file) {
     var _data = _extends({}, data, {
       file: file
     });
+
+    if (!_data.file) {
+      _data = null;
+    }
 
     setData(_data);
     customOnValueChanged && customOnValueChanged(_data);
@@ -955,19 +970,40 @@ var Avatar$1 = (function (props) {
 
   var onClick = function onClick() {};
 
-  var showPreview = data.url || data.file;
+  var hasData = data.url || data.file;
   return /*#__PURE__*/React__default.createElement("div", {
+    className: "  \n            my-4                        \n            flex   \n            group                     \n            "
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "  \n            my-4\n            border \n            border-warmGray-300 \n            rounded-full\n            h-" + size + "\n            w-" + size + "                            \n            align-middle             \n            hover:bg-warmGray-50\n            cursor-pointer\n            justify-center\n            items-center \n            flex\n            group \n            relative\n            overflow-hidden",
     onClick: onClick
   }, /*#__PURE__*/React__default.createElement("div", {
     className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0      \n      "
-  }, showPreview ? /*#__PURE__*/React__default.createElement(Preview, _props) : /*#__PURE__*/React__default.createElement(Add, _props)), /*#__PURE__*/React__default.createElement("div", {
-    className: "\n      bg-pink-300 \n      bg-opacity-70\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0    \n      hidden\n      group-hover:flex \n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center \n      "
-  }, /*#__PURE__*/React__default.createElement("span", null, /*#__PURE__*/React__default.createElement("small", null, "Click to change picture"))), /*#__PURE__*/React__default.createElement("div", {
+  }, hasData ? /*#__PURE__*/React__default.createElement(Preview, _props) : /*#__PURE__*/React__default.createElement(Add, _props)), /*#__PURE__*/React__default.createElement("div", {
+    className: "\n      bg-pink-300 \n      bg-opacity-70\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0    \n      " + (hasData ? 'hidden' : 'flex') + "\n      group-hover:flex \n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center \n      "
+  }, /*#__PURE__*/React__default.createElement("span", null, /*#__PURE__*/React__default.createElement("small", null, "" + (hasData ? 'Click to change picture' : 'Click to add a picture')))), /*#__PURE__*/React__default.createElement("div", {
     className: "      \n      bg-opacity-25\n      items-center \n      flex \n      overflow-hidden \n      h-full \n      w-full \n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
   }, /*#__PURE__*/React__default.createElement(FileUploader, {
     onFileChanged: onFileChanged
-  })));
+  }))), hasData ? /*#__PURE__*/React__default.createElement("div", {
+    className: "              \n            px-2\n            py-4\n            h-full            \n            hidden\n            group-hover:grid\n            place-items-center\n            grid-cols-1\n            transform        \n            transition\n            duration-200\n            ease-in-out\n            "
+  }, canRemove ? /*#__PURE__*/React__default.createElement(IconButton, {
+    "aria-label": "Delete",
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var _data = {};
+      setData(_data);
+      customOnValueChanged && customOnValueChanged(_data);
+    }
+  }, /*#__PURE__*/React__default.createElement(RemoveButton, null)) : null, canEdit ? /*#__PURE__*/React__default.createElement(IconButton, {
+    "aria-label": "Move up",
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, /*#__PURE__*/React__default.createElement(EditOutlined, null)) : null) : null);
 });
 
 var index = (function (props) {
