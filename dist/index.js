@@ -637,10 +637,10 @@ var entry = (function (props) {
   var _useState = React.useState(null),
       error = _useState[0];
 
-  var formItemsProvider = [].concat(itemProps.canRemove && itemProps.showRemove ? [{
+  var inputs = [].concat(itemProps.canRemove && itemProps.showRemove ? [{
     isMulti: true,
     className: 'flex ',
-    items: [].concat(itemProps.formItemsProvider({
+    items: [].concat(itemProps.inputs({
       item: item
     }), [{
       type: 'button',
@@ -655,7 +655,7 @@ var entry = (function (props) {
         }
       }
     }])
-  }] : itemProps.formItemsProvider({
+  }] : itemProps.inputs({
     item: item
   }));
 
@@ -687,7 +687,7 @@ var entry = (function (props) {
     validationSchema: itemProps.validationSchema({
       item: item
     }),
-    formItemsProvider: formItemsProvider,
+    inputs: inputs,
     onValuesChanged: onValuesChanged,
     error: error
   });
@@ -709,7 +709,7 @@ var ListEditor = (function (props) {
   }), items.map(function () {
     return Yup.object();
   }))));
-  var formItemsProvider = [].concat(items.map(function (item, i) {
+  var inputs = [].concat(items.map(function (item, i) {
     return {
       type: 'entry',
       id: "entry-" + i,
@@ -773,7 +773,7 @@ var ListEditor = (function (props) {
     componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
-    formItemsProvider: formItemsProvider,
+    inputs: inputs,
     onValuesChanged: onValuesChanged,
     error: error
   }));

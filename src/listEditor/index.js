@@ -27,7 +27,7 @@ export default (props) => {
       items.map(() => Yup.object()))
   })
 
-  const formItemsProvider = [
+  const inputs = [
     ...(items.map((item, i) => ({
       type: 'entry',
       id: `entry-${i}`,
@@ -88,7 +88,7 @@ export default (props) => {
       componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
       initialValues={initialValues}
       validationSchema={validationSchema}
-      formItemsProvider={formItemsProvider}
+      inputs={inputs}
       onValuesChanged={onValuesChanged}
       error={error} />
   </div>

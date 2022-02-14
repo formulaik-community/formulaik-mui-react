@@ -14,13 +14,13 @@ export default (props) => {
   const item = values[id]
   const [error, setError] = useState(null)
 
-  const formItemsProvider = [
+  const inputs = [
     ...((itemProps.canRemove && itemProps.showRemove) ? [
       {
         isMulti: true,
         className: 'flex ',
         items: [
-          ...itemProps.formItemsProvider({ item }),
+          ...itemProps.inputs({ item }),
           {
             type: 'button',
             id: 'removeItem',
@@ -33,7 +33,7 @@ export default (props) => {
             }
           }
         ]
-      }] : itemProps.formItemsProvider({ item }))
+      }] : itemProps.inputs({ item }))
   ]
 
 
@@ -55,7 +55,7 @@ export default (props) => {
     componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
     initialValues={itemProps.initialValues({ item })}
     validationSchema={itemProps.validationSchema({ item })}
-    formItemsProvider={formItemsProvider}
+    inputs={inputs}
     onValuesChanged={onValuesChanged}
     error={error} />
 }
