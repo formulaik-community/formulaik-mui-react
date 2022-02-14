@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TextField from '@mui/material/TextField';
+import { useDebouncedCallback } from 'use-debounce';
 import LoadingButton from '@mui/lab/LoadingButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox$1 from '@mui/material/Checkbox';
 import Select$1 from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import ReactFlagsSelect from 'react-flags-select';
 import PhoneInput from 'react-phone-number-input';
 import dateAdapter from '@mui/lab/AdapterDateFns';
@@ -60,25 +61,46 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
+var INPUT_DELAY = 1000;
 var Input = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
-      field = props.field,
+  var value = props.value,
+      customOnValueChanged = props.customOnValueChanged,
       errors = props.errors,
       _props$item = props.item,
       subType = _props$item.subType,
-      id = _props$item.id,
       label = _props$item.label,
-      itemProps = _props$item.props;
+      _props$item$props = _props$item.props,
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props,
+      id = _props$item.id;
+  var placeholder = itemProps.placeholder;
+
+  var _useState = useState(value ? value : ''),
+      innerValue = _useState[0],
+      setInnerValue = _useState[1];
+
+  useEffect(function () {
+    setInnerValue(value ? value : '');
+  }, [value]);
+  var debouncedHandleOnChange = useDebouncedCallback(function (event) {
+    var value = event.target.value;
+    customOnValueChanged(value);
+    console.log('textArea debouncedHandleOnChange', value);
+  }, INPUT_DELAY);
+  var handleOnChange = useCallback(function (event) {
+    event.persist();
+    var newValue = event.target.value;
+    setInnerValue(newValue);
+    debouncedHandleOnChange(event);
+    console.log('textArea handleOnChange', value);
+  }, []);
   return /*#__PURE__*/React.createElement(TextField, _extends({
     label: label,
-    variant: "outlined"
-  }, field, {
+    variant: "outlined",
+    value: innerValue,
+    placeholder: placeholder,
     className: "" + (errors[id] ? 'bg-red-100' : ''),
     type: subType,
-    onChange: function onChange(_ref) {
-      var value = _ref.target.value;
-      return customOnValueChanged(value);
-    }
+    onChange: handleOnChange
   }, itemProps));
 });
 
@@ -152,19 +174,48 @@ var Select = (function (props) {
   }));
 });
 
+var INPUT_DELAY$1 = 1000;
 var TextArea = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
-      field = props.field,
+  var _React$createElement;
+
+  var value = props.value,
+      customOnValueChanged = props.customOnValueChanged,
       errors = props.errors,
       _props$item = props.item,
+      _props$item$props = _props$item.props,
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props,
       id = _props$item.id;
-  return /*#__PURE__*/React.createElement(TextareaAutosize, _extends({}, field, {
-    onChange: function onChange(_ref) {
-      var value = _ref.target.value;
-      return customOnValueChanged(value);
-    },
-    className: "textarea h-24 textarea-bordered text-base " + (errors[id] ? 'bg-red-100 border-red-600' : 'border-warmGray-400')
-  }));
+  var _itemProps$maxRows = itemProps.maxRows,
+      maxRows = _itemProps$maxRows === void 0 ? 1000 : _itemProps$maxRows,
+      _itemProps$minRows = itemProps.minRows,
+      minRows = _itemProps$minRows === void 0 ? 3 : _itemProps$minRows,
+      placeholder = itemProps.placeholder;
+
+  var _useState = useState(value ? value : ''),
+      innerValue = _useState[0],
+      setInnerValue = _useState[1];
+
+  useEffect(function () {
+    setInnerValue(value ? value : '');
+  }, [value]);
+  var debouncedHandleOnChange = useDebouncedCallback(function (event) {
+    var value = event.target.value;
+    customOnValueChanged(value);
+    console.log('textArea debouncedHandleOnChange', value);
+  }, INPUT_DELAY$1);
+  var handleOnChange = useCallback(function (event) {
+    event.persist();
+    var newValue = event.target.value;
+    setInnerValue(newValue);
+    debouncedHandleOnChange(event);
+    console.log('textArea handleOnChange', value);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "my-2"
+  }, /*#__PURE__*/React.createElement(TextareaAutosize, (_React$createElement = {
+    "aria-label": "minimum height",
+    minRows: maxRows
+  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 rounded-md border-warmGray-100 text-base w-full " + (errors[id] ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement)));
 });
 
 var SelectCountry = (function (props) {

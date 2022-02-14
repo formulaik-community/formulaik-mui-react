@@ -1,6 +1,6 @@
 {
   "name": "@yelounak/formulaik-mui",
-  "version": "1.0.401",
+  "version": "1.0.404",
   "description": "Formulaik-mui components library.",
   "author": "yelounak",
   "license": "MIT",
@@ -58,7 +58,8 @@
     "react-json-editor-ajrm": "^2.5.13",
     "react-phone-number-input": "^3.1.41",
     "react-textarea-autosize": "^8.3.3",
-    "react-drag-drop-files": "^2.3.2"
+    "react-drag-drop-files": "^2.3.2",
+    "use-debounce": "^7.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
