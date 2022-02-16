@@ -19,7 +19,7 @@ export default (props) => {
   const { size, canRemove = true, canEdit = false } = itemProps
 
   const onFileChanged = (file) => {
-    if (props.disabled) {
+    if (props.disabled || props.readOnly) {
       return
     }
 
@@ -31,7 +31,7 @@ export default (props) => {
     customOnValueChanged && customOnValueChanged(_data)
   }
 
-  const _props = { ...itemProps, data, disabled: props.disabled }
+  const _props = { ...itemProps, data, disabled: props.disabled, readOnly: props.readOnly }
   const onClick = () => { }
 
   const hasData = data.url || data.file
@@ -81,8 +81,8 @@ export default (props) => {
       right-0
       bottom-0
       top-0
-      ${hasData ? 'hidden' : 'flex'}
-      group-hover:flex
+      ${(!props.disable || !props.readOnly || hasData) ? 'hidden' : 'flex'}
+      ${(!props.disable && !props.readOnly) ? 'group-hover:flex' : ''}
       items-center
       px-2
       py-2
@@ -105,9 +105,10 @@ export default (props) => {
         duration-200
         ease-in-out'>
       `}>
-        <FileUploader onFileChanged={onFileChanged} />
+        {(!props.disable && !props.readOnly) ?
+          <FileUploader onFileChanged={onFileChanged} />
+          : null}
       </div>
-
     </div>
     {hasData ?
       <div className={`
@@ -115,7 +116,7 @@ export default (props) => {
             py-4
             h-full
             hidden
-            group-hover:grid
+            ${(!props.disable && !props.readOnly) ? 'group-hover:grid' : ''}
             place-items-center
             grid-cols-1
             transform
@@ -123,11 +124,11 @@ export default (props) => {
             duration-200
             ease-in-out
             `}>
-        {canRemove ? <IconButton aria-label="Delete" component="span"
+        {(!props.disable && !props.readOnly && canRemove) ? <IconButton aria-label="Delete" component="span"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            if (props.disabled) {
+            if (props.disabled || props.readOnly) {
               return
             }
             const _data = {}
@@ -140,7 +141,7 @@ export default (props) => {
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            if (props.disabled) {
+            if (props.disabled || props.readOnly) {
               return
             }
           }} >

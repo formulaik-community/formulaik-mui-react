@@ -113,13 +113,12 @@ var Input = (function (props) {
 var Submit = (function (props) {
   var isSubmitting = props.isSubmitting,
       _props$item = props.item,
-      value = _props$item.value,
-      itemProps = _props$item.props;
+      value = _props$item.value;
   return /*#__PURE__*/React.createElement("div", {
     className: "flex justify-center my-2"
   }, /*#__PURE__*/React.createElement(LoadingButton, {
     loading: isSubmitting,
-    disabled: isSubmitting || props.disabled || itemProps.disabled,
+    disabled: props.disabled,
     variant: "outlined",
     onClick: props.submitForm,
     size: 'large'
@@ -848,7 +847,7 @@ var VisualSelect = (function (props) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (props.disabled || itemProps.disabled) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
@@ -882,7 +881,7 @@ var VisualSelect = (function (props) {
       onClick: function onClick(e) {
         return onClickItem(e, item);
       },
-      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (isSelected ? 'border-4' : 'border-4') + "\n        " + (isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80') + "\n        " + (isSelected ? 'scale-105' : 'hover:scale-105') + "\n        " + (isSelected ? "border-" + highlightColor : "border-" + baseColor + " hover:border-" + highlightColor) + "\n        "
+      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (!props.disabled && !props.readOnly && isSelected ? 'border-4' : 'border-4') + "\n        " + (!props.disabled && !props.readOnly && isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80') + "\n        " + (!props.disabled && !props.readOnly && isSelected ? 'scale-105' : 'hover:scale-105') + "\n        " + (!props.disabled && !props.readOnly && isSelected ? "border-" + highlightColor : "border-" + baseColor + " " + (!props.disabled && !props.readOnly && isSelected ? 'hover:border-${highlightColor}' : '')) + "\n        "
     }, /*#__PURE__*/React.createElement("div", {
       className: "\n        absolute\n        left-1\n        right-1\n        bottom-1\n        top-1\n        flex\n        rounded-xl\n        overflow-hidden\n        justify-center\n        group-hover:flex\n        bg-" + baseColor + "\n        bg-opacity-80\n        group-hover:bg-opacity-100\n    "
     }, /*#__PURE__*/React.createElement(ContentComponent, {
@@ -1025,7 +1024,7 @@ var Avatar$1 = (function (props) {
       canEdit = _itemProps$canEdit === void 0 ? false : _itemProps$canEdit;
 
   var onFileChanged = function onFileChanged(file) {
-    if (props.disabled) {
+    if (props.disabled || props.readOnly) {
       return;
     }
 
@@ -1043,7 +1042,8 @@ var Avatar$1 = (function (props) {
 
   var _props = _extends({}, itemProps, {
     data: data,
-    disabled: props.disabled
+    disabled: props.disabled,
+    readOnly: props.readOnly
   });
 
   var onClick = function onClick() {};
@@ -1057,21 +1057,21 @@ var Avatar$1 = (function (props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      "
   }, hasData ? /*#__PURE__*/React.createElement(Preview, _props) : /*#__PURE__*/React.createElement(Add, _props)), /*#__PURE__*/React.createElement("div", {
-    className: "\n      bg-pink-300\n      bg-opacity-70\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      " + (hasData ? 'hidden' : 'flex') + "\n      group-hover:flex\n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center\n      "
+    className: "\n      bg-pink-300\n      bg-opacity-70\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      " + (!props.disable || !props.readOnly || hasData ? 'hidden' : 'flex') + "\n      " + (!props.disable && !props.readOnly ? 'group-hover:flex' : '') + "\n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center\n      "
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("small", null, "" + (hasData ? 'Click to change picture' : 'Click to add a picture')))), /*#__PURE__*/React.createElement("div", {
     className: "\n      bg-opacity-25\n      items-center\n      flex\n      overflow-hidden\n      h-full\n      w-full\n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
-  }, /*#__PURE__*/React.createElement(FileUploader, {
+  }, !props.disable && !props.readOnly ? /*#__PURE__*/React.createElement(FileUploader, {
     onFileChanged: onFileChanged
-  }))), hasData ? /*#__PURE__*/React.createElement("div", {
-    className: "\n            px-2\n            py-4\n            h-full\n            hidden\n            group-hover:grid\n            place-items-center\n            grid-cols-1\n            transform\n            transition\n            duration-200\n            ease-in-out\n            "
-  }, canRemove ? /*#__PURE__*/React.createElement(IconButton, {
+  }) : null)), hasData ? /*#__PURE__*/React.createElement("div", {
+    className: "\n            px-2\n            py-4\n            h-full\n            hidden\n            " + (!props.disable && !props.readOnly ? 'group-hover:grid' : '') + "\n            place-items-center\n            grid-cols-1\n            transform\n            transition\n            duration-200\n            ease-in-out\n            "
+  }, !props.disable && !props.readOnly && canRemove ? /*#__PURE__*/React.createElement(IconButton, {
     "aria-label": "Delete",
     component: "span",
     onClick: function onClick(e) {
       e.preventDefault();
       e.stopPropagation();
 
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         return;
       }
 
@@ -1086,7 +1086,7 @@ var Avatar$1 = (function (props) {
       e.preventDefault();
       e.stopPropagation();
 
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         return;
       }
     }

@@ -24,7 +24,7 @@ export default (props) => {
   const onClickItem = (e, item) => {
     e.preventDefault()
     e.stopPropagation()
-    if (props.disabled || itemProps.disabled) {
+    if (props.disabled || props.readOnly) {
       return
     }
     const { id } = item
@@ -64,10 +64,10 @@ export default (props) => {
         duration-200
         ease-in-out
         ${itemHeight}
-        ${isSelected ? 'border-4' : 'border-4'}
-        ${isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80'}
-        ${isSelected ? 'scale-105' : 'hover:scale-105'}
-        ${isSelected ? `border-${highlightColor}` : `border-${baseColor} hover:border-${highlightColor}`}
+        ${(!props.disabled && !props.readOnly && isSelected) ? 'border-4' : 'border-4'}
+        ${(!props.disabled && !props.readOnly && isSelected) ? 'opacity-100' : 'opacity-70 hover:opacity-80'}
+        ${(!props.disabled && !props.readOnly && isSelected) ? 'scale-105' : 'hover:scale-105'}
+        ${(!props.disabled && !props.readOnly && isSelected) ? `border-${highlightColor}` : `border-${baseColor} ${(!props.disabled && !props.readOnly && isSelected) ? 'hover:border-${highlightColor}' : ''}`}
         `}>
       <div className={`
         absolute
