@@ -7,6 +7,7 @@ export default (props) => {
 
   return <Rating
     disabled={props.disabled}
+    readOnly={props.readOnly}
     name="simple-controlled"
     value={value}
     size="large"

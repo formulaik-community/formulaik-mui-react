@@ -31,6 +31,7 @@ export default (props) => {
     id="asynchronous-demo"
     open={open}
     disabled={props.disabled}
+    readOnly={props.readOnly}
     sx={{
       // bgcolor: 'background.paper',
       // boxShadow: 1,

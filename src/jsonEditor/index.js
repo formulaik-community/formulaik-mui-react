@@ -13,6 +13,7 @@ export default (props) => {
   return <JSONInput
     id='a_unique_id'
     disabled={props.disabled}
+    readOnly={props.readOnly}
     placeholder={value}
     onChange={(val) => {
       const { json } = val

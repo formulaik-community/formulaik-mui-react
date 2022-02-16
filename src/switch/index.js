@@ -8,6 +8,7 @@ export default (props) => {
   return <FormGroup>
     <FormControlLabel control={<Switch
       disabled={props.disabled}
+      readOnly={props.readOnly}
       color="default"
       checked={value}
       onChange={({ target: { checked } }) => {

@@ -104,6 +104,7 @@ var Input = (function (props) {
     label: label,
     variant: "outlined",
     disabled: props.disabled,
+    readOnly: props.readOnly,
     value: innerValue,
     placeholder: placeholder,
     className: "w-full " + (error ? 'bg-red-100' : ''),
@@ -140,7 +141,8 @@ var Checkbox = (function (props) {
   }, /*#__PURE__*/React__default.createElement(FormControlLabel, {
     control: /*#__PURE__*/React__default.createElement(Checkbox$1, _extends({
       color: "default",
-      disabled: props.disabled
+      disabled: props.disabled,
+      readOnly: props.readOnly
     }, itemProps, {
       checked: function () {
         var _value = values[id];
@@ -168,6 +170,7 @@ var Select = (function (props) {
   var options = itemProps.options;
   return /*#__PURE__*/React__default.createElement(Select$1, {
     disabled: props.disabled,
+    readOnly: props.readOnly,
     labelId: id,
     id: id,
     className: " " + (error ? 'bg-red-100 select-error' : ''),
@@ -223,6 +226,7 @@ var TextArea = (function (props) {
     sx: {},
     "aria-label": "minimum height",
     disabled: props.disabled,
+    readOnly: props.readOnly,
     minRows: maxRows
   }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 py-4 pb-8 rounded-md border-warmGray-100 text-base w-full " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
 });
@@ -235,6 +239,7 @@ var SelectCountry = (function (props) {
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(ReactFlagsSelect, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     selected: value,
     onSelect: customOnValueChanged
   }, itemProps, {
@@ -251,6 +256,7 @@ var InputPhoneNumber = (function (props) {
     className: "border-2 border-warmGray-300 rounded-md px-4 py-4"
   }, /*#__PURE__*/React__default.createElement(PhoneInput, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     placeholder: "Enter phone number",
     value: value,
     onChange: customOnValueChanged
@@ -261,17 +267,17 @@ var InputPhoneNumber = (function (props) {
 
 var DatePicker = (function (props) {
   var customOnValueChanged = props.customOnValueChanged,
-      values = props.values,
+      value = props.value,
       _props$item = props.item,
       label = _props$item.label,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DatePicker$1, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     label: label,
-    value: values[id],
+    value: value,
     onChange: customOnValueChanged
   }, itemProps, {
     renderInput: function renderInput(params) {
@@ -360,6 +366,7 @@ var JSONEditor = (function (props) {
   return /*#__PURE__*/React__default.createElement(JSONInput, _extends({
     id: "a_unique_id",
     disabled: props.disabled,
+    readOnly: props.readOnly,
     placeholder: value,
     onChange: function onChange(val) {
       var json = val.json;
@@ -395,6 +402,7 @@ var CronEditor = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", null, /*#__PURE__*/React__default.createElement(TextField, _extends({
     label: label,
     disabled: props.disabled,
+    readOnly: props.readOnly,
     variant: "outlined"
   }, field, {
     className: "" + (errors[id] ? 'bg-red-100' : ''),
@@ -459,6 +467,7 @@ var Autocomplete = (function (props) {
     id: "asynchronous-demo",
     open: open,
     disabled: props.disabled,
+    readOnly: props.readOnly,
     sx: {},
     fullWidth: true,
     onOpen: function onOpen() {
@@ -505,6 +514,7 @@ var RadioGroup = (function (props) {
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(RadioGroup$1, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     "aria-label": "gender",
     defaultValue: "female",
     name: "radio-buttons-group",
@@ -551,6 +561,7 @@ var Button = (function (props) {
   }, /*#__PURE__*/React__default.createElement(Button$1, {
     variant: "text",
     disabled: props.disabled,
+    readOnly: props.readOnly,
     onClick: onClick
   }, label));
 });
@@ -562,6 +573,7 @@ var ButtonGroup = (function (props) {
   var options = itemProps.options;
   return /*#__PURE__*/React__default.createElement(ButtonGroup$1, {
     disabled: props.disabled,
+    readOnly: props.readOnly,
     className: " " + (errors[id] ? 'bg-red-100 select-error' : ''),
     value: values[id] ? values[id] : initialValues[id],
     variant: "contained",
@@ -584,6 +596,7 @@ var SwitchControl = (function (props) {
   return /*#__PURE__*/React__default.createElement(FormGroup, null, /*#__PURE__*/React__default.createElement(FormControlLabel, _extends({
     control: /*#__PURE__*/React__default.createElement(Switch, {
       disabled: props.disabled,
+      readOnly: props.readOnly,
       color: "default",
       checked: value,
       onChange: function onChange(_ref) {
@@ -602,6 +615,7 @@ var Rating = (function (props) {
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(Rating$1, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     name: "simple-controlled",
     value: value,
     size: "large",
@@ -621,6 +635,7 @@ var DateRangePicker = (function (props) {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DateRangePicker$1, _extends({
     disabled: props.disabled,
+    readOnly: props.readOnly,
     value: values[id] && Array.isArray(values[id]) ? values[id] : [null, null],
     onChange: customOnValueChanged,
     renderInput: function renderInput(startProps, endProps) {

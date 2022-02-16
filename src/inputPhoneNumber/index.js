@@ -7,6 +7,7 @@ export default (props) => {
   return <div className="border-2 border-warmGray-300 rounded-md px-4 py-4">
     <PhoneInput
       disabled={props.disabled}
+      readOnly={props.readOnly}
       placeholder="Enter phone number"
       value={value}
       onChange={customOnValueChanged}

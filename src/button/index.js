@@ -9,6 +9,7 @@ export default (props) => {
     <Button
       variant="text"
       disabled={props.disabled}
+      readOnly={props.readOnly}
       onClick={onClick}>
       {label}
     </Button>

@@ -7,6 +7,7 @@ export default (props) => {
   const { value, error, customOnValueChanged, field, item: { subType, id, label, props: itemProps } } = props
   return <RadioGroup
     disabled={props.disabled}
+    readOnly={props.readOnly}
     aria-label="gender"
     defaultValue="female"
     name="radio-buttons-group"

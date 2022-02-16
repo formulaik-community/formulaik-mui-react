@@ -27,6 +27,7 @@ export default (props) => {
     <TextField
       label={label}
       disabled={props.disabled}
+      readOnly={props.readOnly}
       variant="outlined"
       {...field}
       className={`${errors[id] ? 'bg-red-100' : ''}`}

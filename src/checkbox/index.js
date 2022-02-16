@@ -11,6 +11,7 @@ export default (props) => {
       <Checkbox
         color="default"
         disabled={props.disabled}
+        readOnly={props.readOnly}
         {...itemProps}
         checked={(() => {
           const _value = values[id] // ? values[id] : initialValues[id]

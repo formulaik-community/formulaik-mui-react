@@ -12,6 +12,7 @@ export default (props) => {
   return <LocalizationProvider dateAdapter={dateAdapter}>
     <DateRangePicker
       disabled={props.disabled}
+      readOnly={props.readOnly}
       // startText={itemProps.startLabel}
       // endText={itemProps.endLabel}
       value={(values[id] && Array.isArray(values[id])) ? values[id] : [null, null]}

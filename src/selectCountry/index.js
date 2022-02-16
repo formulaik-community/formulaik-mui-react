@@ -6,6 +6,7 @@ export default (props) => {
 
   return <ReactFlagsSelect
     disabled={props.disabled}
+    readOnly={props.readOnly}
     selected={value}
     onSelect={customOnValueChanged}
     {...itemProps}

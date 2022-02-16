@@ -33,6 +33,7 @@ export default (props) => {
     label={label}
     variant="outlined"
     disabled={props.disabled}
+    readOnly={props.readOnly}
     value={innerValue}
     placeholder={placeholder}
     className={`w-full ${error ? 'bg-red-100' : ''}`}

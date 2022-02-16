@@ -39,6 +39,7 @@ export default (props) => {
     }}
     aria-label="minimum height"
     disabled={props.disabled}
+    readOnly={props.readOnly}
     minRows={maxRows}
     minRows={minRows}
     onChange={handleOnChange}
