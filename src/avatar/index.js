@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import _ from 'underscore'
 import Add from './add'
 import Preview from './preview'
-import Shell from './shell'
 import FileUploader from './fileUploader'
 import IconButton from '@mui/material/IconButton'
 import AddAPhotoIcon from '@mui/icons-material/Add'
@@ -20,6 +19,10 @@ export default (props) => {
   const { size, canRemove = true, canEdit = false } = itemProps
 
   const onFileChanged = (file) => {
+    if (props.disabled) {
+      return
+    }
+
     var _data = { ...data, file }
     if (!_data.file) {
       _data = null
@@ -28,42 +31,42 @@ export default (props) => {
     customOnValueChanged && customOnValueChanged(_data)
   }
 
-  const _props = { ...itemProps, data }
+  const _props = { ...itemProps, data, disabled: props.disabled }
   const onClick = () => { }
 
   const hasData = data.url || data.file
 
 
-  return <div className={`  
-            my-4                        
-            flex   
-            group                     
-            `}>
-    <div className={`  
+  return <div className={`
             my-4
-            border 
-            border-warmGray-300 
+            flex
+            group
+            `}>
+    <div className={`
+            my-4
+            border
+            border-warmGray-300
             rounded-full
             h-${size}
-            w-${size}                            
-            align-middle             
+            w-${size}
+            align-middle
             hover:bg-warmGray-50
             cursor-pointer
             justify-center
-            items-center 
+            items-center
             flex
-            group 
+            group
             relative
             overflow-hidden`}
       onClick={onClick}>
       <div className={`
       bg-pink-300
       bg-opacity-25
-      absolute 
-      left-0 
-      right-0 
-      bottom-0 
-      top-0      
+      absolute
+      left-0
+      right-0
+      bottom-0
+      top-0
       `}>
         {hasData
           ? <Preview {..._props} />
@@ -71,30 +74,30 @@ export default (props) => {
         }
       </div>
       <div className={`
-      bg-pink-300 
+      bg-pink-300
       bg-opacity-70
-      absolute 
-      left-0 
-      right-0 
-      bottom-0 
-      top-0    
+      absolute
+      left-0
+      right-0
+      bottom-0
+      top-0
       ${hasData ? 'hidden' : 'flex'}
-      group-hover:flex 
+      group-hover:flex
       items-center
       px-2
       py-2
       text-center
-      justify-center 
+      justify-center
       `}>
         <span><small>{`${hasData ? 'Click to change picture' : 'Click to add a picture'}`}</small></span>
       </div>
-      <div className={`      
+      <div className={`
       bg-opacity-25
-      items-center 
-      flex 
-      overflow-hidden 
-      h-full 
-      w-full 
+      items-center
+      flex
+      overflow-hidden
+      h-full
+      w-full
       opacity-0
       bg-blue-500
       hover:scale-105
@@ -107,15 +110,15 @@ export default (props) => {
 
     </div>
     {hasData ?
-      <div className={`              
+      <div className={`
             px-2
             py-4
-            h-full            
+            h-full
             hidden
             group-hover:grid
             place-items-center
             grid-cols-1
-            transform        
+            transform
             transition
             duration-200
             ease-in-out
@@ -124,6 +127,9 @@ export default (props) => {
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
+            if (props.disabled) {
+              return
+            }
             const _data = {}
             setData(_data)
             customOnValueChanged && customOnValueChanged(_data)
@@ -134,7 +140,9 @@ export default (props) => {
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-
+            if (props.disabled) {
+              return
+            }
           }} >
           <EditOutlined />
         </IconButton> : null}

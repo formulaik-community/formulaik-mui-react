@@ -6,10 +6,10 @@ export default (props) => {
   return <div className={`flex justify-center my-2`}>
     <LoadingButton
       loading={isSubmitting}
+      disabled={isSubmitting || props.disabled || itemProps.disabled}
       variant="outlined"
       onClick={props.submitForm}
       // color={'#656565'}
-      disabled={isSubmitting}
       size={'large'}>
       {value}
     </LoadingButton>

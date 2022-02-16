@@ -8,6 +8,7 @@ export default (props) => {
 
   const { options, } = itemProps
   return <ButtonGroup
+    disabled={props.disabled}
     className={` ${errors[id] ? 'bg-red-100 select-error' : ''}`}
     value={values[id] ? values[id] : initialValues[id]}
     variant="contained" aria-label="outlined primary button group"

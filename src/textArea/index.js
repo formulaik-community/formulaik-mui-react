@@ -2,11 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { useDebouncedCallback } from 'use-debounce'
 
-const INPUT_DELAY = 1000
-
 export default (props) => {
-  const { value, customOnValueChanged, field, errors, item: { props: itemProps = {}, id } } = props
-  const { maxRows = 1000, minRows = 3, placeholder } = itemProps
+  const { value, error, customOnValueChanged, item: { props: itemProps = {} } } = props
+  const { maxRows = 1000, minRows = 3, placeholder, inputDelay = 1000 } = itemProps
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
 
@@ -20,7 +18,7 @@ export default (props) => {
       customOnValueChanged(value)
       console.log('textArea debouncedHandleOnChange', value)
     },
-    INPUT_DELAY
+    inputDelay
   )
 
   const handleOnChange = useCallback((event) => {
@@ -31,13 +29,21 @@ export default (props) => {
     console.log('textArea handleOnChange', value)
   }, [])
 
-  return <div className='my-2'><TextareaAutosize
+  return <TextareaAutosize
+    sx={{
+      // bgcolor: 'background.paper',
+      // boxShadow: 1,
+      //borderRadius: 1,
+      // paddingTop: 0,
+      // paddingBottom: 0
+    }}
     aria-label="minimum height"
+    disabled={props.disabled}
     minRows={maxRows}
     minRows={minRows}
     onChange={handleOnChange}
     value={innerValue}
     placeholder={placeholder}
-    className={`textarea h-64 rounded-md border-warmGray-100 text-base w-full ${errors[id] ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
-  /></div>
+    className={`textarea h-64 py-4 pb-8 rounded-md border-warmGray-100 text-base w-full ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
+  />
 }

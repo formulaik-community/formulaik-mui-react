@@ -2,11 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField'
 import { useDebouncedCallback } from 'use-debounce'
 
-const INPUT_DELAY = 1000
-
 export default (props) => {
-  const { value, customOnValueChanged, field, errors, item: { subType, label, props: itemProps = {}, id } } = props
-  const { placeholder } = itemProps
+  const { value, error, customOnValueChanged, item: { subType, label, props: itemProps = {}, id } } = props
+  const { placeholder, inputDelay = 1000, className = '' } = itemProps
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
 
@@ -20,7 +18,7 @@ export default (props) => {
       customOnValueChanged(value)
       console.log('textArea debouncedHandleOnChange', value)
     },
-    INPUT_DELAY
+    inputDelay
   )
 
   const handleOnChange = useCallback((event) => {
@@ -31,14 +29,15 @@ export default (props) => {
     console.log('textArea handleOnChange', value)
   }, [])
 
-  return <TextField
+  return <div className={`w-full ${className}`}><TextField
     label={label}
     variant="outlined"
+    disabled={props.disabled}
     value={innerValue}
     placeholder={placeholder}
-    className={`${errors[id] ? 'bg-red-100' : ''}`}
+    className={`w-full ${error ? 'bg-red-100' : ''}`}
     type={subType}
     onChange={handleOnChange}
     {...itemProps} />
-
+  </div>
 }

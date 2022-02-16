@@ -64,18 +64,20 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-var INPUT_DELAY = 1000;
 var Input = (function (props) {
   var value = props.value,
+      error = props.error,
       customOnValueChanged = props.customOnValueChanged,
-      errors = props.errors,
       _props$item = props.item,
       subType = _props$item.subType,
       label = _props$item.label,
       _props$item$props = _props$item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props,
-      id = _props$item.id;
-  var placeholder = itemProps.placeholder;
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
+  var placeholder = itemProps.placeholder,
+      _itemProps$inputDelay = itemProps.inputDelay,
+      inputDelay = _itemProps$inputDelay === void 0 ? 1000 : _itemProps$inputDelay,
+      _itemProps$className = itemProps.className,
+      className = _itemProps$className === void 0 ? '' : _itemProps$className;
 
   var _useState = React.useState(value ? value : ''),
       innerValue = _useState[0],
@@ -88,7 +90,7 @@ var Input = (function (props) {
     var value = event.target.value;
     customOnValueChanged(value);
     console.log('textArea debouncedHandleOnChange', value);
-  }, INPUT_DELAY);
+  }, inputDelay);
   var handleOnChange = React.useCallback(function (event) {
     event.persist();
     var newValue = event.target.value;
@@ -96,28 +98,32 @@ var Input = (function (props) {
     debouncedHandleOnChange(event);
     console.log('textArea handleOnChange', value);
   }, []);
-  return /*#__PURE__*/React__default.createElement(TextField, _extends({
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "w-full " + className
+  }, /*#__PURE__*/React__default.createElement(TextField, _extends({
     label: label,
     variant: "outlined",
+    disabled: props.disabled,
     value: innerValue,
     placeholder: placeholder,
-    className: "" + (errors[id] ? 'bg-red-100' : ''),
+    className: "w-full " + (error ? 'bg-red-100' : ''),
     type: subType,
     onChange: handleOnChange
-  }, itemProps));
+  }, itemProps)));
 });
 
 var Submit = (function (props) {
   var isSubmitting = props.isSubmitting,
       _props$item = props.item,
-      value = _props$item.value;
+      value = _props$item.value,
+      itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "flex justify-center my-2"
   }, /*#__PURE__*/React__default.createElement(LoadingButton, {
     loading: isSubmitting,
+    disabled: isSubmitting || props.disabled || itemProps.disabled,
     variant: "outlined",
     onClick: props.submitForm,
-    disabled: isSubmitting,
     size: 'large'
   }, value));
 });
@@ -133,7 +139,8 @@ var Checkbox = (function (props) {
     className: "px-4 py-2 card rounded-lg border-2 border-warmGray-400 "
   }, /*#__PURE__*/React__default.createElement(FormControlLabel, {
     control: /*#__PURE__*/React__default.createElement(Checkbox$1, _extends({
-      color: "default"
+      color: "default",
+      disabled: props.disabled
     }, itemProps, {
       checked: function () {
         var _value = values[id];
@@ -151,20 +158,20 @@ var Checkbox = (function (props) {
 });
 
 var Select = (function (props) {
-  var initialValues = props.initialValues,
-      values = props.values,
+  var value = props.value,
       customOnValueChanged = props.customOnValueChanged,
-      errors = props.errors,
+      error = props.error,
       _props$item = props.item,
       label = _props$item.label,
       id = _props$item.id,
       itemProps = _props$item.props;
   var options = itemProps.options;
   return /*#__PURE__*/React__default.createElement(Select$1, {
+    disabled: props.disabled,
     labelId: id,
     id: id,
-    className: " " + (errors[id] ? 'bg-red-100 select-error' : ''),
-    value: values[id] ? values[id] : initialValues[id],
+    className: " " + (error ? 'bg-red-100 select-error' : ''),
+    value: value,
     label: label,
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
@@ -177,22 +184,21 @@ var Select = (function (props) {
   }));
 });
 
-var INPUT_DELAY$1 = 1000;
 var TextArea = (function (props) {
   var _React$createElement;
 
   var value = props.value,
+      error = props.error,
       customOnValueChanged = props.customOnValueChanged,
-      errors = props.errors,
-      _props$item = props.item,
-      _props$item$props = _props$item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props,
-      id = _props$item.id;
+      _props$item$props = props.item.props,
+      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
   var _itemProps$maxRows = itemProps.maxRows,
       maxRows = _itemProps$maxRows === void 0 ? 1000 : _itemProps$maxRows,
       _itemProps$minRows = itemProps.minRows,
       minRows = _itemProps$minRows === void 0 ? 3 : _itemProps$minRows,
-      placeholder = itemProps.placeholder;
+      placeholder = itemProps.placeholder,
+      _itemProps$inputDelay = itemProps.inputDelay,
+      inputDelay = _itemProps$inputDelay === void 0 ? 1000 : _itemProps$inputDelay;
 
   var _useState = React.useState(value ? value : ''),
       innerValue = _useState[0],
@@ -205,7 +211,7 @@ var TextArea = (function (props) {
     var value = event.target.value;
     customOnValueChanged(value);
     console.log('textArea debouncedHandleOnChange', value);
-  }, INPUT_DELAY$1);
+  }, inputDelay);
   var handleOnChange = React.useCallback(function (event) {
     event.persist();
     var newValue = event.target.value;
@@ -213,48 +219,43 @@ var TextArea = (function (props) {
     debouncedHandleOnChange(event);
     console.log('textArea handleOnChange', value);
   }, []);
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "my-2"
-  }, /*#__PURE__*/React__default.createElement(TextareaAutosize, (_React$createElement = {
+  return /*#__PURE__*/React__default.createElement(TextareaAutosize, (_React$createElement = {
+    sx: {},
     "aria-label": "minimum height",
+    disabled: props.disabled,
     minRows: maxRows
-  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 rounded-md border-warmGray-100 text-base w-full " + (errors[id] ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement)));
+  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 py-4 pb-8 rounded-md border-warmGray-100 text-base w-full " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
 });
 
 var SelectCountry = (function (props) {
   var customOnValueChanged = props.customOnValueChanged,
-      values = props.values,
-      errors = props.errors,
+      value = props.value,
+      error = props.error,
       _props$item = props.item,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(ReactFlagsSelect, _extends({
-    selected: values[id],
+    disabled: props.disabled,
+    selected: value,
     onSelect: customOnValueChanged
   }, itemProps, {
-    className: "  w-full focus:ring-primary  " + (errors[id] ? 'bg-red-100 select-error' : '')
+    className: "  w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   }));
 });
 
 var InputPhoneNumber = (function (props) {
-  var setFieldTouched = props.setFieldTouched,
-      setFieldValue = props.setFieldValue,
-      values = props.values,
-      errors = props.errors,
-      _props$item = props.item,
-      id = _props$item.id,
-      itemProps = _props$item.props;
+  var customOnValueChanged = props.customOnValueChanged,
+      value = props.value,
+      error = props.error,
+      itemProps = props.item.props;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "border-2 border-warmGray-300 rounded-md px-4 py-4"
   }, /*#__PURE__*/React__default.createElement(PhoneInput, _extends({
+    disabled: props.disabled,
     placeholder: "Enter phone number",
-    value: values[id],
-    onChange: function onChange(value) {
-      setFieldValue(id, value);
-      setFieldTouched(id, true, false);
-    }
+    value: value,
+    onChange: customOnValueChanged
   }, itemProps, {
-    className: "w-full focus:ring-primary  " + (errors[id] ? 'bg-red-100 select-error' : '')
+    className: "w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   })));
 });
 
@@ -268,6 +269,7 @@ var DatePicker = (function (props) {
   return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DatePicker$1, _extends({
+    disabled: props.disabled,
     label: label,
     value: values[id],
     onChange: customOnValueChanged
@@ -350,22 +352,22 @@ var CronGenerator = (function (props) {
 });
 
 var JSONEditor = (function (props) {
-  var values = props.values,
+  var value = props.value,
       customOnValueChanged = props.customOnValueChanged,
-      errors = props.errors,
+      error = props.error,
       _props$item = props.item,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(JSONInput, _extends({
     id: "a_unique_id",
-    placeholder: values[id],
+    disabled: props.disabled,
+    placeholder: value,
     onChange: function onChange(val) {
       var json = val.json;
       customOnValueChanged(json);
     },
     locale: locale,
     height: "550px",
-    className: " " + (errors[id] ? 'bg-red-100 border-red-600' : '')
+    className: " " + (error ? 'bg-red-100 border-red-600' : '')
   }, itemProps));
 });
 
@@ -392,6 +394,7 @@ var CronEditor = (function (props) {
 
   return /*#__PURE__*/React__default.createElement("div", null, /*#__PURE__*/React__default.createElement(TextField, _extends({
     label: label,
+    disabled: props.disabled,
     variant: "outlined"
   }, field, {
     className: "" + (errors[id] ? 'bg-red-100' : ''),
@@ -430,7 +433,6 @@ var Autocomplete = (function (props) {
       setIsLoading = _useState3[1];
 
   React.useEffect(function () {
-
     updateOptions({
       value: ''
     });
@@ -456,6 +458,9 @@ var Autocomplete = (function (props) {
   return /*#__PURE__*/React__default.createElement(Autocomplete$1, _extends({
     id: "asynchronous-demo",
     open: open,
+    disabled: props.disabled,
+    sx: {},
+    fullWidth: true,
     onOpen: function onOpen() {
       setOpen(true);
     },
@@ -492,21 +497,20 @@ var Autocomplete = (function (props) {
 });
 
 var RadioGroup = (function (props) {
-  var values = props.values,
-      initialValues = props.initialValues,
+  var value = props.value,
+      error = props.error,
       customOnValueChanged = props.customOnValueChanged,
       field = props.field,
-      errors = props.errors,
       _props$item = props.item,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(RadioGroup$1, _extends({
+    disabled: props.disabled,
     "aria-label": "gender",
     defaultValue: "female",
     name: "radio-buttons-group",
-    value: values[id] ? values[id] : initialValues[id]
+    value: value
   }, field, {
-    className: "" + (errors[id] ? 'bg-red-100' : '')
+    className: "" + (error ? 'bg-red-100' : '')
   }, itemProps, {
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
@@ -546,6 +550,7 @@ var Button = (function (props) {
     className: "flex justify-center my-2"
   }, /*#__PURE__*/React__default.createElement(Button$1, {
     variant: "text",
+    disabled: props.disabled,
     onClick: onClick
   }, label));
 });
@@ -556,6 +561,7 @@ var ButtonGroup = (function (props) {
       itemProps = _props$item.props;
   var options = itemProps.options;
   return /*#__PURE__*/React__default.createElement(ButtonGroup$1, {
+    disabled: props.disabled,
     className: " " + (errors[id] ? 'bg-red-100 select-error' : ''),
     value: values[id] ? values[id] : initialValues[id],
     variant: "contained",
@@ -571,15 +577,15 @@ var ButtonGroup = (function (props) {
 
 var SwitchControl = (function (props) {
   var customOnValueChanged = props.customOnValueChanged,
-      values = props.values,
+      value = props.value,
       _props$item = props.item,
       label = _props$item.label,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(FormGroup, null, /*#__PURE__*/React__default.createElement(FormControlLabel, _extends({
     control: /*#__PURE__*/React__default.createElement(Switch, {
+      disabled: props.disabled,
       color: "default",
-      checked: values[id],
+      checked: value,
       onChange: function onChange(_ref) {
         var checked = _ref.target.checked;
         customOnValueChanged(checked);
@@ -590,14 +596,14 @@ var SwitchControl = (function (props) {
 });
 
 var Rating = (function (props) {
-  var values = props.values,
+  var value = props.value,
       customOnValueChanged = props.customOnValueChanged,
       _props$item = props.item,
-      id = _props$item.id,
       itemProps = _props$item.props;
   return /*#__PURE__*/React__default.createElement(Rating$1, _extends({
+    disabled: props.disabled,
     name: "simple-controlled",
-    value: values[id],
+    value: value,
     size: "large",
     onChange: function onChange(event, newValue) {
       customOnValueChanged(newValue);
@@ -614,6 +620,7 @@ var DateRangePicker = (function (props) {
   return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DateRangePicker$1, _extends({
+    disabled: props.disabled,
     value: values[id] && Array.isArray(values[id]) ? values[id] : [null, null],
     onChange: customOnValueChanged,
     renderInput: function renderInput(startProps, endProps) {
@@ -800,14 +807,12 @@ var H4 = (function (props) {
 });
 
 var VisualSelect = (function (props) {
-  var values = props.values,
+  var value = props.value,
       customOnValueChanged = props.customOnValueChanged,
-      _props$item = props.item,
-      id = _props$item.id,
-      _props$item$props = _props$item.props,
+      _props$item$props = props.item.props,
       itemProps = _props$item$props === void 0 ? {} : _props$item$props;
 
-  var _useState = React.useState(values[id] ? values[id].filter(function (a) {
+  var _useState = React.useState(value ? value.filter(function (a) {
     return a;
   }) : []),
       selectedItems = _useState[0],
@@ -830,6 +835,11 @@ var VisualSelect = (function (props) {
   var onClickItem = function onClickItem(e, item) {
     e.preventDefault();
     e.stopPropagation();
+
+    if (props.disabled || itemProps.disabled) {
+      return;
+    }
+
     var id = item.id;
     var isSelected = selectedItems.includes(id);
     var newSelectedItems;
@@ -875,7 +885,7 @@ var VisualSelect = (function (props) {
   };
 
   return /*#__PURE__*/React__default.createElement("ul", {
-    className: "grid-cols-" + cols + " grid gap-x-5 gap-y-7 py-4"
+    className: "grid-cols-" + cols + " grid gap-x-6 gap-y-6 py-0"
   }, items && items.length > 0 && items.map(renderItem));
 });
 
@@ -1003,6 +1013,10 @@ var Avatar$1 = (function (props) {
       canEdit = _itemProps$canEdit === void 0 ? false : _itemProps$canEdit;
 
   var onFileChanged = function onFileChanged(file) {
+    if (props.disabled) {
+      return;
+    }
+
     var _data = _extends({}, data, {
       file: file
     });
@@ -1016,33 +1030,39 @@ var Avatar$1 = (function (props) {
   };
 
   var _props = _extends({}, itemProps, {
-    data: data
+    data: data,
+    disabled: props.disabled
   });
 
   var onClick = function onClick() {};
 
   var hasData = data.url || data.file;
   return /*#__PURE__*/React__default.createElement("div", {
-    className: "  \n            my-4                        \n            flex   \n            group                     \n            "
+    className: "\n            my-4\n            flex\n            group\n            "
   }, /*#__PURE__*/React__default.createElement("div", {
-    className: "  \n            my-4\n            border \n            border-warmGray-300 \n            rounded-full\n            h-" + size + "\n            w-" + size + "                            \n            align-middle             \n            hover:bg-warmGray-50\n            cursor-pointer\n            justify-center\n            items-center \n            flex\n            group \n            relative\n            overflow-hidden",
+    className: "\n            my-4\n            border\n            border-warmGray-300\n            rounded-full\n            h-" + size + "\n            w-" + size + "\n            align-middle\n            hover:bg-warmGray-50\n            cursor-pointer\n            justify-center\n            items-center\n            flex\n            group\n            relative\n            overflow-hidden",
     onClick: onClick
   }, /*#__PURE__*/React__default.createElement("div", {
-    className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0      \n      "
+    className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      "
   }, hasData ? /*#__PURE__*/React__default.createElement(Preview, _props) : /*#__PURE__*/React__default.createElement(Add, _props)), /*#__PURE__*/React__default.createElement("div", {
-    className: "\n      bg-pink-300 \n      bg-opacity-70\n      absolute \n      left-0 \n      right-0 \n      bottom-0 \n      top-0    \n      " + (hasData ? 'hidden' : 'flex') + "\n      group-hover:flex \n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center \n      "
+    className: "\n      bg-pink-300\n      bg-opacity-70\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      " + (hasData ? 'hidden' : 'flex') + "\n      group-hover:flex\n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center\n      "
   }, /*#__PURE__*/React__default.createElement("span", null, /*#__PURE__*/React__default.createElement("small", null, "" + (hasData ? 'Click to change picture' : 'Click to add a picture')))), /*#__PURE__*/React__default.createElement("div", {
-    className: "      \n      bg-opacity-25\n      items-center \n      flex \n      overflow-hidden \n      h-full \n      w-full \n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
+    className: "\n      bg-opacity-25\n      items-center\n      flex\n      overflow-hidden\n      h-full\n      w-full\n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
   }, /*#__PURE__*/React__default.createElement(FileUploader, {
     onFileChanged: onFileChanged
   }))), hasData ? /*#__PURE__*/React__default.createElement("div", {
-    className: "              \n            px-2\n            py-4\n            h-full            \n            hidden\n            group-hover:grid\n            place-items-center\n            grid-cols-1\n            transform        \n            transition\n            duration-200\n            ease-in-out\n            "
+    className: "\n            px-2\n            py-4\n            h-full\n            hidden\n            group-hover:grid\n            place-items-center\n            grid-cols-1\n            transform\n            transition\n            duration-200\n            ease-in-out\n            "
   }, canRemove ? /*#__PURE__*/React__default.createElement(IconButton, {
     "aria-label": "Delete",
     component: "span",
     onClick: function onClick(e) {
       e.preventDefault();
       e.stopPropagation();
+
+      if (props.disabled) {
+        return;
+      }
+
       var _data = {};
       setData(_data);
       customOnValueChanged && customOnValueChanged(_data);
@@ -1053,6 +1073,10 @@ var Avatar$1 = (function (props) {
     onClick: function onClick(e) {
       e.preventDefault();
       e.stopPropagation();
+
+      if (props.disabled) {
+        return;
+      }
     }
   }, /*#__PURE__*/React__default.createElement(EditOutlined, null)) : null) : null);
 });

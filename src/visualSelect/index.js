@@ -3,16 +3,15 @@ import _ from 'underscore'
 
 export default (props) => {
   const {
-    values,
+    value,
     customOnValueChanged,
-    errors,
-    item: { label, id, props: itemProps = {} }
+    item: { props: itemProps = {} }
   } = props
 
-  const [selectedItems, setSelectedItems] = useState(values[id] ? (values[id]).filter(a => a) : [])
+  const [selectedItems, setSelectedItems] = useState(value ? (value).filter(a => a) : [])
 
-  const { items,
-    isGrid = true,
+  const {
+    items,
     cols = 1,
     maxSelectionAllowed,
     itemHeight = 'h-72',
@@ -25,6 +24,9 @@ export default (props) => {
   const onClickItem = (e, item) => {
     e.preventDefault()
     e.stopPropagation()
+    if (props.disabled || itemProps.disabled) {
+      return
+    }
     const { id } = item
     const isSelected = selectedItems.includes(id)
     var newSelectedItems
@@ -89,7 +91,7 @@ export default (props) => {
 
   const renderItem = (item, index) => <li className={`w-full`}> {renderThumbnail(item)}</li>
 
-  return <ul className={`grid-cols-${cols} grid gap-x-5 gap-y-7 py-4`}>
+  return <ul className={`grid-cols-${cols} grid gap-x-6 gap-y-6 py-0`}>
     {(items && items.length > 0) && items.map(renderItem)}
   </ul>
 }

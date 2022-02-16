@@ -6,7 +6,10 @@ export default (props) => {
   const { onClick } = itemProps
 
   return <div className={`flex justify-center my-2`}>
-    <Button variant="text" onClick={onClick}>
+    <Button
+      variant="text"
+      disabled={props.disabled}
+      onClick={onClick}>
       {label}
     </Button>
   </div>

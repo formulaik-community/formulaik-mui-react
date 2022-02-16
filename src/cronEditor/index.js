@@ -4,40 +4,41 @@ import cronParser from 'cron-parser'
 import Image from 'next/image'
 
 export default (props) => {
-    const { values, customOnValueChanged, field, errors, item: { subType, id, label, props: itemProps } } = props
+  const { values, customOnValueChanged, field, errors, item: { subType, id, label, props: itemProps } } = props
 
-    const iterations = () => {
+  const iterations = () => {
 
-        try {
-            var interval = cronParser.parseExpression(values[id])
-            return [
-                interval.next().toString(),
-                interval.next().toString(),
-                interval.next().toString(),
-                interval.next().toString()
-            ]
-        } catch (err) {
-            console.log('Error: ' + err.message);
-        }
-
-        return []
+    try {
+      var interval = cronParser.parseExpression(values[id])
+      return [
+        interval.next().toString(),
+        interval.next().toString(),
+        interval.next().toString(),
+        interval.next().toString()
+      ]
+    } catch (err) {
+      console.log('Error: ' + err.message);
     }
 
-    return <div>
-        <TextField
-            label={label}
-            variant="outlined"
-            {...field}
-            className={`${errors[id] ? 'bg-red-100' : ''}`}
-            type={subType}
-            onChange={({ target: { value } }) => customOnValueChanged(value)} />
-        <p className="text-xs mt-6 text-warmGray-500">
-            <ul>
-                {iterations().map(i => <li>{i}</li>)}
-            </ul>
-        </p>
-        {/* <Image src='https://www.ostechnix.com/wp-content/uploads/2018/05/cron-job-format-1.png' width={300} height={200} /> */}
-        {/* <p className="text-xs mt-6 text-warmGray-300">
+    return []
+  }
+
+  return <div>
+    <TextField
+      label={label}
+      disabled={props.disabled}
+      variant="outlined"
+      {...field}
+      className={`${errors[id] ? 'bg-red-100' : ''}`}
+      type={subType}
+      onChange={({ target: { value } }) => customOnValueChanged(value)} />
+    <p className="text-xs mt-6 text-warmGray-500">
+      <ul>
+        {iterations().map(i => <li>{i}</li>)}
+      </ul>
+    </p>
+    {/* <Image src='https://www.ostechnix.com/wp-content/uploads/2018/05/cron-job-format-1.png' width={300} height={200} /> */}
+    {/* <p className="text-xs mt-6 text-warmGray-300">
             *    *    *    *    *    *
             <br />
             ┬    ┬    ┬    ┬    ┬    ┬
@@ -49,5 +50,5 @@ export default (props) => {
             │    └──────────────────── minute (0 - 59)
             └───────────────────────── second (0 - 59, optional)
         </p> */}
-    </div>
+  </div>
 }

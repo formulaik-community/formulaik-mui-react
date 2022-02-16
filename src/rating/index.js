@@ -2,12 +2,13 @@ import React from 'react'
 import Rating from '@mui/material/Rating'
 
 export default (props) => {
-  const { values, customOnValueChanged,
+  const { value, customOnValueChanged,
     item: { id, label, props: itemProps } } = props
 
   return <Rating
+    disabled={props.disabled}
     name="simple-controlled"
-    value={values[id]}
+    value={value}
     size="large"
     onChange={(event, newValue) => {
       customOnValueChanged(newValue)

@@ -9,45 +9,13 @@ export default (props) => {
     customOnValueChanged,
     field,
     values,
-    errors,
     item: { label, id, props: itemProps } } = props
 
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  // useEffect(() => {
-  //     let active = true
-
-  //     if (!loading) {
-  //         return undefined
-  //     }
-
-  //     (async () => {
-  //         const { fetcher } = itemProps
-  //         const items = await fetcher() // For demo purposes.
-
-  //         if (active) {
-  //             setOptions(items)
-  //         }
-  //     })()
-
-  //     return () => {
-  //         active = false
-  //     }
-  // }, [loading])
-
-  // useEffect(() => {
-  //     if (!open) {
-  //         setOptions([])
-  //     }
-  // }, [open])
-
   useEffect(() => {
-    var value = ''
-    if (initialValues[id]) {
-      //return
-    }
     updateOptions({ value: '' })
   }, [])
 
@@ -61,8 +29,16 @@ export default (props) => {
 
   return <Autocomplete
     id="asynchronous-demo"
-
     open={open}
+    disabled={props.disabled}
+    sx={{
+      // bgcolor: 'background.paper',
+      // boxShadow: 1,
+      // borderRadius: 1,
+      // paddingTop: 0,
+      // paddingBottom: 0
+    }}
+    fullWidth
     onOpen={() => {
       setOpen(true)
     }}
@@ -77,12 +53,11 @@ export default (props) => {
       customOnValueChanged(value)
     }}
     defaultValue={(values && values[id]) ? values[id] : initialValues[id]}
-    renderInput={(params) => (
+    renderInput={(params) =>
       <TextField
         {...params}
         {...field}
         label={label}
-
         onChange={async ({ target: { value } }) => {
           updateOptions({ value })
         }}
@@ -96,7 +71,6 @@ export default (props) => {
           ),
         }}
       />
-    )}
+    }
   />
 }
-

@@ -9,6 +9,7 @@ export default (props) => {
   const { customOnValueChanged, values, errors, item: { label, id, props: itemProps } } = props
   return <LocalizationProvider dateAdapter={dateAdapter}>
     <DatePicker
+      disabled={props.disabled}
       label={label}
       value={values[id]}
       onChange={customOnValueChanged}
