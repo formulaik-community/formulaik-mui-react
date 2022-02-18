@@ -4,7 +4,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 export default (props) => {
-  const { value, error, customOnValueChanged, field, item: { subType, id, label, props: itemProps } } = props
+  const { value, error, onValueChanged, field, item: { subType, id, label, props: itemProps } } = props
   return <RadioGroup
     disabled={props.disabled}
     readOnly={props.readOnly}
@@ -15,7 +15,7 @@ export default (props) => {
     {...field}
     className={`${error ? 'bg-red-100' : ''}`}
     {...itemProps}
-    onChange={({ target: { value } }) => customOnValueChanged(value)}>
+    onChange={({ target: { value } }) => onValueChanged(value)}>
     {itemProps.options.map(({ value, label }) => {
       return <FormControlLabel value={value} control={<Radio />} label={label} />
     })}

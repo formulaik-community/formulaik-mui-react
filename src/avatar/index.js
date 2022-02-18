@@ -11,7 +11,7 @@ import EditOutlined from '@mui/icons-material/EditOutlined'
 export default (props) => {
   const {
     values,
-    customOnValueChanged,
+    onValueChanged,
     item: { id, props: itemProps = {} }
   } = props
 
@@ -28,7 +28,7 @@ export default (props) => {
       _data = null
     }
     setData(_data)
-    customOnValueChanged && customOnValueChanged(_data)
+    onValueChanged && onValueChanged(_data)
   }
 
   const _props = { ...itemProps, data, disabled: props.disabled, readOnly: props.readOnly }
@@ -133,7 +133,7 @@ export default (props) => {
             }
             const _data = {}
             setData(_data)
-            customOnValueChanged && customOnValueChanged(_data)
+            onValueChanged && onValueChanged(_data)
           }} >
           <RemoveButton />
         </IconButton> : null}

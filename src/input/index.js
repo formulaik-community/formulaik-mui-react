@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, customOnValueChanged, item: { subType, label, props: itemProps = {}, id } } = props
+  const { value, error, onValueChanged, item: { subType, label, props: itemProps = {}, id } } = props
   const { placeholder, inputDelay = 1000, className = '' } = itemProps
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
@@ -15,7 +15,7 @@ export default (props) => {
   const debouncedHandleOnChange = useDebouncedCallback(
     (event) => {
       const value = event.target.value
-      customOnValueChanged(value)
+      onValueChanged(value)
       console.log('textArea debouncedHandleOnChange', value)
     },
     inputDelay

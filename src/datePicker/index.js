@@ -5,14 +5,14 @@ import DatePicker from '@mui/lab/DatePicker'
 import TextField from '@mui/material/TextField'
 
 export default (props) => {
-  const { customOnValueChanged, value, item: { label, props: itemProps } } = props
+  const { onValueChanged, value, item: { label, props: itemProps } } = props
   return <LocalizationProvider dateAdapter={dateAdapter}>
     <DatePicker
       disabled={props.disabled}
       readOnly={props.readOnly}
       label={label}
       value={value}
-      onChange={customOnValueChanged}
+      onChange={onValueChanged}
       {...itemProps}
       renderInput={(params) => <TextField {...params} />}
     />

@@ -5,7 +5,7 @@ import ButtonInFormulaic from '../button'
 export default (props) => {
   const {
     values,
-    customOnValueChanged,
+    onValueChanged,
     errors,
 
     item: { id, label, props: itemProps }
@@ -28,7 +28,7 @@ export default (props) => {
             className: 'ml-2 ',
             props: {
               onClick: () => {
-                customOnValueChanged && customOnValueChanged({ isRemoved: true })
+                onValueChanged && onValueChanged({ isRemoved: true })
               }
             }
           }
@@ -39,7 +39,7 @@ export default (props) => {
 
   const onValuesChanged = (values) => {
     const data = itemProps.onEntryValuesChangedHook({ values, data: item })
-    customOnValueChanged && customOnValueChanged(data)
+    onValueChanged && onValueChanged(data)
   }
 
   const componentsLibrary = ({ type }) => {

@@ -3,7 +3,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, customOnValueChanged, item: { props: itemProps = {} } } = props
+  const { value, error, onValueChanged, item: { props: itemProps = {} } } = props
   const { maxRows = 1000, minRows = 3, placeholder, inputDelay = 1000 } = itemProps
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
@@ -15,7 +15,7 @@ export default (props) => {
   const debouncedHandleOnChange = useDebouncedCallback(
     (event) => {
       const value = event.target.value
-      customOnValueChanged(value)
+      onValueChanged(value)
       console.log('textArea debouncedHandleOnChange', value)
     },
     inputDelay

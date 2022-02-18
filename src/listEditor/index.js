@@ -10,7 +10,7 @@ import _ from 'underscore'
 export default (props) => {
   const {
     values,
-    customOnValueChanged,
+    onValueChanged,
     errors,
 
     item: { id, label, props: itemProps }
@@ -42,7 +42,7 @@ export default (props) => {
           onClick: () => {
             const newItem = itemProps.newStruct
             items.push(newItem)
-            customOnValueChanged && customOnValueChanged(items)
+            onValueChanged && onValueChanged(items)
           }
         }
       },
@@ -68,7 +68,7 @@ export default (props) => {
       }
       _i.push(__values[e])
     })
-    customOnValueChanged && customOnValueChanged(_i)
+    onValueChanged && onValueChanged(_i)
     //forceUpdate()
   }
 

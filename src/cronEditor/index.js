@@ -4,7 +4,7 @@ import cronParser from 'cron-parser'
 import Image from 'next/image'
 
 export default (props) => {
-  const { values, customOnValueChanged, field, errors, item: { subType, id, label, props: itemProps } } = props
+  const { values, onValueChanged, field, errors, item: { subType, id, label, props: itemProps } } = props
 
   const iterations = () => {
 
@@ -32,7 +32,7 @@ export default (props) => {
       {...field}
       className={`${errors[id] ? 'bg-red-100' : ''}`}
       type={subType}
-      onChange={({ target: { value } }) => customOnValueChanged(value)} />
+      onChange={({ target: { value } }) => onValueChanged(value)} />
     <p className="text-xs mt-6 text-warmGray-500">
       <ul>
         {iterations().map(i => <li>{i}</li>)}

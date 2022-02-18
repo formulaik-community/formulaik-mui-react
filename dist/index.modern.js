@@ -70,7 +70,7 @@ function _extends() {
 var Input = (function (props) {
   var value = props.value,
       error = props.error,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       subType = _props$item.subType,
       label = _props$item.label,
@@ -91,7 +91,7 @@ var Input = (function (props) {
   }, [value]);
   var debouncedHandleOnChange = useDebouncedCallback(function (event) {
     var value = event.target.value;
-    customOnValueChanged(value);
+    onValueChanged(value);
     console.log('textArea debouncedHandleOnChange', value);
   }, inputDelay);
   var handleOnChange = useCallback(function (event) {
@@ -132,7 +132,7 @@ var Submit = (function (props) {
 });
 
 var Checkbox = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       values = props.values,
       _props$item = props.item,
       label = _props$item.label,
@@ -152,7 +152,7 @@ var Checkbox = (function (props) {
       }(),
       onChange: function onChange(_ref) {
         var checked = _ref.target.checked;
-        customOnValueChanged(checked);
+        onValueChanged(checked);
       }
     })),
     label: label
@@ -163,7 +163,7 @@ var Checkbox = (function (props) {
 
 var Select = (function (props) {
   var value = props.value,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       error = props.error,
       _props$item = props.item,
       label = _props$item.label,
@@ -180,7 +180,7 @@ var Select = (function (props) {
     label: label,
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
-      return customOnValueChanged(value);
+      return onValueChanged(value);
     }
   }, options.map(function (option) {
     return /*#__PURE__*/React.createElement(MenuItem, {
@@ -194,7 +194,7 @@ var TextArea = (function (props) {
 
   var value = props.value,
       error = props.error,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item$props = props.item.props,
       itemProps = _props$item$props === void 0 ? {} : _props$item$props;
   var _itemProps$maxRows = itemProps.maxRows,
@@ -214,7 +214,7 @@ var TextArea = (function (props) {
   }, [value]);
   var debouncedHandleOnChange = useDebouncedCallback(function (event) {
     var value = event.target.value;
-    customOnValueChanged(value);
+    onValueChanged(value);
     console.log('textArea debouncedHandleOnChange', value);
   }, inputDelay);
   var handleOnChange = useCallback(function (event) {
@@ -234,7 +234,7 @@ var TextArea = (function (props) {
 });
 
 var SelectCountry = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       value = props.value,
       error = props.error,
       _props$item = props.item,
@@ -243,14 +243,14 @@ var SelectCountry = (function (props) {
     disabled: props.disabled,
     readOnly: props.readOnly,
     selected: value,
-    onSelect: customOnValueChanged
+    onSelect: onValueChanged
   }, itemProps, {
     className: "  w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   }));
 });
 
 var InputPhoneNumber = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       value = props.value,
       error = props.error,
       itemProps = props.item.props;
@@ -261,14 +261,14 @@ var InputPhoneNumber = (function (props) {
     readOnly: props.readOnly,
     placeholder: "Enter phone number",
     value: value,
-    onChange: customOnValueChanged
+    onChange: onValueChanged
   }, itemProps, {
     className: "w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   })));
 });
 
 var DatePicker = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       value = props.value,
       _props$item = props.item,
       label = _props$item.label,
@@ -280,7 +280,7 @@ var DatePicker = (function (props) {
     readOnly: props.readOnly,
     label: label,
     value: value,
-    onChange: customOnValueChanged
+    onChange: onValueChanged
   }, itemProps, {
     renderInput: function renderInput(params) {
       return /*#__PURE__*/React.createElement(TextField, params);
@@ -320,7 +320,7 @@ var Editor = function Editor(props) {
 
 var AceEditor = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       errors = props.errors,
       _props$item = props.item,
       id = _props$item.id,
@@ -329,7 +329,7 @@ var AceEditor = (function (props) {
     value: values[id],
     mode: "jade",
     theme: "github",
-    onChange: customOnValueChanged,
+    onChange: onValueChanged,
     name: "UNIQUE_ID_OF_DIV",
     editorProps: {
       $blockScrolling: true
@@ -350,18 +350,18 @@ var AceEditor = (function (props) {
 
 var CronGenerator = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id;
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ReCron, {
     value: values[id],
-    onChange: customOnValueChanged
+    onChange: onValueChanged
   }));
 });
 
 var JSONEditor = (function (props) {
   var value = props.value,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       error = props.error,
       _props$item = props.item,
       itemProps = _props$item.props;
@@ -372,7 +372,7 @@ var JSONEditor = (function (props) {
     placeholder: value,
     onChange: function onChange(val) {
       var json = val.json;
-      customOnValueChanged(json);
+      onValueChanged(json);
     },
     locale: locale,
     height: "550px",
@@ -382,7 +382,7 @@ var JSONEditor = (function (props) {
 
 var CronEditor = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       field = props.field,
       errors = props.errors,
       _props$item = props.item,
@@ -411,7 +411,7 @@ var CronEditor = (function (props) {
     type: subType,
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
-      return customOnValueChanged(value);
+      return onValueChanged(value);
     }
   })), /*#__PURE__*/React.createElement("p", {
     className: "text-xs mt-6 text-warmGray-500"
@@ -422,7 +422,7 @@ var CronEditor = (function (props) {
 
 var Autocomplete = (function (props) {
   var initialValues = props.initialValues,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       field = props.field,
       values = props.values,
       _props$item = props.item,
@@ -483,7 +483,7 @@ var Autocomplete = (function (props) {
     loading: isLoading,
     onChange: function onChange(event, newValue) {
       var value = newValue ? newValue : null;
-      customOnValueChanged(value);
+      onValueChanged(value);
     },
     defaultValue: values && values[id] ? values[id] : initialValues[id],
     renderInput: function renderInput(params) {
@@ -510,7 +510,7 @@ var Autocomplete = (function (props) {
 var RadioGroup = (function (props) {
   var value = props.value,
       error = props.error,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       field = props.field,
       _props$item = props.item,
       itemProps = _props$item.props;
@@ -526,7 +526,7 @@ var RadioGroup = (function (props) {
   }, itemProps, {
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
-      return customOnValueChanged(value);
+      return onValueChanged(value);
     }
   }), itemProps.options.map(function (_ref2) {
     var value = _ref2.value,
@@ -582,7 +582,7 @@ var ButtonGroup = (function (props) {
     "aria-label": "outlined primary button group",
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
-      return customOnValueChanged(value);
+      return onValueChanged(value);
     }
   }, options.map(function (option) {
     return /*#__PURE__*/React.createElement(Button$1, null, option.value);
@@ -590,7 +590,7 @@ var ButtonGroup = (function (props) {
 });
 
 var SwitchControl = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       value = props.value,
       _props$item = props.item,
       label = _props$item.label,
@@ -603,7 +603,7 @@ var SwitchControl = (function (props) {
       checked: value,
       onChange: function onChange(_ref) {
         var checked = _ref.target.checked;
-        customOnValueChanged(checked);
+        onValueChanged(checked);
       }
     }),
     label: label
@@ -612,7 +612,7 @@ var SwitchControl = (function (props) {
 
 var Rating = (function (props) {
   var value = props.value,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       itemProps = _props$item.props;
   return /*#__PURE__*/React.createElement(Rating$1, _extends({
@@ -622,13 +622,13 @@ var Rating = (function (props) {
     value: value,
     size: "large",
     onChange: function onChange(event, newValue) {
-      customOnValueChanged(newValue);
+      onValueChanged(newValue);
     }
   }, itemProps));
 });
 
 var DateRangePicker = (function (props) {
-  var customOnValueChanged = props.customOnValueChanged,
+  var onValueChanged = props.onValueChanged,
       values = props.values,
       _props$item = props.item,
       id = _props$item.id,
@@ -639,7 +639,7 @@ var DateRangePicker = (function (props) {
     disabled: props.disabled,
     readOnly: props.readOnly,
     value: values[id] && Array.isArray(values[id]) ? values[id] : [null, null],
-    onChange: customOnValueChanged,
+    onChange: onValueChanged,
     renderInput: function renderInput(startProps, endProps) {
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TextField, startProps), /*#__PURE__*/React.createElement(Box, {
         sx: {
@@ -652,7 +652,7 @@ var DateRangePicker = (function (props) {
 
 var entry = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
       itemProps = _props$item.props;
@@ -673,7 +673,7 @@ var entry = (function (props) {
       className: 'ml-2 ',
       props: {
         onClick: function onClick() {
-          customOnValueChanged && customOnValueChanged({
+          onValueChanged && onValueChanged({
             isRemoved: true
           });
         }
@@ -688,7 +688,7 @@ var entry = (function (props) {
       values: values,
       data: item
     });
-    customOnValueChanged && customOnValueChanged(data);
+    onValueChanged && onValueChanged(data);
   };
 
   var componentsLibrary = function componentsLibrary(_ref) {
@@ -719,7 +719,7 @@ var entry = (function (props) {
 
 var ListEditor = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
       itemProps = _props$item.props;
@@ -747,7 +747,7 @@ var ListEditor = (function (props) {
       onClick: function onClick() {
         var newItem = itemProps.newStruct;
         items.push(newItem);
-        customOnValueChanged && customOnValueChanged(items);
+        onValueChanged && onValueChanged(items);
       }
     }
   }] : []);
@@ -773,7 +773,7 @@ var ListEditor = (function (props) {
 
       _i.push(__values[e]);
     });
-    customOnValueChanged && customOnValueChanged(_i);
+    onValueChanged && onValueChanged(_i);
   };
 
   var componentsLibrary = function componentsLibrary(_ref) {
@@ -825,7 +825,7 @@ var H4 = (function (props) {
 
 var VisualSelect = (function (props) {
   var value = props.value,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item$props = props.item.props,
       itemProps = _props$item$props === void 0 ? {} : _props$item$props;
 
@@ -878,7 +878,7 @@ var VisualSelect = (function (props) {
     }
 
     setSelectedItems(newSelectedItems);
-    customOnValueChanged && customOnValueChanged(newSelectedItems);
+    onValueChanged && onValueChanged(newSelectedItems);
   };
 
   var renderThumbnail = function renderThumbnail(item) {
@@ -1013,7 +1013,7 @@ var FileUploader = (function (props) {
 
 var Avatar$1 = (function (props) {
   var values = props.values,
-      customOnValueChanged = props.customOnValueChanged,
+      onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
       _props$item$props = _props$item.props,
@@ -1043,7 +1043,7 @@ var Avatar$1 = (function (props) {
     }
 
     setData(_data);
-    customOnValueChanged && customOnValueChanged(_data);
+    onValueChanged && onValueChanged(_data);
   };
 
   var _props = _extends({}, itemProps, {
@@ -1083,7 +1083,7 @@ var Avatar$1 = (function (props) {
 
       var _data = {};
       setData(_data);
-      customOnValueChanged && customOnValueChanged(_data);
+      onValueChanged && onValueChanged(_data);
     }
   }, /*#__PURE__*/React.createElement(RemoveButton, null)) : null, canEdit ? /*#__PURE__*/React.createElement(IconButton, {
     "aria-label": "Move up",

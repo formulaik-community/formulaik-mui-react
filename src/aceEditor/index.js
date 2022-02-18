@@ -27,7 +27,7 @@ const Editor = (props) => {
 export default (props) => {
     const {
         values,
-        customOnValueChanged,
+        onValueChanged,
         errors,
         item: { id, props: itemProps }
     } = props
@@ -36,7 +36,7 @@ export default (props) => {
         value={values[id]}
         mode="jade"
         theme="github"
-        onChange={customOnValueChanged}
+        onChange={onValueChanged}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
         setOptions={{

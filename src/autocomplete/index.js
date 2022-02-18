@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 export default (props) => {
   const {
     initialValues,
-    customOnValueChanged,
+    onValueChanged,
     field,
     values,
     item: { label, id, props: itemProps } } = props
@@ -51,7 +51,7 @@ export default (props) => {
     loading={isLoading}
     onChange={(event, newValue) => {
       const value = newValue ? newValue : null
-      customOnValueChanged(value)
+      onValueChanged(value)
     }}
     defaultValue={(values && values[id]) ? values[id] : initialValues[id]}
     renderInput={(params) =>

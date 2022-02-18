@@ -3,7 +3,7 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 
 export default (props) => {
-  const { value, customOnValueChanged, error, item: { label, id, props: itemProps } } = props
+  const { value, onValueChanged, error, item: { label, id, props: itemProps } } = props
 
   const { options, } = itemProps
   return <Select
@@ -14,7 +14,7 @@ export default (props) => {
     className={` ${error ? 'bg-red-100 select-error' : ''}`}
     value={value}
     label={label}
-    onChange={({ target: { value } }) => customOnValueChanged(value)}>
+    onChange={({ target: { value } }) => onValueChanged(value)}>
     {options.map((option) =>
       <MenuItem value={option.value}>{option.label}</MenuItem>
     )}

@@ -4,7 +4,7 @@ import _ from 'underscore'
 export default (props) => {
   const {
     value,
-    customOnValueChanged,
+    onValueChanged,
     item: { props: itemProps = {} }
   } = props
 
@@ -45,7 +45,7 @@ export default (props) => {
     }
 
     setSelectedItems(newSelectedItems)
-    customOnValueChanged && customOnValueChanged(newSelectedItems)
+    onValueChanged && onValueChanged(newSelectedItems)
   }
 
   const renderThumbnail = (item) => {

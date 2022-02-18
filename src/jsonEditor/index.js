@@ -5,7 +5,7 @@ import locale from 'react-json-editor-ajrm/locale/en'
 export default (props) => {
   const {
     value,
-    customOnValueChanged,
+    onValueChanged,
     error,
     item: { id, props: itemProps }
   } = props
@@ -17,7 +17,7 @@ export default (props) => {
     placeholder={value}
     onChange={(val) => {
       const { json } = val
-      customOnValueChanged(json)
+      onValueChanged(json)
     }}
     locale={locale}
     // colors={darktheme}
