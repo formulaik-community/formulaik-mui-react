@@ -77,13 +77,13 @@ var Input = (function (props) {
       _props$item = props.item,
       subType = _props$item.subType,
       label = _props$item.label,
-      _props$item$props = _props$item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
-  var placeholder = itemProps.placeholder,
-      _itemProps$inputDelay = itemProps.inputDelay,
-      inputDelay = _itemProps$inputDelay === void 0 ? 1000 : _itemProps$inputDelay,
-      _itemProps$className = itemProps.className,
-      className = _itemProps$className === void 0 ? '' : _itemProps$className;
+      _props$item$params = _props$item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var placeholder = params.placeholder,
+      _params$inputDelay = params.inputDelay,
+      inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay,
+      _params$className = params.className,
+      className = _params$className === void 0 ? '' : _params$className;
 
   var _useState = React.useState(value ? value : ''),
       innerValue = _useState[0],
@@ -116,7 +116,7 @@ var Input = (function (props) {
     className: "w-full " + (error ? 'bg-red-100' : ''),
     type: subType,
     onChange: handleOnChange
-  }, itemProps)));
+  }, params)));
 });
 
 var Submit = (function (props) {
@@ -140,7 +140,7 @@ var Checkbox = (function (props) {
       _props$item = props.item,
       label = _props$item.label,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "px-4 py-2 card rounded-lg border-2 border-warmGray-400 "
   }, /*#__PURE__*/React__default.createElement(FormControlLabel, {
@@ -148,7 +148,7 @@ var Checkbox = (function (props) {
       color: "default",
       disabled: props.disabled,
       readOnly: props.readOnly
-    }, itemProps, {
+    }, params, {
       checked: function () {
         var _value = values[id];
         return _value;
@@ -159,9 +159,9 @@ var Checkbox = (function (props) {
       }
     })),
     label: label
-  }), itemProps && itemProps.subLabel ? /*#__PURE__*/React__default.createElement("small", {
+  }), params && params.subLabel ? /*#__PURE__*/React__default.createElement("small", {
     className: ""
-  }, itemProps.subLabel) : null);
+  }, params.subLabel) : null);
 });
 
 var Select = (function (props) {
@@ -171,8 +171,8 @@ var Select = (function (props) {
       _props$item = props.item,
       label = _props$item.label,
       id = _props$item.id,
-      itemProps = _props$item.props;
-  var options = itemProps.options;
+      params = _props$item.params;
+  var options = params.options;
   return /*#__PURE__*/React__default.createElement(Select$1, {
     disabled: props.disabled,
     readOnly: props.readOnly,
@@ -198,15 +198,15 @@ var TextArea = (function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
-      _props$item$props = props.item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
-  var _itemProps$maxRows = itemProps.maxRows,
-      maxRows = _itemProps$maxRows === void 0 ? 1000 : _itemProps$maxRows,
-      _itemProps$minRows = itemProps.minRows,
-      minRows = _itemProps$minRows === void 0 ? 3 : _itemProps$minRows,
-      placeholder = itemProps.placeholder,
-      _itemProps$inputDelay = itemProps.inputDelay,
-      inputDelay = _itemProps$inputDelay === void 0 ? 1000 : _itemProps$inputDelay;
+      _props$item$params = props.item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var _params$maxRows = params.maxRows,
+      maxRows = _params$maxRows === void 0 ? 1000 : _params$maxRows,
+      _params$minRows = params.minRows,
+      minRows = _params$minRows === void 0 ? 3 : _params$minRows,
+      placeholder = params.placeholder,
+      _params$inputDelay = params.inputDelay,
+      inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay;
 
   var _useState = React.useState(value ? value : ''),
       innerValue = _useState[0],
@@ -241,13 +241,13 @@ var SelectCountry = (function (props) {
       value = props.value,
       error = props.error,
       _props$item = props.item,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(ReactFlagsSelect, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
     selected: value,
     onSelect: onValueChanged
-  }, itemProps, {
+  }, params, {
     className: "  w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   }));
 });
@@ -256,7 +256,7 @@ var InputPhoneNumber = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       error = props.error,
-      itemProps = props.item.props;
+      params = props.item.params;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "border-2 border-warmGray-300 rounded-md px-4 py-4"
   }, /*#__PURE__*/React__default.createElement(PhoneInput, _extends({
@@ -265,7 +265,7 @@ var InputPhoneNumber = (function (props) {
     placeholder: "Enter phone number",
     value: value,
     onChange: onValueChanged
-  }, itemProps, {
+  }, params, {
     className: "w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   })));
 });
@@ -275,7 +275,7 @@ var DatePicker = (function (props) {
       value = props.value,
       _props$item = props.item,
       label = _props$item.label,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DatePicker$1, _extends({
@@ -284,7 +284,7 @@ var DatePicker = (function (props) {
     label: label,
     value: value,
     onChange: onValueChanged
-  }, itemProps, {
+  }, params, {
     renderInput: function renderInput(params) {
       return /*#__PURE__*/React__default.createElement(TextField, params);
     }
@@ -327,7 +327,7 @@ var AceEditor = (function (props) {
       errors = props.errors,
       _props$item = props.item,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(Editor, _extends({
     value: values[id],
     mode: "jade",
@@ -341,14 +341,14 @@ var AceEditor = (function (props) {
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       enableSnippets: true
-    }, itemProps.options),
+    }, params.options),
     width: '100%',
     fontSize: 14,
     wrapEnabled: true,
     showPrintMargin: false,
     showGutter: true,
     className: "textarea w-full textarea-bordered bg-gray-50 " + (errors[id] ? 'bg-red-100 border-red-600' : '')
-  }, itemProps));
+  }, params));
 });
 
 var CronGenerator = (function (props) {
@@ -367,7 +367,7 @@ var JSONEditor = (function (props) {
       onValueChanged = props.onValueChanged,
       error = props.error,
       _props$item = props.item,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(JSONInput, _extends({
     id: "a_unique_id",
     disabled: props.disabled,
@@ -380,7 +380,7 @@ var JSONEditor = (function (props) {
     locale: locale,
     height: "550px",
     className: " " + (error ? 'bg-red-100 border-red-600' : '')
-  }, itemProps));
+  }, params));
 });
 
 var CronEditor = (function (props) {
@@ -431,7 +431,7 @@ var Autocomplete = (function (props) {
       _props$item = props.item,
       label = _props$item.label,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
 
   var _useState = React.useState(false),
       open = _useState[0],
@@ -456,7 +456,7 @@ var Autocomplete = (function (props) {
 
     try {
       setIsLoading(true);
-      var fetcher = itemProps.fetcher;
+      var fetcher = params.fetcher;
       return Promise.resolve(fetcher({
         value: value
       })).then(function (items) {
@@ -481,7 +481,7 @@ var Autocomplete = (function (props) {
     onClose: function onClose() {
       setOpen(false);
     }
-  }, itemProps, {
+  }, params, {
     options: options,
     loading: isLoading,
     onChange: function onChange(event, newValue) {
@@ -516,7 +516,7 @@ var RadioGroup = (function (props) {
       onValueChanged = props.onValueChanged,
       field = props.field,
       _props$item = props.item,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(RadioGroup$1, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
@@ -526,12 +526,12 @@ var RadioGroup = (function (props) {
     value: value
   }, field, {
     className: "" + (error ? 'bg-red-100' : '')
-  }, itemProps, {
+  }, params, {
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
       return onValueChanged(value);
     }
-  }), itemProps.options.map(function (_ref2) {
+  }), params.options.map(function (_ref2) {
     var value = _ref2.value,
         label = _ref2.label;
     return /*#__PURE__*/React__default.createElement(FormControlLabel, {
@@ -544,23 +544,23 @@ var RadioGroup = (function (props) {
 
 var Html = (function (props) {
   var _props$item = props.item,
-      itemProps = _props$item.props;
-  return /*#__PURE__*/React__default.createElement("div", null, itemProps.content);
+      params = _props$item.params;
+  return /*#__PURE__*/React__default.createElement("div", null, params.content);
 });
 
 var Divider = (function (props) {
   var _props$item = props.item,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement("div", {
-    className: "divider " + (itemProps.vertical ? 'divider-vertical' : '') + " "
-  }, itemProps.content);
+    className: "divider " + (params.vertical ? 'divider-vertical' : '') + " "
+  }, params.content);
 });
 
 var Button = (function (props) {
   var _props$item = props.item,
       label = _props$item.label,
-      itemProps = _props$item.props;
-  var onClick = itemProps.onClick;
+      params = _props$item.params;
+  var onClick = params.onClick;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "flex justify-center my-2"
   }, /*#__PURE__*/React__default.createElement(Button$1, {
@@ -574,8 +574,8 @@ var Button = (function (props) {
 var ButtonGroup = (function (props) {
   var _props$item = props.item,
       id = _props$item.id,
-      itemProps = _props$item.props;
-  var options = itemProps.options;
+      params = _props$item.params;
+  var options = params.options;
   return /*#__PURE__*/React__default.createElement(ButtonGroup$1, {
     disabled: props.disabled,
     readOnly: props.readOnly,
@@ -597,7 +597,7 @@ var SwitchControl = (function (props) {
       value = props.value,
       _props$item = props.item,
       label = _props$item.label,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(FormGroup, null, /*#__PURE__*/React__default.createElement(FormControlLabel, _extends({
     control: /*#__PURE__*/React__default.createElement(Switch, {
       disabled: props.disabled,
@@ -610,14 +610,14 @@ var SwitchControl = (function (props) {
       }
     }),
     label: label
-  }, itemProps)));
+  }, params)));
 });
 
 var Rating = (function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(Rating$1, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
@@ -627,7 +627,7 @@ var Rating = (function (props) {
     onChange: function onChange(event, newValue) {
       onValueChanged(newValue);
     }
-  }, itemProps));
+  }, params));
 });
 
 var DateRangePicker = (function (props) {
@@ -635,7 +635,7 @@ var DateRangePicker = (function (props) {
       values = props.values,
       _props$item = props.item,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: dateAdapter
   }, /*#__PURE__*/React__default.createElement(DateRangePicker$1, _extends({
@@ -650,7 +650,7 @@ var DateRangePicker = (function (props) {
         }
       }, " to "), /*#__PURE__*/React__default.createElement(TextField, endProps));
     }
-  }, itemProps)));
+  }, params)));
 });
 
 var entry = (function (props) {
@@ -658,23 +658,23 @@ var entry = (function (props) {
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   var item = values[id];
 
   var _useState = React.useState(null),
       error = _useState[0];
 
-  var inputs = [].concat(itemProps.canRemove && itemProps.showRemove ? [{
+  var inputs = [].concat(params.canRemove && params.showRemove ? [{
     isMulti: true,
     className: 'flex ',
-    items: [].concat(itemProps.inputs({
+    items: [].concat(params.inputs({
       item: item
     }), [{
       type: 'button',
       id: 'removeItem',
       label: 'Remove',
       className: 'ml-2 ',
-      props: {
+      params: {
         onClick: function onClick() {
           onValueChanged && onValueChanged({
             isRemoved: true
@@ -682,12 +682,12 @@ var entry = (function (props) {
         }
       }
     }])
-  }] : itemProps.inputs({
+  }] : params.inputs({
     item: item
   }));
 
   var onValuesChanged = function onValuesChanged(values) {
-    var data = itemProps.onEntryValuesChangedHook({
+    var data = params.onEntryValuesChangedHook({
       values: values,
       data: item
     });
@@ -707,11 +707,11 @@ var entry = (function (props) {
   };
 
   return /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
-    initialValues: itemProps.initialValues({
+    componentsLibraries: [].concat(params.componentsLibraries, [componentsLibrary]),
+    initialValues: params.initialValues({
       item: item
     }),
-    validationSchema: itemProps.validationSchema({
+    validationSchema: params.validationSchema({
       item: item
     }),
     inputs: inputs,
@@ -725,7 +725,7 @@ var ListEditor = (function (props) {
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
-      itemProps = _props$item.props;
+      params = _props$item.params;
   var items = values[id] ? values[id] : [];
 
   var _useState = React.useState(null),
@@ -740,15 +740,15 @@ var ListEditor = (function (props) {
     return {
       type: 'entry',
       id: "entry-" + i,
-      props: itemProps
+      params: params
     };
-  }), itemProps.canAddItems && items.length < itemProps.maxItems ? [{
+  }), params.canAddItems && items.length < params.maxItems ? [{
     type: 'button',
     id: 'addItem',
-    label: itemProps.addItemLabel ? itemProps.addItemLabel : 'Add item',
-    props: {
+    label: params.addItemLabel ? params.addItemLabel : 'Add item',
+    params: {
       onClick: function onClick() {
-        var newItem = itemProps.newStruct;
+        var newItem = params.newStruct;
         items.push(newItem);
         onValueChanged && onValueChanged(items);
       }
@@ -797,7 +797,7 @@ var ListEditor = (function (props) {
   return /*#__PURE__*/React__default.createElement("div", {
     className: "mt-6"
   }, /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(itemProps.componentsLibraries, [componentsLibrary]),
+    componentsLibraries: [].concat(params.componentsLibraries, [componentsLibrary]),
     initialValues: initialValues,
     validationSchema: validationSchema,
     inputs: inputs,
@@ -807,30 +807,30 @@ var ListEditor = (function (props) {
 });
 
 var H1 = (function (props) {
-  var itemProps = props.item.props;
-  return /*#__PURE__*/React__default.createElement("h1", null, itemProps.content);
+  var params = props.item.params;
+  return /*#__PURE__*/React__default.createElement("h1", null, params.content);
 });
 
 var H2 = (function (props) {
-  var itemProps = props.item.props;
-  return /*#__PURE__*/React__default.createElement("h2", null, itemProps.content);
+  var params = props.item.params;
+  return /*#__PURE__*/React__default.createElement("h2", null, params.content);
 });
 
 var H3 = (function (props) {
-  var itemProps = props.item.props;
-  return /*#__PURE__*/React__default.createElement("h3", null, itemProps.content);
+  var params = props.item.params;
+  return /*#__PURE__*/React__default.createElement("h3", null, params.content);
 });
 
 var H4 = (function (props) {
-  var itemProps = props.item.props;
-  return /*#__PURE__*/React__default.createElement("h4", null, itemProps.content);
+  var params = props.item.params;
+  return /*#__PURE__*/React__default.createElement("h4", null, params.content);
 });
 
 var VisualSelect = (function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
-      _props$item$props = props.item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
+      _props$item$params = props.item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
 
   var _useState = React.useState(value ? value.filter(function (a) {
     return a;
@@ -838,19 +838,19 @@ var VisualSelect = (function (props) {
       selectedItems = _useState[0],
       setSelectedItems = _useState[1];
 
-  var items = itemProps.items,
-      _itemProps$cols = itemProps.cols,
-      cols = _itemProps$cols === void 0 ? 1 : _itemProps$cols,
-      maxSelectionAllowed = itemProps.maxSelectionAllowed,
-      _itemProps$itemHeight = itemProps.itemHeight,
-      itemHeight = _itemProps$itemHeight === void 0 ? 'h-72' : _itemProps$itemHeight,
-      ContentComponent = itemProps.ContentComponent,
-      _itemProps$highlightC = itemProps.highlightColor,
-      highlightColor = _itemProps$highlightC === void 0 ? 'pink-600' : _itemProps$highlightC,
-      _itemProps$baseColor = itemProps.baseColor,
-      baseColor = _itemProps$baseColor === void 0 ? 'warmGray-100' : _itemProps$baseColor,
-      _itemProps$useLatestS = itemProps.useLatestSelection,
-      useLatestSelection = _itemProps$useLatestS === void 0 ? false : _itemProps$useLatestS;
+  var items = params.items,
+      _params$cols = params.cols,
+      cols = _params$cols === void 0 ? 1 : _params$cols,
+      maxSelectionAllowed = params.maxSelectionAllowed,
+      _params$itemHeight = params.itemHeight,
+      itemHeight = _params$itemHeight === void 0 ? 'h-72' : _params$itemHeight,
+      ContentComponent = params.ContentComponent,
+      _params$highlightColo = params.highlightColor,
+      highlightColor = _params$highlightColo === void 0 ? 'pink-600' : _params$highlightColo,
+      _params$baseColor = params.baseColor,
+      baseColor = _params$baseColor === void 0 ? 'warmGray-100' : _params$baseColor,
+      _params$useLatestSele = params.useLatestSelection,
+      useLatestSelection = _params$useLatestSele === void 0 ? false : _params$useLatestSele;
 
   var onClickItem = function onClickItem(e, item) {
     e.preventDefault();
@@ -1019,18 +1019,18 @@ var Avatar$1 = (function (props) {
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
       id = _props$item.id,
-      _props$item$props = _props$item.props,
-      itemProps = _props$item$props === void 0 ? {} : _props$item$props;
+      _props$item$params = _props$item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
 
   var _useState = React.useState(values[id] ? values[id] : {}),
       data = _useState[0],
       setData = _useState[1];
 
-  var size = itemProps.size,
-      _itemProps$canRemove = itemProps.canRemove,
-      canRemove = _itemProps$canRemove === void 0 ? true : _itemProps$canRemove,
-      _itemProps$canEdit = itemProps.canEdit,
-      canEdit = _itemProps$canEdit === void 0 ? false : _itemProps$canEdit;
+  var size = params.size,
+      _params$canRemove = params.canRemove,
+      canRemove = _params$canRemove === void 0 ? true : _params$canRemove,
+      _params$canEdit = params.canEdit,
+      canEdit = _params$canEdit === void 0 ? false : _params$canEdit;
 
   var onFileChanged = function onFileChanged(file) {
     if (props.disabled || props.readOnly) {
@@ -1049,7 +1049,7 @@ var Avatar$1 = (function (props) {
     onValueChanged && onValueChanged(_data);
   };
 
-  var _props = _extends({}, itemProps, {
+  var _props = _extends({}, params, {
     data: data,
     disabled: props.disabled,
     readOnly: props.readOnly

@@ -5,7 +5,7 @@ export default (props) => {
   const {
     value,
     onValueChanged,
-    item: { props: itemProps = {} }
+    item: { params = {} }
   } = props
 
   const [selectedItems, setSelectedItems] = useState(value ? (value).filter(a => a) : [])
@@ -19,7 +19,7 @@ export default (props) => {
     highlightColor = 'pink-600',
     baseColor = 'warmGray-100',
     useLatestSelection = false
-  } = itemProps
+  } = params
 
   const onClickItem = (e, item) => {
     e.preventDefault()

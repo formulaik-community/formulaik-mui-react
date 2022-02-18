@@ -3,8 +3,8 @@ import TextField from '@mui/material/TextField'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, onValueChanged, item: { subType, label, props: itemProps = {}, id } } = props
-  const { placeholder, inputDelay = 1000, className = '' } = itemProps
+  const { value, error, onValueChanged, item: { subType, label, params = {}, id } } = props
+  const { placeholder, inputDelay = 1000, className = '' } = params
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
 
@@ -39,6 +39,6 @@ export default (props) => {
     className={`w-full ${error ? 'bg-red-100' : ''}`}
     type={subType}
     onChange={handleOnChange}
-    {...itemProps} />
+    {...params} />
   </div>
 }

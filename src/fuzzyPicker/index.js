@@ -3,7 +3,7 @@ import FuzzyPicker from 'react-fuzzy-picker'
 import "react-fuzzy-picker/styles/index.css"
 
 export default (props) => {
-    const { setFieldTouched, setFieldValue, field, errors, item: { label, id, props: itemProps } } = props
+    const { setFieldTouched, setFieldValue, field, errors, item: { label, id, params } } = props
 
     return <FuzzyPicker
         isOpen={true}
@@ -14,6 +14,6 @@ export default (props) => {
             setFieldTouched(id, true, false)
         }}
         items={["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]}
-        {...itemProps}
+        {...params}
     />
 }

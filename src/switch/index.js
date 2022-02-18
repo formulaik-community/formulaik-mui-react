@@ -4,7 +4,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 export default (props) => {
-  const { onValueChanged, value, item: { label, id, props: itemProps } } = props
+  const { onValueChanged, value, item: { label, id, params } } = props
   return <FormGroup>
     <FormControlLabel control={<Switch
       disabled={props.disabled}
@@ -15,6 +15,6 @@ export default (props) => {
         onValueChanged(checked)
       }} />}
       label={label}
-      {...itemProps} />
+      {...params} />
   </FormGroup>
 }

@@ -2,10 +2,10 @@ import React from 'react'
 
 export default (props) => {
   const {
-    item: { label, id, props: itemProps } } = props
+    item: { label, id, params } } = props
 
   return <div>
-    {itemProps.content}
+    {params.content}
   </div>
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default (props) => {
-  const { item: { props: itemProps } } = props
-  return <h1>{itemProps.content}</h1>
+  const { item: { params } } = props
+  return <h1>{params.content}</h1>
 }
 

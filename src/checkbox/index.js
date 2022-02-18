@@ -3,7 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
 export default (props) => {
-  const { onValueChanged, initialValues, values, field, errors, item: { label, id, props: itemProps } } = props
+  const { onValueChanged, initialValues, values, field, errors, item: { label, id, params } } = props
 
 
   return <div className="px-4 py-2 card rounded-lg border-2 border-warmGray-400 ">
@@ -12,7 +12,7 @@ export default (props) => {
         color="default"
         disabled={props.disabled}
         readOnly={props.readOnly}
-        {...itemProps}
+        {...params}
         checked={(() => {
           const _value = values[id] // ? values[id] : initialValues[id]
           return _value
@@ -21,6 +21,6 @@ export default (props) => {
           onValueChanged(checked)
         }}
       />} label={label} />
-    {(itemProps && itemProps.subLabel) ? <small className="">{itemProps.subLabel}</small> : null}
+    {(params && params.subLabel) ? <small className="">{params.subLabel}</small> : null}
   </div>
 }

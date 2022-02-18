@@ -8,13 +8,13 @@ import Box from '@mui/material/Box'
 
 
 export default (props) => {
-  const { onValueChanged, values, errors, item: { label, id, props: itemProps } } = props
+  const { onValueChanged, values, errors, item: { label, id, params } } = props
   return <LocalizationProvider dateAdapter={dateAdapter}>
     <DateRangePicker
       disabled={props.disabled}
       readOnly={props.readOnly}
-      // startText={itemProps.startLabel}
-      // endText={itemProps.endLabel}
+      // startText={params.startLabel}
+      // endText={params.endLabel}
       value={(values[id] && Array.isArray(values[id])) ? values[id] : [null, null]}
       onChange={onValueChanged}
       renderInput={(startProps, endProps) => (
@@ -24,7 +24,7 @@ export default (props) => {
           <TextField {...endProps} />
         </React.Fragment>
       )}
-      {...itemProps}
+      {...params}
     />
   </LocalizationProvider>
 }

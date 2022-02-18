@@ -12,11 +12,11 @@ export default (props) => {
   const {
     values,
     onValueChanged,
-    item: { id, props: itemProps = {} }
+    item: { id, params = {} }
   } = props
 
   const [data, setData] = useState(values[id] ? values[id] : {})
-  const { size, canRemove = true, canEdit = false } = itemProps
+  const { size, canRemove = true, canEdit = false } = params
 
   const onFileChanged = (file) => {
     if (props.disabled || props.readOnly) {
@@ -31,7 +31,7 @@ export default (props) => {
     onValueChanged && onValueChanged(_data)
   }
 
-  const _props = { ...itemProps, data, disabled: props.disabled, readOnly: props.readOnly }
+  const _props = { ...params, data, disabled: props.disabled, readOnly: props.readOnly }
   const onClick = () => { }
 
   const hasData = data.url || data.file

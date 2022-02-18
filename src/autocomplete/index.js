@@ -9,7 +9,7 @@ export default (props) => {
     onValueChanged,
     field,
     values,
-    item: { label, id, props: itemProps } } = props
+    item: { label, id, params } } = props
 
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState([])
@@ -21,7 +21,7 @@ export default (props) => {
 
   const updateOptions = async ({ value }) => {
     setIsLoading(true)
-    const { fetcher } = itemProps
+    const { fetcher } = params
     const items = await fetcher({ value }) // For demo purposes.
     setOptions(items)
     setIsLoading(false)
@@ -46,7 +46,7 @@ export default (props) => {
     onClose={() => {
       setOpen(false)
     }}
-    {...itemProps}
+    {...params}
     options={options}
     loading={isLoading}
     onChange={(event, newValue) => {

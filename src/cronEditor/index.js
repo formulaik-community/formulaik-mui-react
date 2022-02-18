@@ -4,7 +4,7 @@ import cronParser from 'cron-parser'
 import Image from 'next/image'
 
 export default (props) => {
-  const { values, onValueChanged, field, errors, item: { subType, id, label, props: itemProps } } = props
+  const { values, onValueChanged, field, errors, item: { subType, id, label, params } } = props
 
   const iterations = () => {
 

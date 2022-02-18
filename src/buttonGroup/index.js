@@ -3,10 +3,10 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
 export default (props) => {
-  const { item: { id, label, props: itemProps } } = props
-  const { onClick } = itemProps
+  const { item: { id, label, params } } = props
+  const { onClick } = params
 
-  const { options, } = itemProps
+  const { options, } = params
   return <ButtonGroup
     disabled={props.disabled}
     readOnly={props.readOnly}

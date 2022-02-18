@@ -2,8 +2,8 @@ import React from 'react'
 import Button from '@mui/material/Button'
 
 export default (props) => {
-  const { item: { id, label, props: itemProps } } = props
-  const { onClick } = itemProps
+  const { item: { id, label, params } } = props
+  const { onClick } = params
 
   return <div className={`flex justify-center my-2`}>
     <Button

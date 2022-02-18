@@ -3,7 +3,7 @@ import Rating from '@mui/material/Rating'
 
 export default (props) => {
   const { value, onValueChanged,
-    item: { id, label, props: itemProps } } = props
+    item: { id, label, params } } = props
 
   return <Rating
     disabled={props.disabled}
@@ -14,6 +14,6 @@ export default (props) => {
     onChange={(event, newValue) => {
       onValueChanged(newValue)
     }}
-    {...itemProps}
+    {...params}
   />
 }

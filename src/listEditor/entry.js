@@ -8,37 +8,37 @@ export default (props) => {
     onValueChanged,
     errors,
 
-    item: { id, label, props: itemProps }
+    item: { id, label, params }
   } = props
 
   const item = values[id]
   const [error, setError] = useState(null)
 
   const inputs = [
-    ...((itemProps.canRemove && itemProps.showRemove) ? [
+    ...((params.canRemove && params.showRemove) ? [
       {
         isMulti: true,
         className: 'flex ',
         items: [
-          ...itemProps.inputs({ item }),
+          ...params.inputs({ item }),
           {
             type: 'button',
             id: 'removeItem',
             label: 'Remove',
             className: 'ml-2 ',
-            props: {
+            params: {
               onClick: () => {
                 onValueChanged && onValueChanged({ isRemoved: true })
               }
             }
           }
         ]
-      }] : itemProps.inputs({ item }))
+      }] : params.inputs({ item }))
   ]
 
 
   const onValuesChanged = (values) => {
-    const data = itemProps.onEntryValuesChangedHook({ values, data: item })
+    const data = params.onEntryValuesChangedHook({ values, data: item })
     onValueChanged && onValueChanged(data)
   }
 
@@ -52,9 +52,9 @@ export default (props) => {
   }
 
   return <Formulaik
-    componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
-    initialValues={itemProps.initialValues({ item })}
-    validationSchema={itemProps.validationSchema({ item })}
+    componentsLibraries={[...params.componentsLibraries, componentsLibrary]}
+    initialValues={params.initialValues({ item })}
+    validationSchema={params.validationSchema({ item })}
     inputs={inputs}
     onValuesChanged={onValuesChanged}
     error={error} />

@@ -7,7 +7,7 @@ export default (props) => {
     value,
     onValueChanged,
     error,
-    item: { id, props: itemProps }
+    item: { id, params }
   } = props
 
   return <JSONInput
@@ -23,7 +23,7 @@ export default (props) => {
     // colors={darktheme}
     height='550px'
     className={` ${error ? 'bg-red-100 border-red-600' : ''}`}
-    {...itemProps}
+    {...params}
   />
 
 

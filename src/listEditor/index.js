@@ -13,7 +13,7 @@ export default (props) => {
     onValueChanged,
     errors,
 
-    item: { id, label, props: itemProps }
+    item: { id, label, params }
   } = props
 
   const items = values[id] ? values[id] : []
@@ -31,23 +31,22 @@ export default (props) => {
     ...(items.map((item, i) => ({
       type: 'entry',
       id: `entry-${i}`,
-      props: itemProps
+      params
     }))),
-    ...((itemProps.canAddItems && items.length < itemProps.maxItems) ? [
+    ...((params.canAddItems && items.length < params.maxItems) ? [
       {
         type: 'button',
         id: 'addItem',
-        label: itemProps.addItemLabel ? itemProps.addItemLabel : 'Add item',
-        props: {
+        label: params.addItemLabel ? params.addItemLabel : 'Add item',
+        params: {
           onClick: () => {
-            const newItem = itemProps.newStruct
+            const newItem = params.newStruct
             items.push(newItem)
             onValueChanged && onValueChanged(items)
           }
         }
       },
-    ] : [])
-  ]
+    ] : [])]
 
   const initialValues = () => {
     const list = {}
@@ -85,7 +84,7 @@ export default (props) => {
 
   return <div className="mt-6">
     <Formulaik
-      componentsLibraries={[...itemProps.componentsLibraries, componentsLibrary]}
+      componentsLibraries={[...params.componentsLibraries, componentsLibrary]}
       initialValues={initialValues}
       validationSchema={validationSchema}
       inputs={inputs}

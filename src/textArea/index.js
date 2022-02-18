@@ -3,8 +3,8 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, onValueChanged, item: { props: itemProps = {} } } = props
-  const { maxRows = 1000, minRows = 3, placeholder, inputDelay = 1000 } = itemProps
+  const { value, error, onValueChanged, item: { params = {} } } = props
+  const { maxRows = 1000, minRows = 3, placeholder, inputDelay = 1000 } = params
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
 

@@ -3,9 +3,9 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 
 export default (props) => {
-  const { value, onValueChanged, error, item: { label, id, props: itemProps } } = props
+  const { value, onValueChanged, error, item: { label, id, params } } = props
 
-  const { options, } = itemProps
+  const { options, } = params
   return <Select
     disabled={props.disabled}
     readOnly={props.readOnly}
