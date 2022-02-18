@@ -42,6 +42,12 @@ import Badge from '@mui/material/Badge';
 import { FileUploader as FileUploader$1 } from 'react-drag-drop-files';
 import RemoveButton from '@mui/icons-material/DeleteOutline';
 import EditOutlined from '@mui/icons-material/EditOutlined';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowDownward from '@mui/icons-material/ArrowDownward';
+import ArrowUpward from '@mui/icons-material/ArrowUpward';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -1094,6 +1100,72 @@ var Avatar$1 = (function (props) {
 });
 
 var index = (function (props) {
+  var summary = props.summary,
+      details = props.details,
+      label = props.label,
+      onMoveDownRequired = props.onMoveDownRequired,
+      onRemoveRequired = props.onRemoveRequired,
+      onMoveUpRequired = props.onMoveUpRequired,
+      canRemove = props.canRemove,
+      canMoveUp = props.canMoveUp,
+      canMoveDown = props.canMoveDown,
+      showControls = props.showControls,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled;
+  return /*#__PURE__*/React.createElement(Accordion, {
+    defaultExpanded: true,
+    className: "w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl"
+  }, /*#__PURE__*/React.createElement(AccordionSummary, {
+    expanded: true,
+    expandIcon: /*#__PURE__*/React.createElement(ExpandMoreIcon, null),
+    "aria-controls": "panel1a-content",
+    id: "panel1a-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 justify-between w-full "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/React.createElement("h4", null, label)), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-end mr-4"
+  }, summary, showControls && /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-3"
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Move up",
+    disabled: disabled || !canMoveUp,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onMoveUpRequired && onMoveUpRequired();
+    }
+  }, /*#__PURE__*/React.createElement(ArrowUpward, null)), /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Move down",
+    disabled: disabled || !canMoveDown,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onMoveDownRequired && onMoveDownRequired();
+    }
+  }, /*#__PURE__*/React.createElement(ArrowDownward, null)), /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Delete",
+    disabled: disabled,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onRemoveRequired && onRemoveRequired();
+    }
+  }, canRemove && /*#__PURE__*/React.createElement(RemoveButton, null)))))), /*#__PURE__*/React.createElement(AccordionDetails, null, details));
+});
+
+
+
+var _Utils = {
+  __proto__: null,
+  FieldInArrayShieldVertical: index
+};
+
+var index$1 = (function (props) {
   var type = props.type;
 
   switch (type) {
@@ -1185,6 +1257,8 @@ var index = (function (props) {
       return null;
   }
 });
+var Utils = _Utils;
 
-export default index;
+export default index$1;
+export { Utils };
 //# sourceMappingURL=index.modern.js.map

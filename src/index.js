@@ -29,6 +29,7 @@ import H4 from './h4'
 import VisualSelect from './visualSelect'
 import Avatar from './avatar'
 
+
 export default (props) => {
   const { type } = props
   switch (type) {
@@ -92,3 +93,7 @@ export default (props) => {
       return null
   }
 }
+
+
+import * as _Utils from './utils'
+export const Utils = _Utils
