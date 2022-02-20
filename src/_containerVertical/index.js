@@ -12,8 +12,8 @@ import IconButton from '@mui/material/IconButton'
 export default (props) => {
   const {
     summary,
-    details,
-    label,
+    title,
+    children,
     onMoveDownRequired,
     onRemoveRequired,
     onMoveUpRequired,
@@ -21,10 +21,15 @@ export default (props) => {
     canMoveUp,
     canMoveDown,
     showControls,
-    disabled = false
+    disabled = false,
+    readOnly = false,
+    value,
+    index,
+    className,
+    error
   } = props
 
-  return <Accordion defaultExpanded className="w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl">
+  return <Accordion defaultExpanded className={`w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl ${className}`}>
     <AccordionSummary
       expanded
       expandIcon={<ExpandMoreIcon />}
@@ -32,10 +37,10 @@ export default (props) => {
       id="panel1a-header">
       <div className="grid grid-cols-2 justify-between w-full ">
         <div className="">
-          <h4>{label}</h4>
+          <h4>{title && title({ value, index })}</h4>
         </div>
         <div className="flex justify-end mr-4">
-          {summary}
+          {summary && summary({ value, index })}
           {showControls && <div className='flex gap-3'>
             <IconButton aria-label="Move up" disabled={disabled || !canMoveUp} component="span"
               onClick={(e) => {
@@ -67,8 +72,8 @@ export default (props) => {
         </div>
       </div>
     </AccordionSummary>
-    <AccordionDetails>
-      {details}
+    <AccordionDetails className={``}>
+      {children}
     </AccordionDetails>
   </Accordion>
 }

@@ -28,7 +28,11 @@ import H3 from './h3'
 import H4 from './h4'
 import VisualSelect from './visualSelect'
 import Avatar from './avatar'
+import fileUpload from './fileUpload'
 
+import _containerVertical from './_containerVertical'
+import _containerHorizontal from './_containerHorizontal'
+import _buttonAdd from './_buttonAdd'
 
 export default (props) => {
   const { type } = props
@@ -89,11 +93,15 @@ export default (props) => {
       return VisualSelect
     case 'avatar':
       return Avatar
+    case '_containerVertical':
+      return _containerVertical
+    case '_containerHorizontal':
+      return _containerHorizontal
+    case '_buttonAdd':
+      return _buttonAdd
+    case 'fileUpload':
+      return fileUpload
     default:
       return null
   }
 }
-
-
-import * as _Utils from './utils'
-export const Utils = _Utils

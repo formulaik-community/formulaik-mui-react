@@ -15,15 +15,21 @@ export default (props) => {
     item: { params = {} }
   } = props
 
+  const {
+    itemHeight = '32',
+    itemWidth = '48',
+    canRemove = true,
+    canEdit = false,
+    hideControls = false } = params
+
   const [data, setData] = useState(value ? value : {})
-  const { size, canRemove = true, canEdit = false } = params
 
   const onFileChanged = (file) => {
     if (props.disabled || props.readOnly) {
       return
     }
 
-    var _data = { ...data, file }
+    var _data = { ...data, file, mimeType: file.type }
     if (!_data.file) {
       _data = null
     }
@@ -36,19 +42,16 @@ export default (props) => {
 
   const hasData = data.url || data.file
 
-
   return <div className={`
-            my-4
             flex
             group
             `}>
     <div className={`
-            my-4
             border
             border-warmGray-300
-            rounded-full
-            h-${size}
-            w-${size}
+            rounded-lg 
+            h-${itemHeight}
+            w-${itemWidth}
             align-middle
             hover:bg-warmGray-50
             cursor-pointer
@@ -89,7 +92,7 @@ export default (props) => {
       text-center
       justify-center
       `}>
-        <span><small>{`${hasData ? 'Click to change picture' : 'Click to add a picture'}`}</small></span>
+        <span><small>{`${hasData ? 'Drag and drop or click to change file' : 'Drag and drop or click to add a file'}`}</small></span>
       </div>
       <div className={`
       bg-opacity-25
@@ -106,17 +109,17 @@ export default (props) => {
         ease-in-out'>
       `}>
         {(!props.disable && !props.readOnly) ?
-          <FileUploader onFileChanged={onFileChanged} />
+          <FileUploader onFileChanged={onFileChanged} {..._props} />
           : null}
       </div>
     </div>
-    {hasData ?
+    {(!hideControls && hasData && (!props.disable && !props.readOnly)) ?
       <div className={`
             px-2
             py-4
             h-full
             hidden
-            ${(!props.disable && !props.readOnly) ? 'group-hover:grid' : ''}
+            'group-hover:grid'
             place-items-center
             grid-cols-1
             transform
@@ -124,13 +127,11 @@ export default (props) => {
             duration-200
             ease-in-out
             `}>
-        {(!props.disable && !props.readOnly && canRemove) ? <IconButton aria-label="Delete" component="span"
+        {canRemove ? <IconButton aria-label="Delete" component="span"
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            if (props.disabled || props.readOnly) {
-              return
-            }
+
             const _data = {}
             setData(_data)
             onValueChanged && onValueChanged(_data)
@@ -141,9 +142,7 @@ export default (props) => {
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            if (props.disabled || props.readOnly) {
-              return
-            }
+
           }} >
           <EditOutlined />
         </IconButton> : null}

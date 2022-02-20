@@ -39,15 +39,19 @@ import Avatar$2 from '@mui/material/Avatar';
 import '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import { FileUploader as FileUploader$1 } from 'react-drag-drop-files';
+import { FileUploader as FileUploader$2 } from 'react-drag-drop-files';
 import RemoveButton from '@mui/icons-material/DeleteOutline';
 import EditOutlined from '@mui/icons-material/EditOutlined';
+import FilePreviewer from 'react-file-previewer';
+import HoverVideoPlayer from 'react-hover-video-player';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
 import ArrowUpward from '@mui/icons-material/ArrowUpward';
+import ArrowDownward$1 from '@mui/icons-material/ArrowLeft';
+import ArrowUpward$1 from '@mui/icons-material/ArrowRight';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -1000,7 +1004,7 @@ var FileUploader = (function (props) {
   var onFileChanged = props.onFileChanged,
       _props$maxFileSize = props.maxFileSize,
       maxFileSize = _props$maxFileSize === void 0 ? 10 : _props$maxFileSize;
-  return /*#__PURE__*/React.createElement(FileUploader$1, {
+  return /*#__PURE__*/React.createElement(FileUploader$2, {
     maxSize: maxFileSize,
     onSizeError: function onSizeError() {
       alert("Please choose a smaller file (" + maxFileSize + "mb max)");
@@ -1012,14 +1016,12 @@ var FileUploader = (function (props) {
 });
 
 var Avatar$1 = (function (props) {
-  var values = props.values,
+  var value = props.value,
       onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      id = _props$item.id,
-      _props$item$params = _props$item.params,
+      _props$item$params = props.item.params,
       params = _props$item$params === void 0 ? {} : _props$item$params;
 
-  var _useState = useState(values[id] ? values[id] : {}),
+  var _useState = useState(value ? value : {}),
       data = _useState[0],
       setData = _useState[1];
 
@@ -1099,10 +1101,174 @@ var Avatar$1 = (function (props) {
   }, /*#__PURE__*/React.createElement(EditOutlined, null)) : null) : null);
 });
 
-var index = (function (props) {
+var Add$1 = (function (props) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "items-center flex overflow-hidden relative"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "     items-center  flex  overflow-hidden  justify-center absolute  left-0  right-0  bottom-0  top-0"
+  }, /*#__PURE__*/React.createElement(AddAPhotoIcon, {
+    fontSize: 'large',
+    color: '#858585'
+  })));
+});
+
+var Preview$1 = (function (props) {
+  var data = props.data;
+  var isLocal = data.file;
+  var url = isLocal ? URL.createObjectURL(data.file) : data.url;
+
+  var _mimeType = function _mimeType() {
+    if (data.mimeType) {
+      return data.mimeType;
+    }
+
+    if (isLocal && data.file) {
+      return data.file.type;
+    }
+
+    return null;
+  };
+
+  var render = function render() {
+    var mimeType = _mimeType();
+
+    var isVideo = mimeType && mimeType.indexOf('video/') === 0;
+
+    if (isVideo) {
+      return /*#__PURE__*/React.createElement(HoverVideoPlayer, {
+        videoSrc: url,
+        pausedOverlay: /*#__PURE__*/React.createElement("img", {
+          alt: "",
+          style: {
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }
+        }),
+        loadingOverlay: /*#__PURE__*/React.createElement("div", {
+          className: "loading-overlay"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "loading-spinner"
+        }))
+      });
+    }
+
+    return /*#__PURE__*/React.createElement(FilePreviewer, {
+      hideControls: true,
+      file: {
+        url: url
+      }
+    });
+  };
+
+  return /*#__PURE__*/React.createElement("div", {
+    className: " w-full  h-full  items-center  flex  justify-center   transform group-hover:scale-105 transition duration-200 ease-in-out "
+  }, render());
+});
+
+var FileUploader$1 = (function (props) {
+  var _props$fileTypes = props.fileTypes,
+      fileTypes = _props$fileTypes === void 0 ? ["JPG", "JPEG", "WEBP", "PNG", "GIF"] : _props$fileTypes,
+      onFileChanged = props.onFileChanged,
+      _props$maxFileSize = props.maxFileSize,
+      maxFileSize = _props$maxFileSize === void 0 ? 10 : _props$maxFileSize;
+  return /*#__PURE__*/React.createElement(FileUploader$2, {
+    maxSize: maxFileSize,
+    onSizeError: function onSizeError() {
+      alert("Please choose a smaller file (" + maxFileSize + "mb max)");
+    },
+    handleChange: onFileChanged,
+    name: "file",
+    types: fileTypes
+  });
+});
+
+var fileUpload = (function (props) {
+  var value = props.value,
+      onValueChanged = props.onValueChanged,
+      _props$item$params = props.item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var _params$itemHeight = params.itemHeight,
+      itemHeight = _params$itemHeight === void 0 ? '32' : _params$itemHeight,
+      _params$itemWidth = params.itemWidth,
+      itemWidth = _params$itemWidth === void 0 ? '48' : _params$itemWidth,
+      _params$canRemove = params.canRemove,
+      canRemove = _params$canRemove === void 0 ? true : _params$canRemove,
+      _params$canEdit = params.canEdit,
+      canEdit = _params$canEdit === void 0 ? false : _params$canEdit,
+      _params$hideControls = params.hideControls,
+      hideControls = _params$hideControls === void 0 ? false : _params$hideControls;
+
+  var _useState = useState(value ? value : {}),
+      data = _useState[0],
+      setData = _useState[1];
+
+  var onFileChanged = function onFileChanged(file) {
+    if (props.disabled || props.readOnly) {
+      return;
+    }
+
+    var _data = _extends({}, data, {
+      file: file,
+      mimeType: file.type
+    });
+
+    if (!_data.file) {
+      _data = null;
+    }
+
+    setData(_data);
+    onValueChanged && onValueChanged(_data);
+  };
+
+  var _props = _extends({}, params, {
+    data: data,
+    disabled: props.disabled,
+    readOnly: props.readOnly
+  });
+
+  var onClick = function onClick() {};
+
+  var hasData = data.url || data.file;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "\n            flex\n            group\n            "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "\n            border\n            border-warmGray-300\n            rounded-lg \n            h-" + itemHeight + "\n            w-" + itemWidth + "\n            align-middle\n            hover:bg-warmGray-50\n            cursor-pointer\n            justify-center\n            items-center\n            flex\n            group\n            relative\n            overflow-hidden",
+    onClick: onClick
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "\n      bg-pink-300\n      bg-opacity-25\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      "
+  }, hasData ? /*#__PURE__*/React.createElement(Preview$1, _props) : /*#__PURE__*/React.createElement(Add$1, _props)), /*#__PURE__*/React.createElement("div", {
+    className: "\n      bg-pink-300\n      bg-opacity-70\n      absolute\n      left-0\n      right-0\n      bottom-0\n      top-0\n      " + (!props.disable || !props.readOnly || hasData ? 'hidden' : 'flex') + "\n      " + (!props.disable && !props.readOnly ? 'group-hover:flex' : '') + "\n      items-center\n      px-2\n      py-2\n      text-center\n      justify-center\n      "
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("small", null, "" + (hasData ? 'Drag and drop or click to change file' : 'Drag and drop or click to add a file')))), /*#__PURE__*/React.createElement("div", {
+    className: "\n      bg-opacity-25\n      items-center\n      flex\n      overflow-hidden\n      h-full\n      w-full\n      opacity-0\n      bg-blue-500\n      hover:scale-105\n        transition\n        duration-200\n        ease-in-out'>\n      "
+  }, !props.disable && !props.readOnly ? /*#__PURE__*/React.createElement(FileUploader$1, _extends({
+    onFileChanged: onFileChanged
+  }, _props)) : null)), !hideControls && hasData && !props.disable && !props.readOnly ? /*#__PURE__*/React.createElement("div", {
+    className: "\n            px-2\n            py-4\n            h-full\n            hidden\n            'group-hover:grid'\n            place-items-center\n            grid-cols-1\n            transform\n            transition\n            duration-200\n            ease-in-out\n            "
+  }, canRemove ? /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Delete",
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var _data = {};
+      setData(_data);
+      onValueChanged && onValueChanged(_data);
+    }
+  }, /*#__PURE__*/React.createElement(RemoveButton, null)) : null, canEdit ? /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Move up",
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, /*#__PURE__*/React.createElement(EditOutlined, null)) : null) : null);
+});
+
+var _containerVertical = (function (props) {
   var summary = props.summary,
-      details = props.details,
-      label = props.label,
+      title = props.title,
+      children = props.children,
       onMoveDownRequired = props.onMoveDownRequired,
       onRemoveRequired = props.onRemoveRequired,
       onMoveUpRequired = props.onMoveUpRequired,
@@ -1111,10 +1277,13 @@ var index = (function (props) {
       canMoveDown = props.canMoveDown,
       showControls = props.showControls,
       _props$disabled = props.disabled,
-      disabled = _props$disabled === void 0 ? false : _props$disabled;
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      value = props.value,
+      index = props.index,
+      className = props.className;
   return /*#__PURE__*/React.createElement(Accordion, {
     defaultExpanded: true,
-    className: "w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl"
+    className: "w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl " + className
   }, /*#__PURE__*/React.createElement(AccordionSummary, {
     expanded: true,
     expandIcon: /*#__PURE__*/React.createElement(ExpandMoreIcon, null),
@@ -1124,9 +1293,15 @@ var index = (function (props) {
     className: "grid grid-cols-2 justify-between w-full "
   }, /*#__PURE__*/React.createElement("div", {
     className: ""
-  }, /*#__PURE__*/React.createElement("h4", null, label)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h4", null, title && title({
+    value: value,
+    index: index
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "flex justify-end mr-4"
-  }, summary, showControls && /*#__PURE__*/React.createElement("div", {
+  }, summary && summary({
+    value: value,
+    index: index
+  }), showControls && /*#__PURE__*/React.createElement("div", {
     className: "flex gap-3"
   }, /*#__PURE__*/React.createElement(IconButton, {
     "aria-label": "Move up",
@@ -1155,17 +1330,95 @@ var index = (function (props) {
       e.stopPropagation();
       onRemoveRequired && onRemoveRequired();
     }
-  }, canRemove && /*#__PURE__*/React.createElement(RemoveButton, null)))))), /*#__PURE__*/React.createElement(AccordionDetails, null, details));
+  }, canRemove && /*#__PURE__*/React.createElement(RemoveButton, null)))))), /*#__PURE__*/React.createElement(AccordionDetails, {
+    className: ""
+  }, children));
 });
 
+var _containerHorizontal = (function (props) {
+  var summary = props.summary,
+      title = props.title,
+      children = props.children,
+      onMoveDownRequired = props.onMoveDownRequired,
+      onRemoveRequired = props.onRemoveRequired,
+      onMoveUpRequired = props.onMoveUpRequired,
+      canRemove = props.canRemove,
+      canMoveUp = props.canMoveUp,
+      canMoveDown = props.canMoveDown,
+      showControls = props.showControls,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      value = props.value,
+      index = props.index,
+      className = props.className;
+  return /*#__PURE__*/React.createElement(Accordion, {
+    defaultExpanded: true,
+    className: "border-warmGray-200  border-2 px-2 py-1 rounded-xl " + className
+  }, /*#__PURE__*/React.createElement(AccordionSummary, {
+    expanded: true,
+    expandIcon: /*#__PURE__*/React.createElement(ExpandMoreIcon, null),
+    "aria-controls": "panel1a-content",
+    id: "panel1a-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 justify-between"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/React.createElement("h4", null, title && title({
+    value: value,
+    index: index
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-end mr-4"
+  }, summary && summary({
+    value: value,
+    index: index
+  }), showControls && /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-3"
+  }, /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Move down",
+    disabled: disabled || !canMoveDown,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onMoveDownRequired && onMoveDownRequired();
+    }
+  }, /*#__PURE__*/React.createElement(ArrowDownward$1, null)), /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Move up",
+    disabled: disabled || !canMoveUp,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onMoveUpRequired && onMoveUpRequired();
+    }
+  }, /*#__PURE__*/React.createElement(ArrowUpward$1, null)), /*#__PURE__*/React.createElement(IconButton, {
+    "aria-label": "Delete",
+    disabled: disabled,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onRemoveRequired && onRemoveRequired();
+    }
+  }, canRemove && /*#__PURE__*/React.createElement(RemoveButton, null)))))), /*#__PURE__*/React.createElement(AccordionDetails, {
+    className: ""
+  }, children));
+});
 
+var _buttonAdd = (function (_ref) {
+  var onClick = _ref.onClick,
+      title = _ref.title,
+      disabled = _ref.disabled;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-center my-10"
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    variant: "text",
+    onClick: onClick,
+    disabled: disabled
+  }, title ? title : "Add"));
+});
 
-var _Utils = {
-  __proto__: null,
-  FieldInArrayShieldVertical: index
-};
-
-var index$1 = (function (props) {
+var index = (function (props) {
   var type = props.type;
 
   switch (type) {
@@ -1253,12 +1506,22 @@ var index$1 = (function (props) {
     case 'avatar':
       return Avatar$1;
 
+    case '_containerVertical':
+      return _containerVertical;
+
+    case '_containerHorizontal':
+      return _containerHorizontal;
+
+    case '_buttonAdd':
+      return _buttonAdd;
+
+    case 'fileUpload':
+      return fileUpload;
+
     default:
       return null;
   }
 });
-var Utils = _Utils;
 
-export default index$1;
-export { Utils };
+export default index;
 //# sourceMappingURL=index.modern.js.map
