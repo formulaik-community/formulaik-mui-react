@@ -31,9 +31,7 @@ var FormGroup = _interopDefault(require('@mui/material/FormGroup'));
 var Rating$1 = _interopDefault(require('@mui/material/Rating'));
 var DateRangePicker$1 = _interopDefault(require('@mui/lab/DateRangePicker'));
 var Box = _interopDefault(require('@mui/material/Box'));
-var Formulaik = _interopDefault(require('@yelounak/formulaik'));
-var Yup = require('yup');
-var _ = _interopDefault(require('underscore'));
+require('underscore');
 var AddAPhotoIcon = _interopDefault(require('@mui/icons-material/Add'));
 var IconButton = _interopDefault(require('@mui/material/IconButton'));
 require('@mui/icons-material/Delete');
@@ -655,159 +653,6 @@ var DateRangePicker = (function (props) {
       }, " to "), /*#__PURE__*/React__default.createElement(TextField, endProps));
     }
   }, params)));
-});
-
-var entry = (function (props) {
-  var values = props.values,
-      onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      id = _props$item.id,
-      params = _props$item.params;
-  var item = values[id];
-
-  var _useState = React.useState(null),
-      error = _useState[0];
-
-  var inputs = [].concat(params.canRemove && params.showRemove ? [{
-    isMulti: true,
-    className: 'flex ',
-    items: [].concat(params.inputs({
-      item: item
-    }), [{
-      type: 'button',
-      id: 'removeItem',
-      label: 'Remove',
-      className: 'ml-2 ',
-      params: {
-        onClick: function onClick() {
-          onValueChanged && onValueChanged({
-            isRemoved: true
-          });
-        }
-      }
-    }])
-  }] : params.inputs({
-    item: item
-  }));
-
-  var onValuesChanged = function onValuesChanged(values) {
-    var data = params.onEntryValuesChangedHook({
-      values: values,
-      data: item
-    });
-    onValueChanged && onValueChanged(data);
-  };
-
-  var componentsLibrary = function componentsLibrary(_ref) {
-    var type = _ref.type;
-
-    switch (type) {
-      case 'button':
-        return Button;
-
-      default:
-        return null;
-    }
-  };
-
-  return /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(params.componentsLibraries, [componentsLibrary]),
-    initialValues: params.initialValues({
-      item: item
-    }),
-    validationSchema: params.validationSchema({
-      item: item
-    }),
-    inputs: inputs,
-    onValuesChanged: onValuesChanged,
-    error: error
-  });
-});
-
-var ListEditor = (function (props) {
-  var values = props.values,
-      onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      id = _props$item.id,
-      params = _props$item.params;
-  var items = values[id] ? values[id] : [];
-
-  var _useState = React.useState(null),
-      error = _useState[0];
-
-  var validationSchema = Yup.object().shape(_extends({}, _.object(items.map(function (_item, i) {
-    return "entry-" + i;
-  }), items.map(function () {
-    return Yup.object();
-  }))));
-  var inputs = [].concat(items.map(function (item, i) {
-    return {
-      type: 'entry',
-      id: "entry-" + i,
-      params: params
-    };
-  }), params.canAddItems && items.length < params.maxItems ? [{
-    type: 'button',
-    id: 'addItem',
-    label: params.addItemLabel ? params.addItemLabel : 'Add item',
-    params: {
-      onClick: function onClick() {
-        var newItem = params.newStruct;
-        items.push(newItem);
-        onValueChanged && onValueChanged(items);
-      }
-    }
-  }] : []);
-
-  var initialValues = function initialValues() {
-    var list = {};
-    items.forEach(function (item, i) {
-      list["entry-" + i] = item;
-    });
-    return list;
-  };
-
-  var onValuesChanged = function onValuesChanged(__values) {
-    if (_.isEmpty(__values)) {
-      return;
-    }
-
-    var _i = [];
-    Object.keys(__values).forEach(function (e) {
-      if (__values[e].isRemoved) {
-        return;
-      }
-
-      _i.push(__values[e]);
-    });
-    onValueChanged && onValueChanged(_i);
-  };
-
-  var componentsLibrary = function componentsLibrary(_ref) {
-    var type = _ref.type;
-
-    switch (type) {
-      case 'entry':
-        return entry;
-
-      case 'button':
-        return Button;
-
-      default:
-        return null;
-    }
-  };
-
-  return /*#__PURE__*/React__default.createElement("div", {
-    className: "mt-6"
-  }, /*#__PURE__*/React__default.createElement(Formulaik, {
-    componentsLibraries: [].concat(params.componentsLibraries, [componentsLibrary]),
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    inputs: inputs,
-    onValuesChanged: onValuesChanged,
-    error: error
-  }));
 });
 
 var H1 = (function (props) {
@@ -1487,9 +1332,6 @@ var index = (function (props) {
 
     case 'rating':
       return Rating;
-
-    case 'listEditor':
-      return ListEditor;
 
     case 'h1':
       return H1;

@@ -21,7 +21,6 @@ import ButtonGroup from './buttonGroup'
 import SwitchControl from './switch'
 import Rating from './rating'
 import DateRangePicker from './dateRangePicker'
-import ListEditor from './listEditor'
 import H1 from './h1'
 import H2 from './h2'
 import H3 from './h3'
@@ -79,8 +78,6 @@ export default (props) => {
       return SwitchControl
     case 'rating':
       return Rating
-    case 'listEditor':
-      return ListEditor
     case 'h1':
       return H1
     case 'h2':

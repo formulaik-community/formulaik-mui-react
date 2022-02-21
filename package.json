@@ -1,12 +1,12 @@
 {
-  "name": "@yelounak/formulaik-mui",
-  "version": "1.0.422",
-  "description": "Formulaik-mui components library.",
+  "name": "@yelounak/formulaik-react-mui",
+  "version": "1.0.423",
+  "description": "Formulaik-mui react components library.",
   "author": "yelounak",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yelounak/formulaik-mui"
+    "url": "https://github.com/yelounak/formulaik-react-mui"
   },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -33,7 +33,7 @@
     "react": ">= 0.16.0 < 18.0.0",
     "underscore": "^1.13.1",
     "yup": "^0.32.11",
-    "@yelounak/formulaik": ">= 1.0.0 < 2.0.0"
+    "@yelounak/formulaik-react": ">= 1.0.0 < 2.0.0"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.11.0",
