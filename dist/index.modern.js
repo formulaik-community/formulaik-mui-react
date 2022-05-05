@@ -6,6 +6,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox$1 from '@mui/material/Checkbox';
 import Select$1 from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import ReactFlagsSelect from 'react-flags-select';
 import PhoneInput from 'react-phone-number-input';
@@ -170,23 +172,28 @@ var Select = (function (props) {
       id = _props$item.id,
       params = _props$item.params;
   var options = params.options;
-  return /*#__PURE__*/React.createElement(Select$1, {
+  return /*#__PURE__*/React.createElement(FormControl, {
+    className: 'w-full'
+  }, /*#__PURE__*/React.createElement(InputLabel, {
+    id: "demo-simple-select-autowidth-label"
+  }, label), /*#__PURE__*/React.createElement(Select$1, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
-    labelId: id,
+    labelId: "demo-simple-select-autowidth-label",
     id: id,
     className: " " + (error ? 'bg-red-100 select-error' : ''),
     value: value,
-    label: label,
+    label: label
+  }, params, {
     onChange: function onChange(_ref) {
       var value = _ref.target.value;
       return onValueChanged(value);
     }
-  }, options.map(function (option) {
+  }), options.map(function (option) {
     return /*#__PURE__*/React.createElement(MenuItem, {
       value: option.value
     }, option.label);
-  }));
+  })));
 });
 
 var TextArea = (function (props) {
@@ -195,7 +202,8 @@ var TextArea = (function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
-      _props$item$params = props.item.params,
+      _props$item = props.item,
+      _props$item$params = _props$item.params,
       params = _props$item$params === void 0 ? {} : _props$item$params;
   var _params$maxRows = params.maxRows,
       maxRows = _params$maxRows === void 0 ? 1000 : _params$maxRows,
@@ -228,9 +236,8 @@ var TextArea = (function (props) {
     sx: {},
     "aria-label": "minimum height",
     disabled: props.disabled,
-    readOnly: props.readOnly,
     minRows: maxRows
-  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 py-4 pb-8 rounded-md border-warmGray-100 text-base w-full " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
+  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 rounded-md border-warmGray-100 border px-4 py-4 pb-12 text-base w-full ring-pink-600 " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
 });
 
 var SelectCountry = (function (props) {
@@ -1166,7 +1173,7 @@ var numericStepper = (function (props) {
   var _params$minimumValue = params.minimumValue,
       minimumValue = _params$minimumValue === void 0 ? 0 : _params$minimumValue,
       _params$maximumValue = params.maximumValue,
-      maximumValue = _params$maximumValue === void 0 ? 1000 : _params$maximumValue,
+      maximumValue = _params$maximumValue === void 0 ? Number.MAX_SAFE_INTEGER : _params$maximumValue,
       _params$stepValue = params.stepValue,
       stepValue = _params$stepValue === void 0 ? 1 : _params$stepValue,
       _params$size = params.size,

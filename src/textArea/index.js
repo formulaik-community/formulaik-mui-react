@@ -3,7 +3,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, onValueChanged, item: { params = {} } } = props
+  const { value, error, disabled, onValueChanged, field, item: { params = {}, id } } = props
   const { maxRows = 1000, minRows = 3, placeholder, inputDelay = 1000 } = params
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
@@ -39,12 +39,11 @@ export default (props) => {
     }}
     aria-label="minimum height"
     disabled={props.disabled}
-    readOnly={props.readOnly}
     minRows={maxRows}
     minRows={minRows}
     onChange={handleOnChange}
     value={innerValue}
     placeholder={placeholder}
-    className={`textarea h-64 py-4 pb-8 rounded-md border-warmGray-100 text-base w-full ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
+    className={`textarea h-64 rounded-md border-warmGray-100 border px-4 py-4 pb-12 text-base w-full ring-pink-600 ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
   />
 }
