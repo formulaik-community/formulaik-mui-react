@@ -28,6 +28,8 @@ import H4 from './h4'
 import VisualSelect from './visualSelect'
 import Avatar from './avatar'
 import fileUpload from './fileUpload'
+import inputCurrency from './inputCurrency'
+import numericStepper from './numericStepper'
 
 import _containerVertical from './_containerVertical'
 import _containerHorizontal from './_containerHorizontal'
@@ -98,6 +100,10 @@ export default (props) => {
       return _buttonAdd
     case 'fileUpload':
       return fileUpload
+    case 'inputCurrency':
+      return inputCurrency
+    case 'numericStepper':
+      return numericStepper
     default:
       return null
   }

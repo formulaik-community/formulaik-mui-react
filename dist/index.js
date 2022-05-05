@@ -45,6 +45,8 @@ var RemoveButton = _interopDefault(require('@mui/icons-material/DeleteOutline'))
 var EditOutlined = _interopDefault(require('@mui/icons-material/EditOutlined'));
 var FilePreviewer = _interopDefault(require('react-file-previewer'));
 var HoverVideoPlayer = _interopDefault(require('react-hover-video-player'));
+var CurrencyTextField = _interopDefault(require('@unicef/material-ui-currency-textfield'));
+var numericStepper$1 = require('@anatoliygatt/numeric-stepper');
 var Accordion = _interopDefault(require('@mui/material/Accordion'));
 var AccordionSummary = _interopDefault(require('@mui/material/AccordionSummary'));
 var AccordionDetails = _interopDefault(require('@mui/material/AccordionDetails'));
@@ -138,10 +140,9 @@ var Submit = (function (props) {
 
 var Checkbox = (function (props) {
   var onValueChanged = props.onValueChanged,
-      values = props.values,
+      value = props.value,
       _props$item = props.item,
       label = _props$item.label,
-      id = _props$item.id,
       params = _props$item.params;
   return /*#__PURE__*/React__default.createElement("div", {
     className: "px-4 py-2 card rounded-lg border-2 border-warmGray-400 "
@@ -151,10 +152,7 @@ var Checkbox = (function (props) {
       disabled: props.disabled,
       readOnly: props.readOnly
     }, params, {
-      checked: function () {
-        var _value = values[id];
-        return _value;
-      }(),
+      checked: value,
       onChange: function onChange(_ref) {
         var checked = _ref.target.checked;
         onValueChanged(checked);
@@ -1113,6 +1111,97 @@ var fileUpload = (function (props) {
   }, /*#__PURE__*/React__default.createElement(EditOutlined, null)) : null) : null);
 });
 
+var inputCurrency = (function (props) {
+  var value = props.value,
+      error = props.error,
+      onValueChanged = props.onValueChanged,
+      _props$item = props.item,
+      subType = _props$item.subType,
+      label = _props$item.label,
+      _props$item$params = _props$item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var placeholder = params.placeholder,
+      _params$inputDelay = params.inputDelay,
+      inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay,
+      _params$className = params.className,
+      className = _params$className === void 0 ? '' : _params$className;
+
+  var _useState = React.useState(value ? value : ''),
+      innerValue = _useState[0],
+      setInnerValue = _useState[1];
+
+  React.useEffect(function () {
+    setInnerValue(value ? value : '');
+  }, [value]);
+  var debouncedHandleOnChange = useDebounce.useDebouncedCallback(function (event) {
+    var value = event.target.value;
+    onValueChanged(value);
+    console.log('textArea debouncedHandleOnChange', value);
+  }, inputDelay);
+  var handleOnChange = React.useCallback(function (event) {
+    event.persist();
+    var newValue = event.target.value;
+    setInnerValue(newValue);
+    debouncedHandleOnChange(event);
+    console.log('textArea handleOnChange', value);
+  }, []);
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "w-full " + className
+  }, /*#__PURE__*/React__default.createElement(CurrencyTextField, _extends({
+    label: label,
+    variant: "outlined",
+    disabled: props.disabled,
+    readOnly: props.readOnly ? props.readOnly : false,
+    value: innerValue,
+    placeholder: placeholder,
+    currencySymbol: "$",
+    outputFormat: "number",
+    className: "w-full " + (error ? 'bg-red-100' : ''),
+    type: subType,
+    onChange: handleOnChange
+  }, params)));
+});
+
+var numericStepper = (function (props) {
+  var value = props.value,
+      onValueChanged = props.onValueChanged,
+      params = props.item.params;
+  var _params$minimumValue = params.minimumValue,
+      minimumValue = _params$minimumValue === void 0 ? 0 : _params$minimumValue,
+      _params$maximumValue = params.maximumValue,
+      maximumValue = _params$maximumValue === void 0 ? 1000 : _params$maximumValue,
+      _params$stepValue = params.stepValue,
+      stepValue = _params$stepValue === void 0 ? 1 : _params$stepValue,
+      _params$size = params.size,
+      size = _params$size === void 0 ? "sm" : _params$size,
+      _params$theme = params.theme,
+      theme = _params$theme === void 0 ? {
+    inactiveTrackColor: "#fed7aa",
+    activeTrackColor: "#fddec0",
+    activeButtonColor: "#ffedd5",
+    inactiveIconColor: "#fb923c",
+    hoverIconColor: "#ea580c",
+    activeIconColor: "#9a3412",
+    disabledIconColor: "#fdba74",
+    thumbColor: "#f97316",
+    thumbShadowAnimationOnTrackHoverEnabled: false,
+    focusRingColor: "#fff7ed"
+  } : _params$theme;
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "py-2"
+  }, /*#__PURE__*/React__default.createElement(numericStepper$1.NumericStepper, _extends({
+    minimumValue: minimumValue,
+    maximumValue: maximumValue,
+    stepValue: stepValue,
+    initialValue: value,
+    size: size
+  }, theme, {
+    onChange: onValueChanged,
+    disabled: props.disabled,
+    readOnly: props.readOnly ? props.readOnly : false
+  })));
+});
+
 var _containerVertical = (function (props) {
   var summary = props.summary,
       title = props.title,
@@ -1362,6 +1451,12 @@ var index = (function (props) {
 
     case 'fileUpload':
       return fileUpload;
+
+    case 'inputCurrency':
+      return inputCurrency;
+
+    case 'numericStepper':
+      return numericStepper;
 
     default:
       return null;

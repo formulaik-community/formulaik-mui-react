@@ -1,6 +1,6 @@
 {
   "name": "@yelounak/formulaik-react-mui",
-  "version": "1.0.423",
+  "version": "1.0.427",
   "description": "Formulaik-mui react components library.",
   "author": "yelounak",
   "license": "MIT",
@@ -61,7 +61,12 @@
     "react-drag-drop-files": "^2.3.2",
     "use-debounce": "^7.0.1",
     "react-file-previewer": "^0.6.3",
-    "react-hover-video-player": "^9.4.0"
+    "react-hover-video-player": "^9.4.0",
+    "@unicef/material-ui-currency-textfield": "^0.8.6",
+    "@anatoliygatt/numeric-stepper": "^1.0.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "framer-motion": "^6.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
