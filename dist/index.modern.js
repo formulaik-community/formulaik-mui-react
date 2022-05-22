@@ -124,17 +124,23 @@ var Input = (function (props) {
 
 var Submit = (function (props) {
   var isSubmitting = props.isSubmitting,
-      _props$item = props.item,
-      value = _props$item.value;
+      _props$item$params = props.item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var _params$variant = params.variant,
+      variant = _params$variant === void 0 ? 'outlined' : _params$variant,
+      _params$text = params.text,
+      text = _params$text === void 0 ? 'Update' : _params$text,
+      _params$size = params.size,
+      size = _params$size === void 0 ? 'large' : _params$size;
   return /*#__PURE__*/React.createElement("div", {
     className: "flex justify-center my-2"
   }, /*#__PURE__*/React.createElement(LoadingButton, {
     loading: isSubmitting,
     disabled: props.disabled,
-    variant: "outlined",
+    variant: variant,
     onClick: props.submitForm,
-    size: 'large'
-  }, value));
+    size: size
+  }, text));
 });
 
 var Checkbox = (function (props) {
