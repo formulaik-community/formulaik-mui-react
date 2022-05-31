@@ -44,6 +44,6 @@ export default (props) => {
     onChange={handleOnChange}
     value={innerValue}
     placeholder={placeholder}
-    className={`textarea h-64 rounded-md border-warmGray-100 border px-4 py-4 pb-12 text-base w-full ring-pink-600 ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
+    className={`textarea h-64 rounded-md border-warmGray-200 border px-4 py-4 pb-12 text-base w-full ring-pink-600 ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
   />
 }

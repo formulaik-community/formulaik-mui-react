@@ -53,10 +53,7 @@ var Accordion = _interopDefault(require('@mui/material/Accordion'));
 var AccordionSummary = _interopDefault(require('@mui/material/AccordionSummary'));
 var AccordionDetails = _interopDefault(require('@mui/material/AccordionDetails'));
 var ExpandMoreIcon = _interopDefault(require('@mui/icons-material/ExpandMore'));
-var ArrowDownward = _interopDefault(require('@mui/icons-material/ArrowDownward'));
-var ArrowUpward = _interopDefault(require('@mui/icons-material/ArrowUpward'));
-var ArrowDownward$1 = _interopDefault(require('@mui/icons-material/ArrowLeft'));
-var ArrowUpward$1 = _interopDefault(require('@mui/icons-material/ArrowRight'));
+var reactFeather = require('react-feather');
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -246,7 +243,7 @@ var TextArea = (function (props) {
     "aria-label": "minimum height",
     disabled: props.disabled,
     minRows: maxRows
-  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 rounded-md border-warmGray-100 border px-4 py-4 pb-12 text-base w-full ring-pink-600 " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
+  }, _React$createElement["minRows"] = minRows, _React$createElement.onChange = handleOnChange, _React$createElement.value = innerValue, _React$createElement.placeholder = placeholder, _React$createElement.className = "textarea h-64 rounded-md border-warmGray-200 border px-4 py-4 pb-12 text-base w-full ring-pink-600 " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'), _React$createElement));
 });
 
 var SelectCountry = (function (props) {
@@ -1262,7 +1259,9 @@ var _containerVertical = (function (props) {
       e.stopPropagation();
       onMoveUpRequired && onMoveUpRequired();
     }
-  }, /*#__PURE__*/React__default.createElement(ArrowUpward, null)), /*#__PURE__*/React__default.createElement(IconButton, {
+  }, /*#__PURE__*/React__default.createElement(reactFeather.ChevronUp, {
+    size: 20
+  })), /*#__PURE__*/React__default.createElement(IconButton, {
     "aria-label": "Move down",
     disabled: disabled || !canMoveDown,
     component: "span",
@@ -1271,7 +1270,9 @@ var _containerVertical = (function (props) {
       e.stopPropagation();
       onMoveDownRequired && onMoveDownRequired();
     }
-  }, /*#__PURE__*/React__default.createElement(ArrowDownward, null)), /*#__PURE__*/React__default.createElement(IconButton, {
+  }, /*#__PURE__*/React__default.createElement(reactFeather.ChevronDown, {
+    size: 20
+  })), /*#__PURE__*/React__default.createElement(IconButton, {
     "aria-label": "Delete",
     disabled: disabled,
     component: "span",
@@ -1280,14 +1281,15 @@ var _containerVertical = (function (props) {
       e.stopPropagation();
       onRemoveRequired && onRemoveRequired();
     }
-  }, canRemove && /*#__PURE__*/React__default.createElement(RemoveButton, null)))))), /*#__PURE__*/React__default.createElement(AccordionDetails, {
+  }, canRemove && /*#__PURE__*/React__default.createElement(reactFeather.Trash, {
+    size: 20
+  })))))), /*#__PURE__*/React__default.createElement(AccordionDetails, {
     className: ""
   }, children));
 });
 
 var _containerHorizontal = (function (props) {
   var summary = props.summary,
-      title = props.title,
       children = props.children,
       onMoveDownRequired = props.onMoveDownRequired,
       onRemoveRequired = props.onRemoveRequired,
@@ -1301,38 +1303,16 @@ var _containerHorizontal = (function (props) {
       value = props.value,
       index = props.index,
       className = props.className;
-  return /*#__PURE__*/React__default.createElement(Accordion, {
-    defaultExpanded: true,
-    className: "border-warmGray-200  border-2 px-2 py-1 rounded-xl " + className
-  }, /*#__PURE__*/React__default.createElement(AccordionSummary, {
-    expanded: true,
-    expandIcon: /*#__PURE__*/React__default.createElement(ExpandMoreIcon, null),
-    "aria-controls": "panel1a-content",
-    id: "panel1a-header"
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "border-warmGray-200  border-2  py-1 rounded-xl " + className
   }, /*#__PURE__*/React__default.createElement("div", {
-    className: "grid grid-cols-2 justify-between"
-  }, /*#__PURE__*/React__default.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/React__default.createElement("h4", null, title && title({
-    value: value,
-    index: index
-  }))), /*#__PURE__*/React__default.createElement("div", {
-    className: "flex justify-end mr-4"
+    className: " border-b border-warmGray-100 px-2 py-1 flex justify-end mr-4"
   }, summary && summary({
     value: value,
     index: index
   }), showControls && /*#__PURE__*/React__default.createElement("div", {
     className: "flex gap-3"
   }, /*#__PURE__*/React__default.createElement(IconButton, {
-    "aria-label": "Move down",
-    disabled: disabled || !canMoveDown,
-    component: "span",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      onMoveDownRequired && onMoveDownRequired();
-    }
-  }, /*#__PURE__*/React__default.createElement(ArrowDownward$1, null)), /*#__PURE__*/React__default.createElement(IconButton, {
     "aria-label": "Move up",
     disabled: disabled || !canMoveUp,
     component: "span",
@@ -1341,7 +1321,20 @@ var _containerHorizontal = (function (props) {
       e.stopPropagation();
       onMoveUpRequired && onMoveUpRequired();
     }
-  }, /*#__PURE__*/React__default.createElement(ArrowUpward$1, null)), /*#__PURE__*/React__default.createElement(IconButton, {
+  }, /*#__PURE__*/React__default.createElement(reactFeather.ChevronLeft, {
+    size: 20
+  })), /*#__PURE__*/React__default.createElement(IconButton, {
+    "aria-label": "Move down",
+    disabled: disabled || !canMoveDown,
+    component: "span",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      onMoveDownRequired && onMoveDownRequired();
+    }
+  }, /*#__PURE__*/React__default.createElement(reactFeather.ChevronRight, {
+    size: 20
+  })), /*#__PURE__*/React__default.createElement(IconButton, {
     "aria-label": "Delete",
     disabled: disabled,
     component: "span",
@@ -1350,8 +1343,10 @@ var _containerHorizontal = (function (props) {
       e.stopPropagation();
       onRemoveRequired && onRemoveRequired();
     }
-  }, canRemove && /*#__PURE__*/React__default.createElement(RemoveButton, null)))))), /*#__PURE__*/React__default.createElement(AccordionDetails, {
-    className: ""
+  }, canRemove && /*#__PURE__*/React__default.createElement(reactFeather.Trash, {
+    size: 20
+  })))), /*#__PURE__*/React__default.createElement("div", {
+    className: "px-1"
   }, children));
 });
 

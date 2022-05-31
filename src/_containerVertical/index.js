@@ -3,11 +3,9 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
-import ArrowDownward from '@mui/icons-material/ArrowDownward'
-import ArrowUpward from '@mui/icons-material/ArrowUpward'
-import RemoveButton from '@mui/icons-material/DeleteOutline'
 import IconButton from '@mui/material/IconButton'
+
+import { Trash, ChevronUp, ChevronDown } from 'react-feather'
 
 export default (props) => {
   const {
@@ -29,7 +27,18 @@ export default (props) => {
     error
   } = props
 
-  return <Accordion defaultExpanded className={`w-full border-warmGray-200  border-2 px-4 py-2 rounded-xl ${className}`}>
+  return <Accordion defaultExpanded className={`
+            w-full
+            border-warmGray-200
+            hover:border-warmGray-300
+            transition-all
+            ease-in-out
+            duration-300
+            border-2
+            px-4
+            py-2
+            rounded-xl
+            ${className}`}>
     <AccordionSummary
       expanded
       expandIcon={<ExpandMoreIcon />}
@@ -48,7 +57,9 @@ export default (props) => {
                 e.stopPropagation()
                 onMoveUpRequired && onMoveUpRequired()
               }} >
-              <ArrowUpward />
+              <ChevronUp
+                size={20}
+              />
             </IconButton>
             <IconButton aria-label="Move down" disabled={disabled || !canMoveDown} component="span"
               onClick={(e) => {
@@ -57,7 +68,9 @@ export default (props) => {
                 onMoveDownRequired && onMoveDownRequired()
               }}
             >
-              <ArrowDownward />
+              <ChevronDown
+                size={20}
+              />
             </IconButton>
             <IconButton aria-label="Delete" disabled={disabled} component="span"
               onClick={(e) => {
@@ -65,7 +78,9 @@ export default (props) => {
                 e.stopPropagation()
                 onRemoveRequired && onRemoveRequired()
               }} >
-              {canRemove && <RemoveButton />}
+              {canRemove && <Trash
+                size={20}
+              />}
             </IconButton>
           </div>
           }
