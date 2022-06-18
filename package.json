@@ -1,6 +1,6 @@
 {
   "name": "@yelounak/formulaik-react-mui",
-  "version": "1.0.44",
+  "version": "1.0.13",
   "description": "Formulaik-mui react components library.",
   "author": "yelounak",
   "license": "MIT",
@@ -36,6 +36,7 @@
     "@yelounak/formulaik-react": ">= 1.0.0 < 2.0.0"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "@date-io/date-fns": "^2.11.0",
     "@date-io/dayjs": "^2.11.0",
     "@date-io/moment": "^2.11.0",

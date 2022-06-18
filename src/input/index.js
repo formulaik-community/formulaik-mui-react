@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import TextField from '@mui/material/TextField'
+import React, { useCallback, useEffect, useState, lazy, Suspense } from 'react'
+const TextField = lazy(() => import('@mui/material/TextField'))
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, onValueChanged, item: { subType, label, params = {}, id } } = props
+  const { value, error, disabled, onValueChanged, field, item: { subType, label, params = {}, id } } = props
   const { placeholder, inputDelay = 1000, className = '' } = params
 
   const [innerValue, setInnerValue] = useState(value ? value : '')
@@ -29,16 +29,21 @@ export default (props) => {
     console.log('textArea handleOnChange', value)
   }, [])
 
-  return <div className={`w-full ${className}`}><TextField
-    label={label}
-    variant="outlined"
-    disabled={props.disabled}
-    readOnly={props.readOnly}
-    value={innerValue}
-    placeholder={placeholder}
-    className={`w-full ${error ? 'bg-red-100' : ''}`}
-    type={subType}
-    onChange={handleOnChange}
-    {...params} />
-  </div>
+  return <Suspense fallback={<div></div>}>
+    <div className={`w-full ${className}`}>
+      <TextField
+        //label={label}
+        variant="outlined"
+        disabled={props.disabled}
+        value={innerValue}
+        placeholder={placeholder}
+        className={` ${error ? 'bg-red-50' : ''}`}
+        type={subType}
+        onChange={handleOnChange}
+        style={{
+          width: "100%",
+        }}
+        {...params} />
+    </div>
+  </Suspense>
 }

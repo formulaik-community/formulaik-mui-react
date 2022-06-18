@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import TextareaAutosize from '@mui/material/TextareaAutosize'
+import React, { useCallback, useEffect, useState, lazy, Suspense } from 'react'
+const TextareaAutosize = lazy(() => import('@mui/material/TextareaAutosize'))
+
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
@@ -29,7 +30,7 @@ export default (props) => {
     console.log('textArea handleOnChange', value)
   }, [])
 
-  return <TextareaAutosize
+  return <Suspense fallback={<div></div>}><TextareaAutosize
     sx={{
       // bgcolor: 'background.paper',
       // boxShadow: 1,
@@ -46,4 +47,5 @@ export default (props) => {
     placeholder={placeholder}
     className={`textarea h-64 rounded-md border-warmGray-200 border px-4 py-4 pb-12 text-base w-full ring-pink-600 ${error ? 'bg-red-100 border-red-600' : 'border-warmGray-400'}`}
   />
+  </Suspense>
 }

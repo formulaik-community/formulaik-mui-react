@@ -2,8 +2,6 @@ import React from 'react'
 import FilePreviewer from 'react-file-previewer'
 import HoverVideoPlayer from 'react-hover-video-player'
 
-
-
 export default (props) => {
   const { data } = props
 
@@ -64,10 +62,10 @@ export default (props) => {
       flex 
       justify-center  
       transform
-      group-hover:scale-105
-      transition
-      duration-200
-      ease-in-out
+      group-hover:scale-[1.005]
+      transition-all
+        duration-200
+        ease-in-out
       '>
 
     {render()}

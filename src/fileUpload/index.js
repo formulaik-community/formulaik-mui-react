@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import _ from 'underscore'
+//const Add = lazy(() =>{import('./add')})
 import Add from './add'
 import Preview from './preview'
 import FileUploader from './fileUploader'
@@ -49,11 +50,14 @@ export default (props) => {
     <div className={`
             border
             border-warmGray-300
-            rounded-lg 
+            rounded-lg
             h-${itemHeight}
             w-${itemWidth}
             align-middle
             hover:bg-warmGray-50
+            transition-all
+        duration-200
+        ease-in-out
             cursor-pointer
             justify-center
             items-center
@@ -63,7 +67,7 @@ export default (props) => {
             overflow-hidden`}
       onClick={onClick}>
       <div className={`
-      bg-pink-300
+      bg-white
       bg-opacity-25
       absolute
       left-0
@@ -74,11 +78,14 @@ export default (props) => {
         {hasData
           ? <Preview {..._props} />
           : <Add {..._props} />
+          //: <Suspense fallback={<div></div>}><Add {..._props} /></Suspense>
         }
       </div>
       <div className={`
-      bg-pink-300
-      bg-opacity-70
+      bg-white
+      bg-opacity-80
+    backdrop-filter
+    backdrop-blur-sm
       absolute
       left-0
       right-0
@@ -88,11 +95,15 @@ export default (props) => {
       ${(!props.disable && !props.readOnly) ? 'group-hover:flex' : ''}
       items-center
       px-2
+      md:px-4
       py-2
       text-center
       justify-center
+      transition-all
+      duration-200
+      ease-in-out
       `}>
-        <span><small>{`${hasData ? 'Drag and drop or click to change file' : 'Drag and drop or click to add a file'}`}</small></span>
+        <p>{`${hasData ? 'Drag and drop or click to change file' : 'Drag and drop or click to add a file'}`}</p>
       </div>
       <div className={`
       bg-opacity-25
@@ -104,7 +115,7 @@ export default (props) => {
       opacity-0
       bg-blue-500
       hover:scale-105
-        transition
+        transition-all
         duration-200
         ease-in-out'>
       `}>

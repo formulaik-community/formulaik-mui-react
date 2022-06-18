@@ -3,7 +3,9 @@ import _ from 'underscore'
 import { FileUploader } from "react-drag-drop-files"
 
 export default (props) => {
-  const { fileTypes = ["JPG", "JPEG", "WEBP", "PNG", "GIF"], onFileChanged, maxFileSize = 10 } = props
+  const {
+    fileTypes = ["JPG", "JPEG", "WEBP", "PNG", "GIF"],
+    onFileChanged, maxFileSize = 10 } = props
 
   return <FileUploader
     maxSize={maxFileSize}
