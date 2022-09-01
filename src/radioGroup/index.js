@@ -17,7 +17,8 @@ export default (props) => {
     {...params}
     onChange={({ target: { value } }) => onValueChanged(value)}>
     {params.options.map(({ value, label }) => {
-      return <FormControlLabel value={value} control={<Radio />} label={label} />
+      return <FormControlLabel value={value} control={<Radio />} //label={label}
+      />
     })}
   </RadioGroup>
 }

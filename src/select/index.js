@@ -13,7 +13,7 @@ export default (props) => {
     id={id}
     className={` ${error ? 'bg-pink-50 select-error' : ''}`}
     value={value}
-    //label={label}
+    ////label={label}
     {...params}
     onChange={({ target: { value } }) => onValueChanged(value)}>
     {options.map((option) =>

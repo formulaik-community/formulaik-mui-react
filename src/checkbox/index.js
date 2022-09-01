@@ -18,7 +18,8 @@ export default (props) => {
           onValueChanged(checked)
         }}
       />}
-      label={label} />
+    //label={label}
+    />
     {(params && params.subLabel) ? <small className="">{params.subLabel}</small> : null}
   </div>
 }

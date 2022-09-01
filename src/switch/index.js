@@ -14,7 +14,7 @@ export default (props) => {
       onChange={({ target: { checked } }) => {
         onValueChanged(checked)
       }} />}
-      label={label}
+      //label={label}
       {...params} />
   </FormGroup>
 }

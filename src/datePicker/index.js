@@ -10,7 +10,7 @@ export default (props) => {
     <DatePicker
       disabled={props.disabled}
       readOnly={props.readOnly}
-      label={label}
+      ////label={label}
       value={value}
       onChange={onValueChanged}
       {...params}

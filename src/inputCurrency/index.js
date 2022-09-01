@@ -32,7 +32,7 @@ export default (props) => {
 
   return <div className={`w-full ${className}`}>
     <CurrencyTextField
-      label={label}
+      //label={label}
       variant="outlined"
       disabled={props.disabled}
       readOnly={props.readOnly ? props.readOnly : false}

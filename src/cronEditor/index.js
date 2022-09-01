@@ -25,7 +25,7 @@ export default (props) => {
 
   return <div>
     <TextField
-      label={label}
+      //label={label}
       disabled={props.disabled}
       readOnly={props.readOnly}
       variant="outlined"

@@ -5,7 +5,7 @@ export default (props) => {
   const {
     value,
     onValueChanged,
-    item: { params = {} }
+    item: { label, id, params = {} }
   } = props
 
   const [selectedItems, setSelectedItems] = useState(value ? (value).filter(a => a) : [])
@@ -17,14 +17,14 @@ export default (props) => {
     itemHeight = 'h-72',
     ContentComponent,
     highlightColor = 'pink-600',
-    baseColor = 'warmGray-100',
+    borderColor = 'warmGray-100',
     useLatestSelection = false
   } = params
 
   const onClickItem = (e, item) => {
     e.preventDefault()
     e.stopPropagation()
-    if (props.disabled || props.readOnly) {
+    if (props.disabled || params.disabled) {
       return
     }
     const { id } = item
@@ -64,10 +64,10 @@ export default (props) => {
         duration-200
         ease-in-out
         ${itemHeight}
-        ${(!props.disabled && !props.readOnly && isSelected) ? 'border-4' : 'border-4'}
-        ${(!props.disabled && !props.readOnly && isSelected) ? 'opacity-100' : 'opacity-70 hover:opacity-80'}
-        ${(!props.disabled && !props.readOnly && isSelected) ? 'scale-105' : 'hover:scale-105'}
-        ${(!props.disabled && !props.readOnly && isSelected) ? `border-${highlightColor}` : `border-${baseColor} ${(!props.disabled && !props.readOnly && isSelected) ? 'hover:border-${highlightColor}' : ''}`}
+        ${isSelected ? 'border-4' : 'border-4'}
+        ${isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80'}
+        ${isSelected ? 'scale-[1.01]' : 'hover:scale-[1.01]'}
+        ${isSelected ? `border-${highlightColor}` : `border-${borderColor} hover:border-${highlightColor}`}
         `}>
       <div className={`
         absolute
@@ -80,8 +80,6 @@ export default (props) => {
         overflow-hidden
         justify-center
         group-hover:flex
-        bg-${baseColor}
-        bg-opacity-80
         group-hover:bg-opacity-100
     `}>
         <ContentComponent item={item} />

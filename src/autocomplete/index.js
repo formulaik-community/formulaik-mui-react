@@ -58,7 +58,7 @@ export default (props) => {
       <TextField
         {...params}
         {...field}
-        label={label}
+        //label={label}
         onChange={async ({ target: { value } }) => {
           updateOptions({ value })
         }}
