@@ -26,10 +26,10 @@ var FormControlLabel = _interopDefault(require('@mui/material/FormControlLabel')
 var Checkbox$1 = _interopDefault(require('@mui/material/Checkbox'));
 var ReactFlagsSelect = _interopDefault(require('react-flags-select'));
 var PhoneInput = _interopDefault(require('react-phone-number-input'));
-var dateAdapter = _interopDefault(require('@mui/lab/AdapterDateFns'));
-var LocalizationProvider = _interopDefault(require('@mui/lab/LocalizationProvider'));
-var DatePicker$1 = _interopDefault(require('@mui/lab/DatePicker'));
+var LocalizationProvider = require('@mui/x-date-pickers/LocalizationProvider');
+var DatePicker$1 = require('@mui/x-date-pickers/DatePicker');
 var TextField$1 = _interopDefault(require('@mui/material/TextField'));
+var AdapterMoment = require('@mui/x-date-pickers/AdapterMoment');
 var reCron = require('@sbzen/re-cron');
 var JSONInput = _interopDefault(require('react-json-editor-ajrm'));
 var locale = _interopDefault(require('react-json-editor-ajrm/locale/en'));
@@ -44,8 +44,6 @@ var ButtonGroup$1 = _interopDefault(require('@mui/material/ButtonGroup'));
 var Switch = _interopDefault(require('@mui/material/Switch'));
 var FormGroup = _interopDefault(require('@mui/material/FormGroup'));
 var Rating$1 = _interopDefault(require('@mui/material/Rating'));
-var DateRangePicker$1 = _interopDefault(require('@mui/lab/DateRangePicker'));
-var Box = _interopDefault(require('@mui/material/Box'));
 require('underscore');
 var AddAPhotoIcon = _interopDefault(require('@mui/icons-material/Add'));
 var IconButton = _interopDefault(require('@mui/material/IconButton'));
@@ -324,18 +322,19 @@ var InputPhoneNumber = (function (props) {
 var DatePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
-      _props$item = props.item,
-      params = _props$item.params;
-  return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
-    dateAdapter: dateAdapter
-  }, /*#__PURE__*/React__default.createElement(DatePicker$1, _extends({
+      params = props.item.params;
+  return /*#__PURE__*/React__default.createElement(LocalizationProvider.LocalizationProvider, {
+    dateAdapter: AdapterMoment.AdapterMoment
+  }, /*#__PURE__*/React__default.createElement(DatePicker$1.DatePicker, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
     value: value,
-    onChange: onValueChanged
+    onChange: function onChange(_v) {
+      onValueChanged(_v._d);
+    }
   }, params, {
-    renderInput: function renderInput(params) {
-      return /*#__PURE__*/React__default.createElement(TextField$1, params);
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React__default.createElement(TextField$1, _params);
     }
   })));
 });
@@ -673,25 +672,41 @@ var Rating = (function (props) {
 
 var DateRangePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
-      values = props.values,
-      _props$item = props.item,
-      id = _props$item.id,
-      params = _props$item.params;
-  return /*#__PURE__*/React__default.createElement(LocalizationProvider, {
-    dateAdapter: dateAdapter
-  }, /*#__PURE__*/React__default.createElement(DateRangePicker$1, _extends({
+      value = props.value,
+      params = props.item.params;
+  return /*#__PURE__*/React__default.createElement("div", {
+    className: "grid md:grid-flow-col"
+  }, /*#__PURE__*/React__default.createElement(LocalizationProvider.LocalizationProvider, {
+    dateAdapter: AdapterMoment.AdapterMoment
+  }, /*#__PURE__*/React__default.createElement(DatePicker$1.DatePicker, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
-    value: values[id] && Array.isArray(values[id]) ? values[id] : [null, null],
-    onChange: onValueChanged,
-    renderInput: function renderInput(startProps, endProps) {
-      return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, /*#__PURE__*/React__default.createElement(TextField$1, startProps), /*#__PURE__*/React__default.createElement(Box, {
-        sx: {
-          mx: 2
-        }
-      }, " to "), /*#__PURE__*/React__default.createElement(TextField$1, endProps));
+    label: 'From',
+    value: value && value.length ? value[0] : null,
+    onChange: function onChange(_v) {
+      onValueChanged([_v._d, value && value.length ? value[0] : null]);
     }
-  }, params)));
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React__default.createElement(TextField$1, _params);
+    }
+  }))), /*#__PURE__*/React__default.createElement("p", {
+    className: "flex items-center justify-center md:px-2"
+  }, "\u2192"), /*#__PURE__*/React__default.createElement(LocalizationProvider.LocalizationProvider, {
+    dateAdapter: AdapterMoment.AdapterMoment
+  }, /*#__PURE__*/React__default.createElement(DatePicker$1.DatePicker, _extends({
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    label: 'To',
+    value: value && value.length > 0 ? value[1] : null,
+    onChange: function onChange(_v) {
+      onValueChanged([value && value.length > 0 ? value[0] : null, _v._d]);
+    }
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React__default.createElement(TextField$1, _params);
+    }
+  }))));
 });
 
 var H1 = (function (props) {

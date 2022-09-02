@@ -4,10 +4,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox$1 from '@mui/material/Checkbox';
 import ReactFlagsSelect from 'react-flags-select';
 import PhoneInput from 'react-phone-number-input';
-import dateAdapter from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker$1 from '@mui/lab/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker as DatePicker$1 } from '@mui/x-date-pickers/DatePicker';
 import TextField$1 from '@mui/material/TextField';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { ReCron } from '@sbzen/re-cron';
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
@@ -22,8 +22,6 @@ import ButtonGroup$1 from '@mui/material/ButtonGroup';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import Rating$1 from '@mui/material/Rating';
-import DateRangePicker$1 from '@mui/lab/DateRangePicker';
-import Box from '@mui/material/Box';
 import 'underscore';
 import AddAPhotoIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
@@ -302,18 +300,19 @@ var InputPhoneNumber = (function (props) {
 var DatePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
-      _props$item = props.item,
-      params = _props$item.params;
+      params = props.item.params;
   return /*#__PURE__*/React.createElement(LocalizationProvider, {
-    dateAdapter: dateAdapter
+    dateAdapter: AdapterMoment
   }, /*#__PURE__*/React.createElement(DatePicker$1, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
     value: value,
-    onChange: onValueChanged
+    onChange: function onChange(_v) {
+      onValueChanged(_v._d);
+    }
   }, params, {
-    renderInput: function renderInput(params) {
-      return /*#__PURE__*/React.createElement(TextField$1, params);
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React.createElement(TextField$1, _params);
     }
   })));
 });
@@ -651,25 +650,41 @@ var Rating = (function (props) {
 
 var DateRangePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
-      values = props.values,
-      _props$item = props.item,
-      id = _props$item.id,
-      params = _props$item.params;
-  return /*#__PURE__*/React.createElement(LocalizationProvider, {
-    dateAdapter: dateAdapter
-  }, /*#__PURE__*/React.createElement(DateRangePicker$1, _extends({
+      value = props.value,
+      params = props.item.params;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "grid md:grid-flow-col"
+  }, /*#__PURE__*/React.createElement(LocalizationProvider, {
+    dateAdapter: AdapterMoment
+  }, /*#__PURE__*/React.createElement(DatePicker$1, _extends({
     disabled: props.disabled,
     readOnly: props.readOnly,
-    value: values[id] && Array.isArray(values[id]) ? values[id] : [null, null],
-    onChange: onValueChanged,
-    renderInput: function renderInput(startProps, endProps) {
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TextField$1, startProps), /*#__PURE__*/React.createElement(Box, {
-        sx: {
-          mx: 2
-        }
-      }, " to "), /*#__PURE__*/React.createElement(TextField$1, endProps));
+    label: 'From',
+    value: value && value.length ? value[0] : null,
+    onChange: function onChange(_v) {
+      onValueChanged([_v._d, value && value.length ? value[0] : null]);
     }
-  }, params)));
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React.createElement(TextField$1, _params);
+    }
+  }))), /*#__PURE__*/React.createElement("p", {
+    className: "flex items-center justify-center md:px-2"
+  }, "\u2192"), /*#__PURE__*/React.createElement(LocalizationProvider, {
+    dateAdapter: AdapterMoment
+  }, /*#__PURE__*/React.createElement(DatePicker$1, _extends({
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    label: 'To',
+    value: value && value.length > 0 ? value[1] : null,
+    onChange: function onChange(_v) {
+      onValueChanged([value && value.length > 0 ? value[0] : null, _v._d]);
+    }
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React.createElement(TextField$1, _params);
+    }
+  }))));
 });
 
 var H1 = (function (props) {

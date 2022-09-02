@@ -1,20 +1,21 @@
 import React from 'react'
-import dateAdapter from '@mui/lab/AdapterDateFns'
-import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import DatePicker from '@mui/lab/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import TextField from '@mui/material/TextField'
+import { AdapterMoment as dateAdapter } from '@mui/x-date-pickers/AdapterMoment'
 
 export default (props) => {
-  const { onValueChanged, value, item: { label, params } } = props
+  const { onValueChanged, value, item: { params } } = props
   return <LocalizationProvider dateAdapter={dateAdapter}>
     <DatePicker
       disabled={props.disabled}
       readOnly={props.readOnly}
-      ////label={label}
       value={value}
-      onChange={onValueChanged}
+      onChange={(_v) => {
+        onValueChanged(_v._d)
+      }}
       {...params}
-      renderInput={(params) => <TextField {...params} />}
+      renderInput={(_params) => <TextField {..._params} />}
     />
   </LocalizationProvider>
 }

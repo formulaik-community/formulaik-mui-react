@@ -1,6 +1,6 @@
 {
   "name": "@yelounak/formulaik-react-mui",
-  "version": "1.1.9",
+  "version": "1.2.2",
   "description": "Formulaik-mui react components library.",
   "author": "yelounak",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "@mui/styles": "^5.2.3",
     "@mui/x-data-grid": "^5.2.1",
     "@mui/x-data-grid-generator": "^5.2.1",
+    "@mui/x-date-pickers": "^5.0.0",
     "@sbzen/re-cron": "^1.0.6",
     "ace-builds": "^1.4.13",
     "cron-parser": "^4.2.0",
