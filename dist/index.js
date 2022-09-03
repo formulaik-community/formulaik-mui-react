@@ -60,6 +60,7 @@ var FilePreviewer = _interopDefault(require('react-file-previewer'));
 var HoverVideoPlayer = _interopDefault(require('react-hover-video-player'));
 var CurrencyTextField = _interopDefault(require('@unicef/material-ui-currency-textfield'));
 var numericStepper$1 = require('@anatoliygatt/numeric-stepper');
+var DateTimePicker = require('@mui/x-date-pickers/DateTimePicker');
 var Accordion = _interopDefault(require('@mui/material/Accordion'));
 var AccordionSummary = _interopDefault(require('@mui/material/AccordionSummary'));
 var AccordionDetails = _interopDefault(require('@mui/material/AccordionDetails'));
@@ -1257,6 +1258,26 @@ var numericStepper = (function (props) {
   })));
 });
 
+var dateTimePicker = (function (props) {
+  var onValueChanged = props.onValueChanged,
+      value = props.value,
+      params = props.item.params;
+  return /*#__PURE__*/React__default.createElement(LocalizationProvider.LocalizationProvider, {
+    dateAdapter: AdapterMoment.AdapterMoment
+  }, /*#__PURE__*/React__default.createElement(DateTimePicker.DateTimePicker, _extends({
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    value: value,
+    onChange: function onChange(_v) {
+      onValueChanged(_v._d);
+    }
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React__default.createElement(TextField$1, _params);
+    }
+  })));
+});
+
 var _containerVertical = (function (props) {
   var summary = props.summary,
       title = props.title,
@@ -1420,6 +1441,9 @@ var index = (function (props) {
 
     case 'submit':
       return Submit;
+
+    case 'dateTimePicker':
+      return dateTimePicker;
 
     case 'checkbox':
       return Checkbox;

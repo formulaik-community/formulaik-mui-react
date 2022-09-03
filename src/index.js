@@ -30,7 +30,7 @@ import Avatar from './avatar'
 import fileUpload from './fileUpload'
 import inputCurrency from './inputCurrency'
 import numericStepper from './numericStepper'
-
+import dateTimePicker from './dateTimePicker'
 import _containerVertical from './_containerVertical'
 import _containerHorizontal from './_containerHorizontal'
 import _buttonAdd from './_buttonAdd'
@@ -44,6 +44,8 @@ export default (props) => {
       return Select
     case 'submit':
       return Submit
+    case 'dateTimePicker':
+      return dateTimePicker
     case 'checkbox':
       return Checkbox
     case 'textArea':

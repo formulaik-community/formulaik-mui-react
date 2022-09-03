@@ -38,6 +38,7 @@ import FilePreviewer from 'react-file-previewer';
 import HoverVideoPlayer from 'react-hover-video-player';
 import CurrencyTextField from '@unicef/material-ui-currency-textfield';
 import { NumericStepper } from '@anatoliygatt/numeric-stepper';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -1235,6 +1236,26 @@ var numericStepper = (function (props) {
   })));
 });
 
+var dateTimePicker = (function (props) {
+  var onValueChanged = props.onValueChanged,
+      value = props.value,
+      params = props.item.params;
+  return /*#__PURE__*/React.createElement(LocalizationProvider, {
+    dateAdapter: AdapterMoment
+  }, /*#__PURE__*/React.createElement(DateTimePicker, _extends({
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    value: value,
+    onChange: function onChange(_v) {
+      onValueChanged(_v._d);
+    }
+  }, params, {
+    renderInput: function renderInput(_params) {
+      return /*#__PURE__*/React.createElement(TextField$1, _params);
+    }
+  })));
+});
+
 var _containerVertical = (function (props) {
   var summary = props.summary,
       title = props.title,
@@ -1398,6 +1419,9 @@ var index = (function (props) {
 
     case 'submit':
       return Submit;
+
+    case 'dateTimePicker':
+      return dateTimePicker;
 
     case 'checkbox':
       return Checkbox;
