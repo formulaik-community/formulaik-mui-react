@@ -1,4 +1,3 @@
-import React from 'react'
 import Button from '@mui/material/Button'
 
 export default (props) => {
@@ -8,8 +7,8 @@ export default (props) => {
   return <div className={`flex justify-center my-2`}>
     <Button
       variant="text"
+      color={'primary'}
       disabled={props.disabled}
-      readOnly={props.readOnly}
       onClick={onClick}>
       {label}
     </Button>

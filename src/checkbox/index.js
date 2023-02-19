@@ -6,7 +6,7 @@ export default (props) => {
   const { onValueChanged, value, item: { label, id, params } } = props
 
 
-  return <div className="px-4 py-2 card rounded-lg border-2 border-warmGray-400 ">
+  return <div className="">
     <FormControlLabel control={
       <Checkbox
         color="default"
@@ -18,8 +18,7 @@ export default (props) => {
           onValueChanged(checked)
         }}
       />}
-    //label={label}
-    />
-    {(params && params.subLabel) ? <small className="">{params.subLabel}</small> : null}
+      label={params.label ? params.label : label} />
+    {(params && params.subLabel) && <small className="">{params.subLabel}</small>}
   </div>
 }

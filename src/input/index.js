@@ -1,12 +1,33 @@
-import React, { useCallback, useEffect, useState, lazy, Suspense } from 'react'
-const TextField = lazy(() => import('@mui/material/TextField'))
+import React, { useCallback, useEffect, useState, } from 'react'
+import TextField from '@mui/material/TextField'
 import { useDebouncedCallback } from 'use-debounce'
 
 export default (props) => {
-  const { value, error, disabled, onValueChanged, field, item: { subType, label, params = {}, id } } = props
-  const { placeholder, inputDelay = 1000, className = '' } = params
+  const {
+    value,
+    error,
+    disabled,
+    onValueChanged,
+    field,
+    item: {
+      subType,
+      layoutMode = 'form',
+      label,
+      params = {},
+      id } } = props
 
+  const {
+    placeholder,
+    inputDelay = 1000,
+    className = '',
+    multiline = true,
+    inputPropsStyle = {},
+    inputLabelPropsStyle = {},
+    variant = "outlined" } = params
+
+  //const [innerValue, setInnerValue] = useState(value ? value : '')
   const [innerValue, setInnerValue] = useState(value ? value : '')
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
     setInnerValue(value ? value : '')
@@ -29,21 +50,43 @@ export default (props) => {
     console.log('textArea handleOnChange', value)
   }, [])
 
-  return <Suspense fallback={<div></div>}>
-    <div className={`w-full ${className}`}>
-      <TextField
-        ////label={label}
-        variant="outlined"
-        disabled={props.disabled}
-        value={innerValue}
-        placeholder={placeholder}
-        className={` ${error ? 'bg-red-50' : ''}`}
-        type={subType}
-        onChange={handleOnChange}
-        style={{
-          width: "100%",
-        }}
-        {...params} />
-    </div>
-  </Suspense>
+
+  const modeProps = () => {
+    switch (layoutMode) {
+      default:
+      case 'form': {
+        return {
+
+        }
+      }
+      case 'inline': {
+        return {
+          variant: "standard",
+        }
+      }
+    }
+  }
+
+  const onBlur = () => {
+    console.log('onblur')
+  }
+
+  return <TextField
+    //label={label}
+    variant={variant}
+    fullWidth
+    disabled={props.disabled}
+    inputProps={{ style: inputPropsStyle }}
+    InputLabelProps={{ style: inputLabelPropsStyle }}
+    value={innerValue}
+    multiline={multiline}
+    placeholder={placeholder}
+    className={`${error ? 'bg-red-50' : ''}`}
+    type={subType}
+    onBlur={onBlur}
+    // onFocus={() => setIsFocused(true)}
+    onChange={handleOnChange}
+    {...modeProps()}
+    {...params}
+  />
 }
