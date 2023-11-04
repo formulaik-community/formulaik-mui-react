@@ -1,6 +1,5 @@
 {
   "name": "@formulaik-community/formulaik-mui-react",
-  "type": "module",
   "source": "src/index.js",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -77,7 +76,7 @@
     "react": ">= 0.16.0 < 18.0.0",
     "underscore": "^1.13.1",
     "yup": "^0.32.11",
-    "@yelounak/formulaik-react": ">= 1.0.0 < 2.0.0",
+    "@formulaik-community/formulaik-engine-react": "*",
     "@loadable/component": "*"
   },
   "dependencies": {
