@@ -2,7 +2,8 @@
   "name": "@formulaik-community/formulaik-mui-react",
   "type": "module",
   "source": "src/index.js",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
   "version": "0.0.0-development",
   "description": "Formulaik React JS Engine",
   "author": "Formulaik Community",
@@ -12,8 +13,7 @@
   },
   "homepage": "https://github.com/formulaik-community/formulaik-mui-react#readme",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
