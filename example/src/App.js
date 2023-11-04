@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ExampleComponent } from 'formulaik-mui'
-import 'formulaik-mui/dist/index.css'
+import { ExampleComponent } from 'formulaik'
+import 'formulaik/dist/index.css'
 
 const App = () => {
   return <ExampleComponent text="Create React Library Example 😄" />
