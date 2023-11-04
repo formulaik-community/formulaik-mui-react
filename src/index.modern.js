@@ -1,8 +1,13 @@
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+function _interopDefault(ex) {
+  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
+}
 
 function _interopNamespace(e) {
-  if (e && e.__esModule) { return e; } else {
+  if (e && e.__esModule) {
+    return e;
+  } else {
     var n = {};
+
     if (e) {
       Object.keys(e).forEach(function (k) {
         var d = Object.getOwnPropertyDescriptor(e, k);
@@ -14,59 +19,108 @@ function _interopNamespace(e) {
         });
       });
     }
+
     n['default'] = e;
     return n;
   }
 }
 
 var React$1 = require('react');
+
 var React$1__default = _interopDefault(React$1);
+
 var TextField = _interopDefault(require('@mui/material/TextField'));
+
 var useDebounce = require('use-debounce');
+
 var FormControlLabel = _interopDefault(require('@mui/material/FormControlLabel'));
+
 var Checkbox$1 = _interopDefault(require('@mui/material/Checkbox'));
+
 var loadable = _interopDefault(require('@loadable/component'));
+
 var ReactFlagsSelect = _interopDefault(require('react-flags-select'));
+
 var PhoneInput = _interopDefault(require('react-phone-number-input'));
+
 var LocalizationProvider = require('@mui/x-date-pickers/LocalizationProvider');
+
 var DatePicker$1 = require('@mui/x-date-pickers/DatePicker');
+
 var AdapterMoment = require('@mui/x-date-pickers/AdapterMoment');
+
 var reCron = require('@sbzen/re-cron');
+
 var JSONInput = _interopDefault(require('react-json-editor-ajrm'));
+
 var locale = _interopDefault(require('react-json-editor-ajrm/locale/en'));
+
 var cronParser = _interopDefault(require('cron-parser'));
+
 require('next/image');
+
 var Autocomplete$1 = _interopDefault(require('@mui/material/Autocomplete'));
+
 var CircularProgress = _interopDefault(require('@mui/material/CircularProgress'));
+
 var Radio = _interopDefault(require('@mui/material/Radio'));
+
 var RadioGroup$1 = _interopDefault(require('@mui/material/RadioGroup'));
+
 var Button$1 = _interopDefault(require('@mui/material/Button'));
+
 var ButtonGroup$1 = _interopDefault(require('@mui/material/ButtonGroup'));
+
 var Switch = _interopDefault(require('@mui/material/Switch'));
+
 var FormGroup = _interopDefault(require('@mui/material/FormGroup'));
+
 var Rating$1 = _interopDefault(require('@mui/material/Rating'));
+
 require('underscore');
+
 var AddAPhotoIcon = _interopDefault(require('@mui/icons-material/Add'));
+
 var IconButton = _interopDefault(require('@mui/material/IconButton'));
+
 require('@mui/icons-material/Delete');
+
 require('@mui/material/Modal');
+
 var Avatar$2 = _interopDefault(require('@mui/material/Avatar'));
+
 require('@mui/material/colors');
+
 var styles = require('@mui/material/styles');
+
 var Badge = _interopDefault(require('@mui/material/Badge'));
+
 var reactDragDropFiles = require('react-drag-drop-files');
+
 var RemoveButton = _interopDefault(require('@mui/icons-material/DeleteOutline'));
+
 var EditOutlined = _interopDefault(require('@mui/icons-material/EditOutlined'));
+
 var FilePreviewer = _interopDefault(require('react-file-previewer'));
+
 var HoverVideoPlayer = _interopDefault(require('react-hover-video-player'));
+
 var CurrencyTextField = _interopDefault(require('@unicef/material-ui-currency-textfield'));
+
 var numericStepper$1 = require('@anatoliygatt/numeric-stepper');
+
 var DateTimePicker = require('@mui/x-date-pickers/DateTimePicker');
+
 var Accordion = _interopDefault(require('@mui/material/Accordion'));
+
 var AccordionSummary = _interopDefault(require('@mui/material/AccordionSummary'));
+
 var AccordionDetails = _interopDefault(require('@mui/material/AccordionDetails'));
+
 var ExpandMoreIcon = _interopDefault(require('@mui/icons-material/ExpandMore'));
+
 var styles$1 = require('@material-ui/core/styles');
+
 var reactFeather = require('react-feather');
 
 function _extends() {
@@ -87,7 +141,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-var Input = (function (props) {
+var Input = function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
@@ -170,12 +224,15 @@ var Input = (function (props) {
     onBlur: onBlur,
     onChange: handleOnChange
   }, modeProps(), params));
-});
+};
 
 var LoadingButton = React$1.lazy(function () {
-  return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/lab/LoadingButton'))); });
+  return new Promise(function (resolve) {
+    resolve(_interopNamespace(require('@mui/lab/LoadingButton')));
+  });
 });
-var Submit = (function (props) {
+
+var Submit = function (props) {
   var isSubmitting = props.isSubmitting,
       _props$item$params = props.item.params,
       params = _props$item$params === void 0 ? {} : _props$item$params;
@@ -205,9 +262,9 @@ var Submit = (function (props) {
     },
     size: size
   }, text)));
-});
+};
 
-var Checkbox = (function (props) {
+var Checkbox = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       _props$item = props.item,
@@ -231,18 +288,25 @@ var Checkbox = (function (props) {
   }), params && params.subLabel && /*#__PURE__*/React$1__default.createElement("small", {
     className: ""
   }, params.subLabel));
-});
+};
 
 var Select = React$1.lazy(function () {
-  return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/material/Select'))); });
+  return new Promise(function (resolve) {
+    resolve(_interopNamespace(require('@mui/material/Select')));
+  });
 });
 var MenuItem = React$1.lazy(function () {
-  return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/material/MenuItem'))); });
+  return new Promise(function (resolve) {
+    resolve(_interopNamespace(require('@mui/material/MenuItem')));
+  });
 });
 var FormControl = React$1.lazy(function () {
-  return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/material/FormControl'))); });
+  return new Promise(function (resolve) {
+    resolve(_interopNamespace(require('@mui/material/FormControl')));
+  });
 });
-var Select$1 = (function (props) {
+
+var Select$1 = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       error = props.error,
@@ -270,12 +334,15 @@ var Select$1 = (function (props) {
       value: option.value
     }, option.label);
   }))));
-});
+};
 
 var TextareaAutosize = loadable(function () {
-  return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/material/TextareaAutosize'))); });
+  return new Promise(function (resolve) {
+    resolve(_interopNamespace(require('@mui/material/TextareaAutosize')));
+  });
 });
-var TextArea = (function (props) {
+
+var TextArea = function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
@@ -358,9 +425,9 @@ var TextArea = (function (props) {
     placeholder: placeholder,
     className: "textarea\n    h-64\n    rounded-md\n    border-warmGray-200\n    border\n    w-full\n    focus:ring-pink-600\n    " + (error ? 'bg-red-100 border-red-600' : 'border-warmGray-400') + "\n    " + className + "\n    " + layoutModeClassName()
   }, layoutModeProps()));
-});
+};
 
-var SelectCountry = (function (props) {
+var SelectCountry = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       error = props.error,
@@ -374,9 +441,9 @@ var SelectCountry = (function (props) {
   }, params, {
     className: "  w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   }));
-});
+};
 
-var InputPhoneNumber = (function (props) {
+var InputPhoneNumber = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       error = props.error,
@@ -392,9 +459,9 @@ var InputPhoneNumber = (function (props) {
   }, params, {
     className: "w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
   })));
-});
+};
 
-var DatePicker = (function (props) {
+var DatePicker = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       params = props.item.params;
@@ -412,7 +479,7 @@ var DatePicker = (function (props) {
       return /*#__PURE__*/React$1__default.createElement(TextField, _params);
     }
   })));
-});
+};
 
 var Editor = function Editor(props) {
   if (typeof window === 'undefined') {
@@ -444,7 +511,7 @@ var Editor = function Editor(props) {
   return /*#__PURE__*/React$1__default.createElement(AceEditor, props);
 };
 
-var AceEditor = (function (props) {
+var AceEditor = function (props) {
   var values = props.values,
       onValueChanged = props.onValueChanged,
       errors = props.errors,
@@ -472,9 +539,9 @@ var AceEditor = (function (props) {
     showGutter: true,
     className: "textarea w-full textarea-bordered bg-gray-50 " + (errors[id] ? 'bg-red-100 border-red-600' : '')
   }, params));
-});
+};
 
-var CronGenerator = (function (props) {
+var CronGenerator = function (props) {
   var values = props.values,
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
@@ -483,9 +550,9 @@ var CronGenerator = (function (props) {
     value: values[id],
     onChange: onValueChanged
   }));
-});
+};
 
-var JSONEditor = (function (props) {
+var JSONEditor = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       error = props.error,
@@ -504,9 +571,9 @@ var JSONEditor = (function (props) {
     height: "550px",
     className: " " + (error ? 'bg-red-100 border-red-600' : '')
   }, params));
-});
+};
 
-var CronEditor = (function (props) {
+var CronEditor = function (props) {
   var values = props.values,
       onValueChanged = props.onValueChanged,
       field = props.field,
@@ -542,9 +609,9 @@ var CronEditor = (function (props) {
   }, /*#__PURE__*/React$1__default.createElement("ul", null, iterations().map(function (i) {
     return /*#__PURE__*/React$1__default.createElement("li", null, i);
   }))));
-});
+};
 
-var Autocomplete = (function (props) {
+var Autocomplete = function (props) {
   var initialValues = props.initialValues,
       onValueChanged = props.onValueChanged,
       field = props.field,
@@ -627,9 +694,9 @@ var Autocomplete = (function (props) {
       }));
     }
   }));
-});
+};
 
-var RadioGroup = (function (props) {
+var RadioGroup = function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
@@ -657,23 +724,23 @@ var RadioGroup = (function (props) {
       control: /*#__PURE__*/React$1__default.createElement(Radio, null)
     });
   }));
-});
+};
 
-var Html = (function (props) {
+var Html = function (props) {
   var _props$item = props.item,
       params = _props$item.params;
   return /*#__PURE__*/React$1__default.createElement("div", null, params.content);
-});
+};
 
-var Divider = (function (props) {
+var Divider = function (props) {
   var _props$item = props.item,
       params = _props$item.params;
   return /*#__PURE__*/React$1__default.createElement("div", {
     className: "divider " + (params.vertical ? 'divider-vertical' : '') + " "
   }, params.content);
-});
+};
 
-var Button = (function (props) {
+var Button = function (props) {
   var _props$item = props.item,
       label = _props$item.label,
       params = _props$item.params;
@@ -686,9 +753,9 @@ var Button = (function (props) {
     disabled: props.disabled,
     onClick: onClick
   }, label));
-});
+};
 
-var ButtonGroup = (function (props) {
+var ButtonGroup = function (props) {
   var _props$item = props.item,
       id = _props$item.id,
       params = _props$item.params;
@@ -707,9 +774,9 @@ var ButtonGroup = (function (props) {
   }, options.map(function (option) {
     return /*#__PURE__*/React$1__default.createElement(Button$1, null, option.value);
   }));
-});
+};
 
-var SwitchControl = (function (props) {
+var SwitchControl = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       _props$item = props.item,
@@ -726,9 +793,9 @@ var SwitchControl = (function (props) {
       }
     })
   }, params)));
-});
+};
 
-var Rating = (function (props) {
+var Rating = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
@@ -743,9 +810,9 @@ var Rating = (function (props) {
       onValueChanged(newValue);
     }
   }, params));
-});
+};
 
-var DateRangePicker = (function (props) {
+var DateRangePicker = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       params = props.item.params;
@@ -782,29 +849,29 @@ var DateRangePicker = (function (props) {
       return /*#__PURE__*/React$1__default.createElement(TextField, _params);
     }
   }))));
-});
+};
 
-var H1 = (function (props) {
+var H1 = function (props) {
   var params = props.item.params;
   return /*#__PURE__*/React$1__default.createElement("h1", null, params.content);
-});
+};
 
-var H2 = (function (props) {
+var H2 = function (props) {
   var params = props.item.params;
   return /*#__PURE__*/React$1__default.createElement("h2", null, params.content);
-});
+};
 
-var H3 = (function (props) {
+var H3 = function (props) {
   var params = props.item.params;
   return /*#__PURE__*/React$1__default.createElement("h3", null, params.content);
-});
+};
 
-var H4 = (function (props) {
+var H4 = function (props) {
   var params = props.item.params;
   return /*#__PURE__*/React$1__default.createElement("h4", null, params.content);
-});
+};
 
-var VisualSelect = (function (props) {
+var VisualSelect = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
@@ -886,9 +953,9 @@ var VisualSelect = (function (props) {
   return /*#__PURE__*/React$1__default.createElement("ul", {
     className: "grid-cols-" + cols + " grid gap-x-6 gap-y-6 py-0"
   }, items && items.length > 0 && items.map(renderItem));
-});
+};
 
-var Add = (function (props) {
+var Add = function (props) {
   return /*#__PURE__*/React$1__default.createElement("div", {
     className: "items-center flex overflow-hidden relative"
   }, /*#__PURE__*/React$1__default.createElement("div", {
@@ -897,9 +964,9 @@ var Add = (function (props) {
     fontSize: 'large',
     color: '#858585'
   })));
-});
+};
 
-var Shell = (function (props) {
+var Shell = function (props) {
   var badge = props.badge,
       children = props.children;
 
@@ -915,7 +982,8 @@ var Shell = (function (props) {
     },
     variant: "dot"
   }, children);
-});
+};
+
 var StyledBadge = styles.styled(Badge)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -948,7 +1016,7 @@ var StyledBadge = styles.styled(Badge)(function (_ref) {
   };
 });
 
-var Avatar = (function (props) {
+var Avatar = function (props) {
   var _props$initials2;
 
   var _props$badge = props.badge,
@@ -963,9 +1031,9 @@ var Avatar = (function (props) {
     },
     src: props.src
   }, (_props$initials2 = props.initials) != null ? _props$initials2 : props.initials));
-});
+};
 
-var Preview = (function (props) {
+var Preview = function (props) {
   var size = props.size,
       data = props.data;
   return /*#__PURE__*/React$1__default.createElement("div", {
@@ -975,10 +1043,11 @@ var Preview = (function (props) {
     badge: false,
     src: data.file ? URL.createObjectURL(data.file) : data.url
   }));
-});
+};
 
 var fileTypes = ["JPG", "JPEG", "WEBP", "PNG", "GIF"];
-var FileUploader = (function (props) {
+
+var FileUploader = function (props) {
   var onFileChanged = props.onFileChanged,
       _props$maxFileSize = props.maxFileSize,
       maxFileSize = _props$maxFileSize === void 0 ? 10 : _props$maxFileSize;
@@ -991,9 +1060,9 @@ var FileUploader = (function (props) {
     name: "file",
     types: fileTypes
   });
-});
+};
 
-var Avatar$1 = (function (props) {
+var Avatar$1 = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       _props$item$params = props.item.params,
@@ -1077,9 +1146,9 @@ var Avatar$1 = (function (props) {
       }
     }
   }, /*#__PURE__*/React$1__default.createElement(EditOutlined, null)) : null) : null);
-});
+};
 
-var Add$1 = (function (props) {
+var Add$1 = function (props) {
   return /*#__PURE__*/React$1__default.createElement("div", {
     className: "items-center flex overflow-hidden relative"
   }, /*#__PURE__*/React$1__default.createElement("div", {
@@ -1088,9 +1157,9 @@ var Add$1 = (function (props) {
     fontSize: 'large',
     color: '#858585'
   })));
-});
+};
 
-var Preview$1 = (function (props) {
+var Preview$1 = function (props) {
   var data = props.data;
   var isLocal = data.file;
   var url = isLocal ? URL.createObjectURL(data.file) : data.url;
@@ -1142,9 +1211,9 @@ var Preview$1 = (function (props) {
   return /*#__PURE__*/React$1__default.createElement("div", {
     className: " w-full  h-full  items-center  flex  justify-center   transform group-hover:scale-[1.005] transition-all duration-200 ease-in-out "
   }, render());
-});
+};
 
-var FileUploader$1 = (function (props) {
+var FileUploader$1 = function (props) {
   var _props$fileTypes = props.fileTypes,
       fileTypes = _props$fileTypes === void 0 ? ["JPG", "JPEG", "WEBP", "PNG", "GIF"] : _props$fileTypes,
       onFileChanged = props.onFileChanged,
@@ -1159,9 +1228,9 @@ var FileUploader$1 = (function (props) {
     name: "file",
     types: fileTypes
   });
-});
+};
 
-var fileUpload = (function (props) {
+var fileUpload = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       _props$item$params = props.item.params,
@@ -1241,9 +1310,9 @@ var fileUpload = (function (props) {
       e.stopPropagation();
     }
   }, /*#__PURE__*/React$1__default.createElement(EditOutlined, null)) : null) : null);
-});
+};
 
-var inputCurrency = (function (props) {
+var inputCurrency = function (props) {
   var value = props.value,
       error = props.error,
       onValueChanged = props.onValueChanged,
@@ -1290,9 +1359,9 @@ var inputCurrency = (function (props) {
     type: subType,
     onChange: handleOnChange
   }, params)));
-});
+};
 
-var numericStepper = (function (props) {
+var numericStepper = function (props) {
   var value = props.value,
       onValueChanged = props.onValueChanged,
       params = props.item.params;
@@ -1330,9 +1399,9 @@ var numericStepper = (function (props) {
     disabled: props.disabled,
     readOnly: props.readOnly ? props.readOnly : false
   })));
-});
+};
 
-var dateTimePicker = (function (props) {
+var dateTimePicker = function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
       params = props.item.params;
@@ -1350,7 +1419,7 @@ var dateTimePicker = (function (props) {
       return /*#__PURE__*/React$1__default.createElement(TextField, _params);
     }
   })));
-});
+};
 
 var useStyles = styles$1.makeStyles(function (theme) {
   return {
@@ -1359,7 +1428,8 @@ var useStyles = styles$1.makeStyles(function (theme) {
     }
   };
 });
-var _containerVertical = (function (props) {
+
+var _containerVertical = function (props) {
   var summary = props.summary,
       title = props.title,
       children = props.children,
@@ -1458,9 +1528,9 @@ var _containerVertical = (function (props) {
   })))))), /*#__PURE__*/React$1__default.createElement(AccordionDetails, {
     className: ""
   }, children)));
-});
+};
 
-var _containerHorizontal = (function (props) {
+var _containerHorizontal = function (props) {
   var summary = props.summary,
       children = props.children,
       onMoveDownRequired = props.onMoveDownRequired,
@@ -1520,9 +1590,9 @@ var _containerHorizontal = (function (props) {
   })))), /*#__PURE__*/React$1__default.createElement("div", {
     className: "px-1"
   }, children));
-});
+};
 
-var _buttonAdd = (function (_ref) {
+var _buttonAdd = function (_ref) {
   var onAdd = _ref.onAdd,
       title = _ref.title,
       disabled = _ref.disabled;
@@ -1533,9 +1603,9 @@ var _buttonAdd = (function (_ref) {
     onClick: onAdd,
     disabled: disabled
   }, title ? title : "Add"));
-});
+};
 
-var index = (function (props) {
+var index = function (props) {
   var type = props.type;
 
   switch (type) {
@@ -1644,7 +1714,7 @@ var index = (function (props) {
     default:
       return null;
   }
-});
+};
 
 module.exports = index;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.modern.js.map
