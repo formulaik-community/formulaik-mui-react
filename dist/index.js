@@ -23,19 +23,13 @@ var React$1 = require('react');
 var React$1__default = _interopDefault(React$1);
 var TextField = _interopDefault(require('@mui/material/TextField'));
 var useDebounce = require('use-debounce');
+var loadable = _interopDefault(require('@loadable/component'));
+var tailwindMerge = require('tailwind-merge');
 var FormControlLabel = _interopDefault(require('@mui/material/FormControlLabel'));
 var Checkbox$1 = _interopDefault(require('@mui/material/Checkbox'));
-var loadable = _interopDefault(require('@loadable/component'));
-var ReactFlagsSelect = _interopDefault(require('react-flags-select'));
-var PhoneInput = _interopDefault(require('react-phone-number-input'));
 var LocalizationProvider = require('@mui/x-date-pickers/LocalizationProvider');
 var DatePicker$1 = require('@mui/x-date-pickers/DatePicker');
 var AdapterMoment = require('@mui/x-date-pickers/AdapterMoment');
-var reCron = require('@sbzen/re-cron');
-var JSONInput = _interopDefault(require('react-json-editor-ajrm'));
-var locale = _interopDefault(require('react-json-editor-ajrm/locale/en'));
-var cronParser = _interopDefault(require('cron-parser'));
-require('next/image');
 var Autocomplete$1 = _interopDefault(require('@mui/material/Autocomplete'));
 var CircularProgress = _interopDefault(require('@mui/material/CircularProgress'));
 var Radio = _interopDefault(require('@mui/material/Radio'));
@@ -59,8 +53,6 @@ var RemoveButton = _interopDefault(require('@mui/icons-material/DeleteOutline'))
 var EditOutlined = _interopDefault(require('@mui/icons-material/EditOutlined'));
 var FilePreviewer = _interopDefault(require('react-file-previewer'));
 var HoverVideoPlayer = _interopDefault(require('react-hover-video-player'));
-var CurrencyTextField = _interopDefault(require('@unicef/material-ui-currency-textfield'));
-var numericStepper$1 = require('@anatoliygatt/numeric-stepper');
 var DateTimePicker = require('@mui/x-date-pickers/DateTimePicker');
 var Accordion = _interopDefault(require('@mui/material/Accordion'));
 var AccordionSummary = _interopDefault(require('@mui/material/AccordionSummary'));
@@ -92,16 +84,16 @@ var Input = (function (props) {
       error = props.error,
       onValueChanged = props.onValueChanged,
       _props$item = props.item,
-      subType = _props$item.subType,
       _props$item$layoutMod = _props$item.layoutMode,
       layoutMode = _props$item$layoutMod === void 0 ? 'form' : _props$item$layoutMod,
       _props$item$params = _props$item.params,
       params = _props$item$params === void 0 ? {} : _props$item$params;
-  var placeholder = params.placeholder,
-      _params$inputDelay = params.inputDelay,
+  var _params$inputDelay = params.inputDelay,
       inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay,
+      _params$className = params.className,
+      className = _params$className === void 0 ? '' : _params$className,
       _params$multiline = params.multiline,
-      multiline = _params$multiline === void 0 ? true : _params$multiline,
+      multiline = _params$multiline === void 0 ? false : _params$multiline,
       _params$inputPropsSty = params.inputPropsStyle,
       inputPropsStyle = _params$inputPropsSty === void 0 ? {} : _params$inputPropsSty,
       _params$inputLabelPro = params.inputLabelPropsStyle,
@@ -113,25 +105,21 @@ var Input = (function (props) {
       innerValue = _useState[0],
       setInnerValue = _useState[1];
 
-  var _useState2 = React$1.useState(false);
-
   React$1.useEffect(function () {
     setInnerValue(value ? value : '');
   }, [value]);
   var debouncedHandleOnChange = useDebounce.useDebouncedCallback(function (event) {
     var value = event.target.value;
     onValueChanged(value);
-    console.log('textArea debouncedHandleOnChange', value);
   }, inputDelay);
   var handleOnChange = React$1.useCallback(function (event) {
     event.persist();
     var newValue = event.target.value;
     setInnerValue(newValue);
     debouncedHandleOnChange(event);
-    console.log('textArea handleOnChange', value);
   }, []);
 
-  var modeProps = function modeProps() {
+  var layoutModeProps = function layoutModeProps() {
     switch (layoutMode) {
       default:
       case 'form':
@@ -148,31 +136,42 @@ var Input = (function (props) {
     }
   };
 
-  var onBlur = function onBlur() {
-    console.log('onblur');
+  var layoutModeClassName = function layoutModeClassName() {
+    switch (layoutMode) {
+      default:
+      case 'form':
+        {
+          return "\n          ";
+        }
+
+      case 'inline':
+        {
+          return "\n            ";
+        }
+    }
   };
 
-  return /*#__PURE__*/React$1__default.createElement(TextField, _extends({
+  var onBlur = function onBlur() {};
+
+  return /*#__PURE__*/React.createElement(TextField, _extends({
     variant: variant,
     fullWidth: true,
     disabled: props.disabled,
-    inputProps: {
-      style: inputPropsStyle
+    InputProps: {
+      style: _extends({}, inputPropsStyle)
     },
     InputLabelProps: {
       style: inputLabelPropsStyle
     },
     value: innerValue,
     multiline: multiline,
-    placeholder: placeholder,
-    className: "" + (error ? 'bg-red-50' : ''),
-    type: subType,
+    className: "transition-all\n      ease-in-out\n      duration-1000\n      " + (error ? 'bg-red-50' : '') + "\n    " + className + "\n    " + layoutModeClassName(),
     onBlur: onBlur,
     onChange: handleOnChange
-  }, modeProps(), params));
+  }, layoutModeProps(), params));
 });
 
-var LoadingButton = React$1.lazy(function () {
+var LoadingButton = loadable(function () {
   return new Promise(function (resolve) { resolve(_interopNamespace(require('@mui/lab/LoadingButton'))); });
 });
 var Submit = (function (props) {
@@ -187,24 +186,22 @@ var Submit = (function (props) {
       size = _params$size === void 0 ? 'large' : _params$size,
       _params$className = params.className,
       className = _params$className === void 0 ? '' : _params$className;
-  return /*#__PURE__*/React$1__default.createElement("div", {
-    className: "flex mb-4 mt-12 " + className
-  }, /*#__PURE__*/React$1__default.createElement(React$1.Suspense, {
-    fallback: /*#__PURE__*/React$1__default.createElement("div", null)
-  }, /*#__PURE__*/React$1__default.createElement(LoadingButton, {
+  return /*#__PURE__*/React.createElement(MPView, {
+    className: tailwindMerge.twMerge('mb-4 mt-12', className)
+  }, /*#__PURE__*/React.createElement(LoadingButton, {
     loading: isSubmitting,
     disabled: props.disabled,
     variant: variant,
     onClick: props.submitForm,
     style: {
-      paddingLeft: 50,
-      paddingRight: 50,
-      paddingTop: 20,
-      paddingBottom: 20,
+      paddingLeft: 30,
+      paddingRight: 30,
+      paddingTop: 10,
+      paddingBottom: 10,
       minWidth: 50
     },
     size: size
-  }, text)));
+  }, text));
 });
 
 var Checkbox = (function (props) {
@@ -360,40 +357,6 @@ var TextArea = (function (props) {
   }, layoutModeProps()));
 });
 
-var SelectCountry = (function (props) {
-  var onValueChanged = props.onValueChanged,
-      value = props.value,
-      error = props.error,
-      _props$item = props.item,
-      params = _props$item.params;
-  return /*#__PURE__*/React$1__default.createElement(ReactFlagsSelect, _extends({
-    disabled: props.disabled,
-    readOnly: props.readOnly,
-    selected: value,
-    onSelect: onValueChanged
-  }, params, {
-    className: "  w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
-  }));
-});
-
-var InputPhoneNumber = (function (props) {
-  var onValueChanged = props.onValueChanged,
-      value = props.value,
-      error = props.error,
-      params = props.item.params;
-  return /*#__PURE__*/React$1__default.createElement("div", {
-    className: "border-2 border-warmGray-300 rounded-md px-4 py-4"
-  }, /*#__PURE__*/React$1__default.createElement(PhoneInput, _extends({
-    disabled: props.disabled,
-    readOnly: props.readOnly,
-    placeholder: "Enter phone number",
-    value: value,
-    onChange: onValueChanged
-  }, params, {
-    className: "w-full focus:ring-primary  " + (error ? 'bg-red-100 select-error' : '')
-  })));
-});
-
 var DatePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
@@ -412,136 +375,6 @@ var DatePicker = (function (props) {
       return /*#__PURE__*/React$1__default.createElement(TextField, _params);
     }
   })));
-});
-
-var Editor = function Editor(props) {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  var AceEditor = require('react-ace')["default"];
-
-  var _props$mode = props.mode,
-      mode = _props$mode === void 0 ? 'jade' : _props$mode;
-
-  require('ace-builds/src-noconflict/ext-language_tools');
-
-  require('ace-builds/src-noconflict/theme-github');
-
-  switch (mode) {
-    default:
-    case 'jade':
-      require('ace-builds/src-noconflict/mode-jade');
-
-      break;
-
-    case 'json':
-      require('ace-builds/src-noconflict/mode-json');
-
-      break;
-  }
-
-  return /*#__PURE__*/React$1__default.createElement(AceEditor, props);
-};
-
-var AceEditor = (function (props) {
-  var values = props.values,
-      onValueChanged = props.onValueChanged,
-      errors = props.errors,
-      _props$item = props.item,
-      id = _props$item.id,
-      params = _props$item.params;
-  return /*#__PURE__*/React$1__default.createElement(Editor, _extends({
-    value: values[id],
-    mode: "jade",
-    theme: "github",
-    onChange: onValueChanged,
-    name: "UNIQUE_ID_OF_DIV",
-    editorProps: {
-      $blockScrolling: true
-    },
-    setOptions: _extends({
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true,
-      enableSnippets: true
-    }, params.options),
-    width: '100%',
-    fontSize: 14,
-    wrapEnabled: true,
-    showPrintMargin: false,
-    showGutter: true,
-    className: "textarea w-full textarea-bordered bg-gray-50 " + (errors[id] ? 'bg-red-100 border-red-600' : '')
-  }, params));
-});
-
-var CronGenerator = (function (props) {
-  var values = props.values,
-      onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      id = _props$item.id;
-  return /*#__PURE__*/React$1__default.createElement("div", null, /*#__PURE__*/React$1__default.createElement(reCron.ReCron, {
-    value: values[id],
-    onChange: onValueChanged
-  }));
-});
-
-var JSONEditor = (function (props) {
-  var value = props.value,
-      onValueChanged = props.onValueChanged,
-      error = props.error,
-      _props$item = props.item,
-      params = _props$item.params;
-  return /*#__PURE__*/React$1__default.createElement(JSONInput, _extends({
-    id: "a_unique_id",
-    disabled: props.disabled,
-    readOnly: props.readOnly,
-    placeholder: value,
-    onChange: function onChange(val) {
-      var json = val.json;
-      onValueChanged(json);
-    },
-    locale: locale,
-    height: "550px",
-    className: " " + (error ? 'bg-red-100 border-red-600' : '')
-  }, params));
-});
-
-var CronEditor = (function (props) {
-  var values = props.values,
-      onValueChanged = props.onValueChanged,
-      field = props.field,
-      errors = props.errors,
-      _props$item = props.item,
-      subType = _props$item.subType,
-      id = _props$item.id;
-
-  var iterations = function iterations() {
-    try {
-      var interval = cronParser.parseExpression(values[id]);
-      return [interval.next().toString(), interval.next().toString(), interval.next().toString(), interval.next().toString()];
-    } catch (err) {
-      console.log('Error: ' + err.message);
-    }
-
-    return [];
-  };
-
-  return /*#__PURE__*/React$1__default.createElement("div", null, /*#__PURE__*/React$1__default.createElement(TextField, _extends({
-    disabled: props.disabled,
-    readOnly: props.readOnly,
-    variant: "outlined"
-  }, field, {
-    className: "" + (errors[id] ? 'bg-red-100' : ''),
-    type: subType,
-    onChange: function onChange(_ref) {
-      var value = _ref.target.value;
-      return onValueChanged(value);
-    }
-  })), /*#__PURE__*/React$1__default.createElement("p", {
-    className: "text-xs mt-6 text-warmGray-500"
-  }, /*#__PURE__*/React$1__default.createElement("ul", null, iterations().map(function (i) {
-    return /*#__PURE__*/React$1__default.createElement("li", null, i);
-  }))));
 });
 
 var Autocomplete = (function (props) {
@@ -802,90 +635,6 @@ var H3 = (function (props) {
 var H4 = (function (props) {
   var params = props.item.params;
   return /*#__PURE__*/React$1__default.createElement("h4", null, params.content);
-});
-
-var VisualSelect = (function (props) {
-  var value = props.value,
-      onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      _props$item$params = _props$item.params,
-      params = _props$item$params === void 0 ? {} : _props$item$params;
-
-  var _useState = React$1.useState(value ? value.filter(function (a) {
-    return a;
-  }) : []),
-      selectedItems = _useState[0],
-      setSelectedItems = _useState[1];
-
-  var items = params.items,
-      _params$cols = params.cols,
-      cols = _params$cols === void 0 ? 1 : _params$cols,
-      maxSelectionAllowed = params.maxSelectionAllowed,
-      _params$itemHeight = params.itemHeight,
-      itemHeight = _params$itemHeight === void 0 ? 'h-72' : _params$itemHeight,
-      ContentComponent = params.ContentComponent,
-      _params$highlightColo = params.highlightColor,
-      highlightColor = _params$highlightColo === void 0 ? 'pink-600' : _params$highlightColo,
-      _params$borderColor = params.borderColor,
-      borderColor = _params$borderColor === void 0 ? 'warmGray-100' : _params$borderColor,
-      _params$useLatestSele = params.useLatestSelection,
-      useLatestSelection = _params$useLatestSele === void 0 ? false : _params$useLatestSele;
-
-  var onClickItem = function onClickItem(e, item) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (props.disabled || params.disabled) {
-      return;
-    }
-
-    var id = item.id;
-    var isSelected = selectedItems.includes(id);
-    var newSelectedItems;
-
-    if (isSelected) {
-      newSelectedItems = selectedItems.filter(function (a) {
-        return a !== id;
-      });
-    } else {
-      if (useLatestSelection) {
-        newSelectedItems = [].concat(selectedItems, [id]);
-
-        if (newSelectedItems.length > maxSelectionAllowed) {
-          newSelectedItems.splice(0, 1);
-        }
-      } else {
-        newSelectedItems = selectedItems.length < maxSelectionAllowed ? [].concat(selectedItems, [id]) : [].concat(selectedItems);
-      }
-    }
-
-    setSelectedItems(newSelectedItems);
-    onValueChanged && onValueChanged(newSelectedItems);
-  };
-
-  var renderThumbnail = function renderThumbnail(item) {
-    var isSelected = selectedItems.includes(item.id);
-    return /*#__PURE__*/React$1__default.createElement("div", {
-      onClick: function onClick(e) {
-        return onClickItem(e, item);
-      },
-      className: "\n        w-full\n        cursor-pointer\n        rounded-2xl\n        overflow-hidden\n        group\n        relative\n        transform\n        transition\n        duration-200\n        ease-in-out\n        " + itemHeight + "\n        " + (isSelected ? 'border-4' : 'border-4') + "\n        " + (isSelected ? 'opacity-100' : 'opacity-70 hover:opacity-80') + "\n        " + (isSelected ? 'scale-[1.01]' : 'hover:scale-[1.01]') + "\n        " + (isSelected ? "border-" + highlightColor : "border-" + borderColor + " hover:border-" + highlightColor) + "\n        "
-    }, /*#__PURE__*/React$1__default.createElement("div", {
-      className: "\n        absolute\n        left-1\n        right-1\n        bottom-1\n        top-1\n        flex\n        rounded-xl\n        overflow-hidden\n        justify-center\n        group-hover:flex\n        group-hover:bg-opacity-100\n    "
-    }, /*#__PURE__*/React$1__default.createElement(ContentComponent, {
-      item: item
-    })));
-  };
-
-  var renderItem = function renderItem(item, index) {
-    return /*#__PURE__*/React$1__default.createElement("li", {
-      className: "w-full"
-    }, " ", renderThumbnail(item));
-  };
-
-  return /*#__PURE__*/React$1__default.createElement("ul", {
-    className: "grid-cols-" + cols + " grid gap-x-6 gap-y-6 py-0"
-  }, items && items.length > 0 && items.map(renderItem));
 });
 
 var Add = (function (props) {
@@ -1243,95 +992,6 @@ var fileUpload = (function (props) {
   }, /*#__PURE__*/React$1__default.createElement(EditOutlined, null)) : null) : null);
 });
 
-var inputCurrency = (function (props) {
-  var value = props.value,
-      error = props.error,
-      onValueChanged = props.onValueChanged,
-      _props$item = props.item,
-      subType = _props$item.subType,
-      _props$item$params = _props$item.params,
-      params = _props$item$params === void 0 ? {} : _props$item$params;
-  var placeholder = params.placeholder,
-      _params$inputDelay = params.inputDelay,
-      inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay,
-      _params$className = params.className,
-      className = _params$className === void 0 ? '' : _params$className;
-
-  var _useState = React$1.useState(value ? value : ''),
-      innerValue = _useState[0],
-      setInnerValue = _useState[1];
-
-  React$1.useEffect(function () {
-    setInnerValue(value ? value : '');
-  }, [value]);
-  var debouncedHandleOnChange = useDebounce.useDebouncedCallback(function (event) {
-    var value = event.target.value;
-    onValueChanged(value);
-    console.log('textArea debouncedHandleOnChange', value);
-  }, inputDelay);
-  var handleOnChange = React$1.useCallback(function (event) {
-    event.persist();
-    var newValue = event.target.value;
-    setInnerValue(newValue);
-    debouncedHandleOnChange(event);
-    console.log('textArea handleOnChange', value);
-  }, []);
-  return /*#__PURE__*/React$1__default.createElement("div", {
-    className: "w-full " + className
-  }, /*#__PURE__*/React$1__default.createElement(CurrencyTextField, _extends({
-    variant: "outlined",
-    disabled: props.disabled,
-    readOnly: props.readOnly ? props.readOnly : false,
-    value: innerValue,
-    placeholder: placeholder,
-    currencySymbol: "$",
-    outputFormat: "number",
-    className: "w-full " + (error ? 'bg-red-100' : ''),
-    type: subType,
-    onChange: handleOnChange
-  }, params)));
-});
-
-var numericStepper = (function (props) {
-  var value = props.value,
-      onValueChanged = props.onValueChanged,
-      params = props.item.params;
-  var _params$minimumValue = params.minimumValue,
-      minimumValue = _params$minimumValue === void 0 ? 0 : _params$minimumValue,
-      _params$maximumValue = params.maximumValue,
-      maximumValue = _params$maximumValue === void 0 ? Number.MAX_SAFE_INTEGER : _params$maximumValue,
-      _params$stepValue = params.stepValue,
-      stepValue = _params$stepValue === void 0 ? 1 : _params$stepValue,
-      _params$size = params.size,
-      size = _params$size === void 0 ? "sm" : _params$size,
-      _params$theme = params.theme,
-      theme = _params$theme === void 0 ? {
-    inactiveTrackColor: "#fed7aa",
-    activeTrackColor: "#fddec0",
-    activeButtonColor: "#ffedd5",
-    inactiveIconColor: "#fb923c",
-    hoverIconColor: "#ea580c",
-    activeIconColor: "#9a3412",
-    disabledIconColor: "#fdba74",
-    thumbColor: "#f97316",
-    thumbShadowAnimationOnTrackHoverEnabled: false,
-    focusRingColor: "#fff7ed"
-  } : _params$theme;
-  return /*#__PURE__*/React$1__default.createElement("div", {
-    className: "py-2"
-  }, /*#__PURE__*/React$1__default.createElement(numericStepper$1.NumericStepper, _extends({
-    minimumValue: minimumValue,
-    maximumValue: maximumValue,
-    stepValue: stepValue,
-    initialValue: value,
-    size: size
-  }, theme, {
-    onChange: onValueChanged,
-    disabled: props.disabled,
-    readOnly: props.readOnly ? props.readOnly : false
-  })));
-});
-
 var dateTimePicker = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
@@ -1557,29 +1217,11 @@ var index = (function (props) {
     case 'textArea':
       return TextArea;
 
-    case 'selectCountry':
-      return SelectCountry;
-
-    case 'inputPhoneNumber':
-      return InputPhoneNumber;
-
     case 'dateRangePicker':
       return DateRangePicker;
 
     case 'datePicker':
       return DatePicker;
-
-    case 'aceEditor':
-      return AceEditor;
-
-    case 'cronGenerator':
-      return CronGenerator;
-
-    case 'JSONEditor':
-      return JSONEditor;
-
-    case 'cronEditor':
-      return CronEditor;
 
     case 'autocomplete':
       return Autocomplete;
@@ -1617,9 +1259,6 @@ var index = (function (props) {
     case 'h4':
       return H4;
 
-    case 'visualSelect':
-      return VisualSelect;
-
     case 'avatar':
       return Avatar$1;
 
@@ -1634,12 +1273,6 @@ var index = (function (props) {
 
     case 'fileUpload':
       return fileUpload;
-
-    case 'inputCurrency':
-      return inputCurrency;
-
-    case 'numericStepper':
-      return numericStepper;
 
     default:
       return null;

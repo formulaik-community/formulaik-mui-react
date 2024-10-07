@@ -1,17 +1,9 @@
-
 import Input from './input'
 import Submit from './submit'
 import Checkbox from './checkbox'
 import Select from './select'
 import TextArea from './textArea'
-import SelectCountry from './selectCountry'
-import InputPhoneNumber from './inputPhoneNumber'
 import DatePicker from './datePicker'
-import AceEditor from './aceEditor'
-import CronGenerator from './cronGenerator'
-
-import JSONEditor from './jsonEditor'
-import CronEditor from './cronEditor'
 import Autocomplete from './autocomplete'
 import RadioGroup from './radioGroup'
 import Html from './html'
@@ -25,11 +17,8 @@ import H1 from './h1'
 import H2 from './h2'
 import H3 from './h3'
 import H4 from './h4'
-import VisualSelect from './visualSelect'
 import Avatar from './avatar'
 import fileUpload from './fileUpload'
-import inputCurrency from './inputCurrency'
-import numericStepper from './numericStepper'
 import dateTimePicker from './dateTimePicker'
 import _containerVertical from './_containerVertical'
 import _containerHorizontal from './_containerHorizontal'
@@ -50,22 +39,10 @@ export default (props) => {
       return Checkbox
     case 'textArea':
       return TextArea
-    case 'selectCountry':
-      return SelectCountry
-    case 'inputPhoneNumber':
-      return InputPhoneNumber
     case 'dateRangePicker':
       return DateRangePicker
     case 'datePicker':
       return DatePicker
-    case 'aceEditor':
-      return AceEditor
-    case 'cronGenerator':
-      return CronGenerator
-    case 'JSONEditor':
-      return JSONEditor
-    case 'cronEditor':
-      return CronEditor
     case 'autocomplete':
       return Autocomplete
     case 'radioGroup':
@@ -90,8 +67,6 @@ export default (props) => {
       return H3
     case 'h4':
       return H4
-    case 'visualSelect':
-      return VisualSelect
     case 'avatar':
       return Avatar
     case '_containerVertical':
@@ -102,10 +77,6 @@ export default (props) => {
       return _buttonAdd
     case 'fileUpload':
       return fileUpload
-    case 'inputCurrency':
-      return inputCurrency
-    case 'numericStepper':
-      return numericStepper
     default:
       return null
   }
