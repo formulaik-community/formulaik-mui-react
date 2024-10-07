@@ -117,7 +117,7 @@ export default (props) => {
 
 This repository follows the semantic branching model.
 
-## Contributing
+## Contributors
 [<img src="https://github.com/adoucoure.png" width="60px;"/>
 <br />
 <sub>
