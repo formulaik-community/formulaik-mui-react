@@ -2,6 +2,8 @@
 
 [![NPM](https://img.shields.io/npm/v/@formulaik-community/react-mui.svg)](https://www.npmjs.com/package/formulaik-mui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+Visit [The Formulaik project](https://formulaik-core.github.io/documentation/) to get started with Formulaik.
+
 This a Formulaik components library built on top of Material UI.
 Formulaik components are a set of inputs compatible with a Formulaik engine.
 In this case, the Formulaik-Mui library is made for the [Formulaik React engine](https://github.com/formulaik-core/react).
@@ -93,7 +95,6 @@ export default (props) => {
 
 ## Components
 
-
 | Component Key     | Description              | Parameters |
 | ------------------- | -------------------------- | ------------ |
 | `input`           | Text input               | #TODO      |
@@ -111,6 +112,21 @@ export default (props) => {
 | `rating`          | Rating                   | #TODO      |
 | `switch`          | Switch                   | #TODO      |
 | `fileUpload`      | File uploader            | #TODO      |
+
+## Versionning
+
+This repository follows the semantic branching model.
+
+## Contributing
+[<img src="https://github.com/adoucoure.png" width="60px;"/>
+<br />
+<sub>
+<a href="https://github.com/adoucoure">Aboubacar Doucouré</a>
+</sub>](https://adoucoure.com/formulaik)
+
+This project follows the [all-contributors specification](https://github.com/all-contributors/all-contributors). Contributions of any kind welcome!
+Please [contact me](https://adoucoure.com/contact) if you want to contribute to the core frameworks or add a components library.
+
 
 ## License
 
