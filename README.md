@@ -2,7 +2,6 @@
 
 [![NPM](https://img.shields.io/npm/v/@formulaik-community/react-mui.svg)](https://www.npmjs.com/package/formulaik-mui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-
 This a Formulaik components library built on top of Material UI.
 Formulaik components are a set of inputs compatible with a Formulaik engine.
 In this case, the Formulaik-Mui library is made for the [Formulaik React engine](https://github.com/formulaik-core/react).
@@ -14,11 +13,13 @@ In this case, the Formulaik-Mui library is made for the [Formulaik React engine]
 ## Install
 
 1. Install the React formulaik engine
+
 ```bash
 npm install @formulaik/react
 ```
 
 2. Install the Formulaik React Mui components library
+
 ```bash
 npm install @formulaik-community/formulaik-mui-react
 ```
@@ -90,11 +91,33 @@ export default (props) => {
 }
 ```
 
+## Components
+
+
+| Component Key     | Description              | Parameters |
+| ------------------- | -------------------------- | ------------ |
+| `input`           | Text input               | #TODO      |
+| `select`          | Choice component         | #TODO      |
+| `submit`          | Formulaik submit button  | #TODO      |
+| `dateTimePicker`  | Date time picker         | #TODO      |
+| `checkbox`        | Checkbox                 | #TODO      |
+| `textArea`        | Autogrowing text area    | #TODO      |
+| `dateRangePicker` | Date range picker        | #TODO      |
+| `autocomplete`    | Autocomplete input field | #TODO      |
+| `radioGroup`      | Radio group              | #TODO      |
+| `autocomplete`    | Autocomplete input field | #TODO      |
+| `button`          | Button                   | #TODO      |
+| `buttonGroup`     | Button group             | #TODO      |
+| `rating`          | Rating                   | #TODO      |
+| `switch`          | Switch                   | #TODO      |
+| `fileUpload`      | File uploader            | #TODO      |
+
 ## License
 
 MIT © [yelounak](https://github.com/yelounak)
 
 ## References
+
 - [The Formulaik project documentation](https://formulaik-core.github.io/documentation/)
 - [Getting started with Formulaik React 🚀](https://formulaik-core.github.io/documentation/docs/next/gettingstarted/react/installation)
 - [Contribute to Formulaik](https://formulaik-core.github.io/documentation/docs/next/contributing)
