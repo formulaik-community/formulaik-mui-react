@@ -23,12 +23,15 @@ import dateTimePicker from './dateTimePicker'
 import _containerVertical from './_containerVertical'
 import _containerHorizontal from './_containerHorizontal'
 import _buttonAdd from './_buttonAdd'
+import inputPassword from './inputPassword'
 
 export default (props) => {
   const { type } = props
   switch (type) {
     case 'input':
       return Input
+    case 'inputPassword':
+      return inputPassword
     case 'select':
       return Select
     case 'submit':
