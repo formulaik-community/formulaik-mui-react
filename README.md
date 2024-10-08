@@ -36,33 +36,57 @@ import FormulaikPaper from '@formulaik-community/react-native-paper'
 import { Text } from 'react-native'
 
 const inputs = [
-  {
-    type: 'input',
-    schema: 'email',
-    id: 'email',
-    label: 'Email',
-    params: {
-      type: 'email',
-      placeholder: "email@domain.com"
-    }
-  },
-  {
-    type: 'inputPassword',
-    schema: 'password',
-    label: 'Password',
-    id: 'password',
-    params: {
-      type: 'password',
-      autoComplete: "current-password",
-      placeholder: "xxxx-xxxx-xxxx"
-    }
-  },
-  {
-    type: 'submit',
-    params: {
-      text: 'Continue'
-    }
-  },
+ {
+      component: 'input',
+      id: 'email',
+      label: 'Email',
+      type: "string",
+      params: {
+        type: 'email',
+        placeholder: "email@domain.com"
+      },
+      validations: [
+        {
+          kind: "format",
+          value: "email",
+          message: 'Invalid email format',
+        },
+        {
+          kind: "required",
+          value: true,
+          message: "This field can't be blank",
+        },
+      ],
+    },
+    {
+      component: 'inputPassword',
+      label: 'Password',
+      id: 'password',
+      type: "string",
+      params: {
+        autoComplete: "current-password",
+        placeholder: "xxxx-xxxx-xxxx"
+      },
+      validations: [
+        {
+          kind: "required",
+          value: true,
+          message: "This field can't be blank",
+        },
+        {
+          kind: "matches",
+          value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+          message: 'Invalid password, must contain at least 8 characters and at most 18 characters',
+        },
+      ]
+    },
+    {
+      component: 'submit',
+      id: 'submit',
+      params: {
+        text: 'Continue'
+      }
+    },
 ]
 
 export default (props) => {
@@ -117,13 +141,8 @@ export default (props) => {
 
 This repository follows the semantic branching model.
 
-## Contributors
-[<img src="https://github.com/adoucoure.png" width="60px;"/>
-<br />
-<sub>
-<a href="https://github.com/adoucoure">Aboubacar Doucouré</a>
-</sub>](https://adoucoure.com/formulaik)
-
+## Contributing
+[<img src="https://github.com/adoucoure.png" width="60px;"/><br /><sub><ahref="https://github.com/adoucoure">Aboubacar Doucouré</ahref=></sub>](https://adoucoure.com/formulaik)
 This project follows the [all-contributors specification](https://github.com/all-contributors/all-contributors). Contributions of any kind welcome!
 Please [contact me](https://adoucoure.com/contact) if you want to contribute to the core frameworks or add a components library.
 
