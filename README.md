@@ -32,8 +32,7 @@ Create your inputs and create the form using formulaik:
 
 ```jsx
 import Formulaik from '@formulaik/react'
-import FormulaikPaper from '@formulaik-community/react-native-paper'
-import { Text } from 'react-native'
+import FormulaikMui from '@formulaik-community/formulaik-mui-react'
 
 const inputs = [
  {
@@ -106,9 +105,9 @@ export default (props) => {
   }
 
   return <>
-      <Text>Login</Text>
+      <h3>Login</h3>
       <Formulaik
-        components={[FormulaikPaper]}
+        components={[FormulaikMui]}
         values={values}
         inputs={inputs}
         onSubmit={onSubmit}

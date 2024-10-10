@@ -38,6 +38,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import { ChevronUp, ChevronDown, Trash, ChevronLeft, ChevronRight } from 'react-feather';
+import Visibility from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOff from '@mui/icons-material/VisibilityOffOutlined';
+import InputAdornment from '@mui/material/InputAdornment';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -523,12 +526,14 @@ var ButtonGroup = (function (props) {
 var SwitchControl = (function (props) {
   var onValueChanged = props.onValueChanged,
       value = props.value,
+      disabled = props.disabled,
+      readOnly = props.readOnly,
       _props$item = props.item,
       params = _props$item.params;
   return /*#__PURE__*/React$1.createElement(FormGroup, null, /*#__PURE__*/React$1.createElement(FormControlLabel, _extends({
     control: /*#__PURE__*/React$1.createElement(Switch, {
-      disabled: props.disabled,
-      readOnly: props.readOnly,
+      disabled: disabled,
+      readOnly: readOnly,
       color: "default",
       checked: value,
       onChange: function onChange(_ref) {
@@ -1173,12 +1178,129 @@ var _buttonAdd = (function (_ref) {
   }, title ? title : "Add"));
 });
 
+var inputPassword = (function (props) {
+  var value = props.value,
+      error = props.error,
+      onValueChanged = props.onValueChanged,
+      _props$item = props.item,
+      _props$item$layoutMod = _props$item.layoutMode,
+      layoutMode = _props$item$layoutMod === void 0 ? 'form' : _props$item$layoutMod,
+      _props$item$params = _props$item.params,
+      params = _props$item$params === void 0 ? {} : _props$item$params;
+  var _params$inputDelay = params.inputDelay,
+      inputDelay = _params$inputDelay === void 0 ? 1000 : _params$inputDelay,
+      _params$className = params.className,
+      className = _params$className === void 0 ? '' : _params$className,
+      _params$inputPropsSty = params.inputPropsStyle,
+      inputPropsStyle = _params$inputPropsSty === void 0 ? {} : _params$inputPropsSty,
+      _params$inputLabelPro = params.inputLabelPropsStyle,
+      inputLabelPropsStyle = _params$inputLabelPro === void 0 ? {} : _params$inputLabelPro,
+      _params$variant = params.variant,
+      variant = _params$variant === void 0 ? "outlined" : _params$variant;
+
+  var _useState = useState(value ? value : ''),
+      innerValue = _useState[0],
+      setInnerValue = _useState[1];
+
+  var _React$useState = React$1.useState(false),
+      showPassword = _React$useState[0],
+      setShowPassword = _React$useState[1];
+
+  var handleClickShowPassword = function handleClickShowPassword() {
+    return setShowPassword(function (show) {
+      return !show;
+    });
+  };
+
+  var handleMouseDownPassword = function handleMouseDownPassword(event) {
+    event.preventDefault();
+  };
+
+  useEffect(function () {
+    setInnerValue(value ? value : '');
+  }, [value]);
+  var debouncedHandleOnChange = useDebouncedCallback(function (event) {
+    var value = event.target.value;
+    onValueChanged(value);
+  }, inputDelay);
+  var handleOnChange = useCallback(function (event) {
+    event.persist();
+    var newValue = event.target.value;
+    setInnerValue(newValue);
+    debouncedHandleOnChange(event);
+  }, []);
+
+  var layoutModeProps = function layoutModeProps() {
+    switch (layoutMode) {
+      default:
+      case 'form':
+        {
+          return {};
+        }
+
+      case 'inline':
+        {
+          return {
+            variant: "standard"
+          };
+        }
+    }
+  };
+
+  var layoutModeClassName = function layoutModeClassName() {
+    switch (layoutMode) {
+      default:
+      case 'form':
+        {
+          return "\n          ";
+        }
+
+      case 'inline':
+        {
+          return "\n            ";
+        }
+    }
+  };
+
+  var onBlur = function onBlur() {};
+
+  return /*#__PURE__*/React$1.createElement(TextField, _extends({
+    variant: variant,
+    fullWidth: true,
+    disabled: props.disabled,
+    InputProps: {
+      style: _extends({}, inputPropsStyle),
+      endAdornment: /*#__PURE__*/React$1.createElement(InputAdornment, {
+        position: "end"
+      }, /*#__PURE__*/React$1.createElement(IconButton, {
+        "aria-label": "toggle password visibility",
+        onClick: handleClickShowPassword,
+        onMouseDown: handleMouseDownPassword,
+        edge: "end"
+      }, showPassword ? /*#__PURE__*/React$1.createElement(VisibilityOff, null) : /*#__PURE__*/React$1.createElement(Visibility, null)))
+    },
+    InputLabelProps: {
+      style: inputLabelPropsStyle
+    },
+    value: innerValue,
+    multiline: false,
+    className: "\n      transition-all\n      ease-in-out\n      duration-1000\n      " + (error ? 'bg-red-50' : '') + "\n      " + className + "\n      " + layoutModeClassName() + "\n    ",
+    onBlur: onBlur,
+    onChange: handleOnChange
+  }, layoutModeProps(), params, {
+    type: showPassword ? 'text' : 'password'
+  }));
+});
+
 var index = (function (props) {
   var type = props.type;
 
   switch (type) {
     case 'input':
       return Input;
+
+    case 'inputPassword':
+      return inputPassword;
 
     case 'select':
       return Select$1;

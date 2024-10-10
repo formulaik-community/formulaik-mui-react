@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "@loadable/component": "*",
-    "react": ">= 0.16.0 < 18.0.0",
+    "react": ">= 0.16.0",
     "underscore": "^1"
   },
   "dependencies": {
